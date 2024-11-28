@@ -135,20 +135,22 @@ section p {
     color: #0077b6;
 }
 
-/* Skill Cards */
 .skill-card {
-    display: inline-block;
-    width: 200px;
+    display: inline-block; /* Keeps cards side by side */
+    width: 280px; /* Increase card width to accommodate larger image */
     margin: 20px;
     text-align: center;
     background-color: #caf0f8;
     padding: 20px;
     border-radius: 5px;
+    vertical-align: top; /* Ensures proper alignment for inline-block elements */
 }
 
 .skill-card img {
-    width: 200px;
-    margin: 20px;
+    display: block; /* Ensures the image does not align inline with text */
+    margin: 0 auto; /* Centers the image horizontally */
+    width: 240px; /* Make the image much larger */
+    height: auto; /* Maintains aspect ratio */
     border-radius: 6px;
 }
 
@@ -156,6 +158,7 @@ section p {
     color: #03045e;
     margin-top: 10px;
 }
+
 
 /* Media Section */
 #media img {
@@ -176,3 +179,4 @@ footer {
 footer p {
     font-size: 1rem;
 }
+
