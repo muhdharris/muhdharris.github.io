@@ -143,6 +143,24 @@ section p {
     color: #0077b6;
 }
 
+/* General styles */
+#projects {
+    padding: 2rem;
+    color: #03045e;
+    text-align: center;
+}
+
+#projects h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+#projects p {
+    font-size: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Flexbox layout for projects */
 .projects-row {
     display: flex;
     justify-content: space-between;
@@ -168,7 +186,6 @@ section p {
     background-color: #00b4d8; /* Slightly changes background color */
 }
 
-
 .project-card h3 {
     color: #03045e;
     margin-bottom: 10px;
@@ -177,7 +194,6 @@ section p {
 .project-card p {
     color: #0077b6;
 }
-
 
 .project-link {
     display: inline-block;
@@ -194,6 +210,45 @@ section p {
 .project-link:hover {
     background-color: #0077b6;
 }
+
+/* Responsive behavior */
+@media (max-width: 1024px) {
+    .project-card {
+        flex: 1 1 calc(30% - 20px); /* Cards take 30% width on medium screens */
+        max-width: calc(30% - 20px);
+    }
+}
+
+@media (max-width: 768px) {
+    .project-card {
+        flex: 1 1 calc(48% - 20px); /* Cards take 48% width on tablets */
+        max-width: calc(48% - 20px);
+    }
+
+    #projects h2 {
+        font-size: 1.75rem;
+    }
+
+    #projects p {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-card {
+        flex: 1 1 100%; /* Cards take full width on mobile */
+        max-width: 100%;
+    }
+
+    #projects h2 {
+        font-size: 1.5rem;
+    }
+
+    #projects p {
+        font-size: 0.85rem;
+    }
+}
+
 
 .skill-item {
     background-color: #90e0ef;
