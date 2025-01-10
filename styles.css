@@ -1828,16 +1828,6 @@ footer span {
     box-shadow: 0 5px 15px rgba(255, 77, 109, 0.5);
 }
 
-.timeline-content {
-    flex: 1;
-    position: relative;
-    background: rgba(255, 77, 109, 0.05);
-    border: 2px solid rgba(255, 77, 109, 0.3);
-    border-radius: 10px;
-    padding: 1.5rem;
-    box-shadow: 0 10px 20px rgba(255, 77, 109, 0.1);
-}
-
 .timeline-date {
     font-family: 'Orbitron', sans-serif;
     font-size: 1.6rem;
