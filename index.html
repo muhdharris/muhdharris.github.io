@@ -3,434 +3,296 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Harris — Computer Systems student specialising in Linux infrastructure. Runs a two-node Proxmox cluster with 16 containers and documents all of it.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <title>Portfolio Website</title>
+    <title>Harris — Systems &amp; Infrastructure</title>
 </head>
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
+
     <header>
-        <a href="#" class="logo">Harris</a>
-        <div class="menu-btn">
-            <div class="menu-btn__burger"></div>
-        </div>
+        <a href="#home" class="logo">Harris</a>
+        <button class="menu-btn" aria-label="Toggle navigation" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
         <nav>
-            <a href="#home" class="nav-link">Home</a>
-            <a href="#about" class="nav-link">About Me</a>
+            <a href="#about" class="nav-link">About</a>
+            <a href="#infra" class="nav-link">Infrastructure</a>
             <a href="#projects" class="nav-link">Projects</a>
-            <a href="#skills" class="nav-link">Skills</a>
+            <a href="#stack" class="nav-link">Stack</a>
             <a href="#education" class="nav-link">Education</a>
             <a href="#contact" class="nav-link">Contact</a>
         </nav>
     </header>
 
-    <!-- Home Section -->
+    <main id="main">
+
     <section id="home" class="home">
         <div class="home-content">
-            <h3>Hello, I'm</h3>
-            <h1><span>Harris </span></h1>
-            <h3>And I'm a <span class="typing-text"><span></span></span></h3>
-            <p>Turning innovative ideas into exceptional digital experiences.</p>
+            <p class="eyebrow">Computer Systems &amp; Networks · University Malaya</p>
+            <h1>I run a two-node Proxmox cluster with <span class="hl">16 containers</span> and document all of it.</h1>
+            <p class="lede">
+                Systems and infrastructure work on Linux — virtualisation, containers,
+                networking, and the kind of hardware faults that take a host down and
+                don't tell you why.
+            </p>
             <div class="social-icons">
-                <a href="https://github.com/muhdharris"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/muhdharris/"><i class="fab fa-linkedin"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="https://github.com/muhdharris" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/muhdharris/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
             </div>
-            <a href="#contact" class="btn">Get In Touch</a>
+            <a href="#infra" class="btn">See the setup</a>
+            <a href="#contact" class="btn btn-ghost">Get in touch</a>
         </div>
-        <div class="home-img">
-            <div class="profile-wrapper">
-                <img src="https://wallpapers.com/images/high/dark-profile-pictures-2880-x-1800-fwnn7x4togpxajkm.webp" alt="Profile Picture">
+    </section>
+
+    <section id="about" class="section">
+        <h2 class="section-title">About</h2>
+        <div class="prose">
+            <p>
+                I'm a Computer Systems &amp; Networks student at University Malaya,
+                working out of a home lab I built rather than a tutorial I followed.
+                The lab is the work: a two-node Proxmox cluster, a NAS, sixteen
+                containers, and a monitoring setup that tells me when something breaks
+                before I notice it myself.
+            </p>
+            <p>
+                Most of what I know about infrastructure came from things going wrong.
+                Two separate faults could take the entire cluster offline and present
+                almost identically from the outside — every VM losing network, the host
+                unresponsive. The first fix I found online held for about a week, then
+                didn't. The real cause was a second, unrelated layer I hadn't found yet.
+                Getting to the bottom of that is the part I'm actually proud of.
+            </p>
+            <p>
+                I keep everything in a structured, cross-linked documentation vault
+                that I treat as source of truth. It's not an afterthought — it's how I
+                keep from repeating a fix I already applied twice.
+            </p>
+        </div>
+    </section>
+
+    <section id="infra" class="section alt">
+        <h2 class="section-title">What I run</h2>
+        <p class="section-intro">
+            Self-hosted on hardware I own, at a student budget. No cloud credits, no
+            managed services.
+        </p>
+
+        <div class="grid stats">
+            <div class="stat"><span class="num">2</span><span class="lab">Proxmox nodes</span></div>
+            <div class="stat"><span class="num">16</span><span class="lab">Containers running</span></div>
+            <div class="stat"><span class="num">3</span><span class="lab">VMs · 2 LXCs</span></div>
+            <div class="stat"><span class="num">~1<span class="unit">TB</span></span><span class="lab">NAS storage</span></div>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <caption>Cluster and workload at a glance</caption>
+                <thead>
+                    <tr><th>Layer</th><th>What it is</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Virtualisation</td><td>Proxmox VE, two nodes — a Dell OptiPlex 5090 (i5-11500, Intel UHD 750) and a spare laptop with 10Gb networking. KVM VMs plus LXC containers.</td></tr>
+                    <tr><td>Storage</td><td>OpenMediaVault VM with direct disk passthrough, exported over NFS and SMB. Hardlinked into the media pipeline.</td></tr>
+                    <tr><td>Containers</td><td>Docker Compose on one VM: Sonarr, Radarr, Prowlarr, qBittorrent, Jellyfin, Immich, Pi-hole, CouchDB, Homepage, Uptime Kuma, Portainer.</td></tr>
+                    <tr><td>Media</td><td>Download-to-library pipeline with hardware-accelerated VAAPI transcoding on the iGPU. Library scans itself.</td></tr>
+                    <tr><td>Networking</td><td>Pi-hole for DNS, Tailscale for private access, deliberate <code>/24</code> layout with fixed addressing.</td></tr>
+                    <tr><td>Observability</td><td>Scheduled health checks that only alert on failure, nightly snapshots, morning briefings.</td></tr>
+                    <tr><td>Documentation</td><td>Structured Obsidian vault — architecture, every bug and its fix, cross-linked and treated as source of truth.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <h2 class="section-title">Selected work</h2>
+
+        <article class="project">
+            <h3>Two-node Proxmox cluster with a hard-won uptime</h3>
+            <p class="project-meta">Infrastructure · Troubleshooting · Linux</p>
+            <p>
+                A Proxmox cluster that kept dropping every VM's network at once. Two
+                independent faults, near-identical symptoms:
+            </p>
+            <ol class="steps">
+                <li>
+                    <strong>Intel I219-LM link drops.</strong> Firmware bug causing the
+                    NIC to lose link intermittently. EEE, ASPM and Wake-on-LAN all
+                    triggered it. Disabling those three held for days — then recurred,
+                    because a separate hardware-unit hang was being caused by packet
+                    offloads. Final fix disables EEE/ASPM/WoL <em>and</em>
+                    TSO/GSO/GRO, applied on boot.
+                </li>
+                <li>
+                    <strong>i915 crash on GPU passthrough handoff.</strong> The host hung
+                    when starting or stopping passthrough. Root cause was module load
+                    order; fixed by declaring <code>i915</code> soft-dependent on
+                    <code>vfio-pci</code>.
+                </li>
+            </ol>
+            <p class="note">
+                The first fix didn't hold. Diagnosing the second layer underneath is the
+                part that took the real work.
+            </p>
+        </article>
+
+        <article class="project">
+            <h3>Website in Docker</h3>
+            <p class="project-meta">JavaScript · Nginx · Containers</p>
+            <p>
+                A responsive frontend with a small backend API, built and served entirely
+                from containers. The containerisation was the point — reproducible
+                environments, one-command teardown.
+            </p>
+            <a class="repo-link" href="https://github.com/muhdharris/Website-in-Docker">View repository <i class="fab fa-github"></i></a>
+        </article>
+
+        <article class="project">
+            <h3>Java cinema project</h3>
+            <p class="project-meta">Java</p>
+            <p>
+                A larger Java application — booking flow, listings, persistence. The
+                most substantial piece of application code I've written.
+            </p>
+            <a class="repo-link" href="https://github.com/muhdharris/cinemaProject">View repository <i class="fab fa-github"></i></a>
+        </article>
+
+        <p class="more">
+            Also on
+            <a href="https://github.com/muhdharris?tab=repositories">GitHub</a>:
+            small scraper, port scanner and WebRTC experiments.
+        </p>
+    </section>
+
+    <section id="stack" class="section alt">
+        <h2 class="section-title">Stack</h2>
+        <div class="grid stack-grid">
+            <div class="stack-card">
+                <h3><i class="fas fa-server"></i> Infrastructure</h3>
+                <ul>
+                    <li>Proxmox VE</li>
+                    <li>KVM &amp; LXC virtualisation</li>
+                    <li>Linux administration</li>
+                    <li>Shell &amp; systemd</li>
+                    <li>Hardware passthrough</li>
+                </ul>
+            </div>
+            <div class="stack-card">
+                <h3><i class="fas fa-cubes"></i> Containers</h3>
+                <ul>
+                    <li>Docker</li>
+                    <li>Docker Compose</li>
+                    <li>Service networking</li>
+                    <li>Image &amp; volume management</li>
+                </ul>
+            </div>
+            <div class="stack-card">
+                <h3><i class="fas fa-network-wired"></i> Networking</h3>
+                <ul>
+                    <li>TCP/IP &amp; subnetting</li>
+                    <li>NFS &amp; SMB</li>
+                    <li>DNS (Pi-hole)</li>
+                    <li>Tailscale</li>
+                    <li>Troubleshooting &amp; packet-level diagnosis</li>
+                </ul>
+            </div>
+            <div class="stack-card">
+                <h3><i class="fas fa-hdd"></i> Storage &amp; Media</h3>
+                <ul>
+                    <li>OpenMediaVault</li>
+                    <li>Direct disk passthrough</li>
+                    <li>Jellyfin (VAAPI)</li>
+                    <li>Radarr / Sonarr / Prowlarr</li>
+                    <li>qBittorrent</li>
+                </ul>
+            </div>
+            <div class="stack-card">
+                <h3><i class="fas fa-microchip"></i> Hardware</h3>
+                <ul>
+                    <li>Intel NUC / mini-PC (Tiger Lake)</li>
+                    <li>VAAPI hardware transcoding</li>
+                    <li>PCIe &amp; IOMMU</li>
+                    <li>NIC &amp; driver-level faults</li>
+                </ul>
+            </div>
+            <div class="stack-card">
+                <h3><i class="fas fa-code"></i> Development</h3>
+                <ul>
+                    <li>JavaScript</li>
+                    <li>Python</li>
+                    <li>Java</li>
+                    <li>Ruby</li>
+                    <li>Git</li>
+                </ul>
             </div>
         </div>
     </section>
 
-    <section id="about" class="about">
-        <h2 class="section-title glitch" data-text="About Me">About Me</h2>
-        <div class="about-container">
-            <div class="about-image-container">
-                <div class="image-frame">
-                    <div class="image-glitch-effect">
-                        <img src="https://wallpapers.com/images/high/dark-profile-pictures-2880-x-1800-fwnn7x4togpxajkm.webp" alt="Profile Picture">
-                    </div>
-                    <div class="frame-corner top-left"></div>
-                    <div class="frame-corner top-right"></div>
-                    <div class="frame-corner bottom-left"></div>
-                    <div class="frame-corner bottom-right"></div>
-                </div>
-            </div>
-            <div class="about-content">
-                <div class="typing-effect">Computer Systems & Networks Student</div>
-                <p class="about-description">Exploring the intricate world of digital infrastructure and network security with a passion for innovation and problem-solving.</p>
-                
-                <div class="tech-stack">
-                    <div class="tech-category">
-                        <h3 class="neo-text">Specializations</h3>
-                        <ul class="tech-list">
-                            <li class="tech-item">
-                                <i class="fas fa-network-wired"></i>
-                                <span>Network Architecture</span>
-                            </li>
-                            <li class="tech-item">
-                                <i class="fas fa-shield-alt"></i>
-                                <span>Cybersecurity</span>
-                            </li>
-                            <li class="tech-item">
-                                <i class="fas fa-server"></i>
-                                <span>System Administration</span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- projects Section -->
-    <section id="projects">
-        <h2 class="section-title">My projects</h2>
-        <div class="section-content-project">
-            <div class="projects-card fadeIn">
-                <i class="fas fa-code"></i>
-                <h3>Web in Docker</h3>
-                <p>Showcases a fully responsive frontend and a basic backend API, all running in containerized environments.</p>
-            </div>
-            <div class="projects-card fadeIn">
-                <i class="fas fa-mobile-alt"></i>
-                <h3>Mobile Development</h3>
-                <p>Creating native and cross-platform mobile applications.</p>
-            </div>
-            <div class="projects-card fadeIn">
-                <i class="fas fa-database"></i>
-                <h3>Backend Development</h3>
-                <p>Developing robust server-side solutions and APIs.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills">
-        <h2 class="section-title">My Skills</h2>
-        <div class="skills-container">
-            <div class="skill-category">
-                <h3 class="category-title">Development</h3>
-                
-                <div class="skill-item">
-                    <div class="skill-header">
-                        <span class="skill-name">JavaScript</span>
-                        <span class="skill-level level-excellent">Excellent</span>
-                    </div>
-                    <div class="skill-bar-container">
-                        <div class="skill-progress progress-excellent"></div>
-                    </div>
-                </div>
-    
-                <div class="skill-item">
-                    <div class="skill-header">
-                        <span class="skill-name">Python</span>
-                        <span class="skill-level level-good">Good</span>
-                    </div>
-                    <div class="skill-bar-container">
-                        <div class="skill-progress progress-good"></div>
-                    </div>
-                </div>
-    
-                <div class="skill-item">
-                    <div class="skill-header">
-                        <span class="skill-name">React Native</span>
-                        <span class="skill-level level-learning">Learning</span>
-                    </div>
-                    <div class="skill-bar-container">
-                        <div class="skill-progress progress-learning"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Education Section -->
-    <section id="education">
+    <section id="education" class="section">
         <h2 class="section-title">Education</h2>
-        <div class="timeline-container">
-            <div class="timeline-item">
-                <span class="timeline-date">2021 - Present</span>
-                <h3 class="timeline-title">Bachelor of Computer Science (Computer System and Network)</h3>
-                <h4 class="timeline-subtitle">University Malaya</h4>
+        <div class="timeline">
+            <div class="tl-item">
+                <span class="tl-when">2021 — present</span>
+                <div class="tl-body">
+                    <h3>University Malaya</h3>
+                    <p>Computer System &amp; Networks</p>
+                </div>
             </div>
-            <div class="timeline-item">
-                <span class="timeline-date">2020 - 2021</span>
-                <h3 class="timeline-title">Foundation in Physical Sciences</h3>
-                <h4 class="timeline-subtitle">University Malaya</h4>
+            <div class="tl-item">
+                <span class="tl-when">2020 — 2021</span>
+                <div class="tl-body">
+                    <h3>University Malaya</h3>
+                    <p>Foundation</p>
+                </div>
             </div>
-            <div class="timeline-item">
-                <span class="timeline-date">2015 - 2019</span>
-                <h3 class="timeline-title">SPM</h3>
-                <h4 class="timeline-subtitle">SMS Tengku Muhammad Faris Petra</h4>
+            <div class="tl-item">
+                <span class="tl-when">2015 — 2019</span>
+                <div class="tl-body">
+                    <h3>SMS Tengku Muhammad Faris Petra</h3>
+                </div>
             </div>
-            
-    
         </div>
     </section>
 
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <h2 class="section-title">Get In Touch</h2>
-        <div class="section-content">
-            <p>Interested in working together? Let's discuss your project!</p>
-            <form id="contactForm">
-                <input type="text" id="name" placeholder="Your Name" required>
-                <input type="email" id="email" placeholder="Your Email" required>
-                <textarea id="message" placeholder="Your Message" rows="6" required></textarea>
-                <button type="submit" class="btn">Send Message</button>
-            </form>
+    <section id="contact" class="section alt">
+        <h2 class="section-title">Get in touch</h2>
+        <p class="section-intro">
+            Interested in infrastructure work, or want to talk about the homelab?
+        </p>
+        <div class="contact-cards">
+            <a class="contact-card" href="https://github.com/muhdharris">
+                <i class="fab fa-github"></i>
+                <span>GitHub</span>
+                <small>@muhdharris</small>
+            </a>
+            <a class="contact-card" href="https://www.linkedin.com/in/muhdharris/">
+                <i class="fab fa-linkedin"></i>
+                <span>LinkedIn</span>
+                <small>/in/muhdharris</small>
+            </a>
         </div>
     </section>
+
+    </main>
 
     <footer>
-        <p>© 2024 Harris Doe | All Rights Reserved</p>
+        <p>Built by hand. No template.</p>
     </footer>
 
     <script>
-        // Navigation and menu handling
-        const menuBtn = document.querySelector('.menu-btn');
-        const nav = document.querySelector('nav');
-        let menuOpen = false;
-
-        menuBtn.addEventListener('click', () => {
-            menuBtn.classList.toggle('open');
-            nav.classList.toggle('active');
-            menuOpen = !menuOpen;
+        const btn = document.querySelector('.menu-btn');
+        const nav = document.querySelector('header nav');
+        btn.addEventListener('click', () => {
+            const open = nav.classList.toggle('open');
+            btn.setAttribute('aria-expanded', String(open));
         });
-
-        // Close menu when clicking a link
-        document.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
-                if (menuOpen) {
-                    menuBtn.classList.remove('open');
-                    nav.classList.remove('active');
-                    menuOpen = false;
-                }
-            });
-        });
-
-        // Smooth scroll for navigation
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // Update active nav link based on scroll position
-        const sections = document.querySelectorAll('section');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= sectionTop - sectionHeight / 3) {
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href').substring(1) === current) {
-                    link.classList.add('active');
-                }
-            });
-        });
-
-        // Profile image animation
-        const profileImg = document.querySelector('.profile-wrapper');
-        
-        profileImg.addEventListener('mousemove', (e) => {
-            const rect = profileImg.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            
-            const rotateX = (y - centerY) / 10;
-            const rotateY = (centerX - x) / 10;
-            
-            profileImg.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
-        });
-        
-        profileImg.addEventListener('mouseleave', () => {
-            profileImg.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
-        });
-
-        // Typing animation
-        const words = ["Student"];
-        let wordIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const typingDelay = 100;
-        const erasingDelay = 50;
-        const newWordDelay = 2000;
-
-        function type() {
-            const current = words[wordIndex];
-            const typingText = document.querySelector('.typing-text span');
-            
-            if (isDeleting) {
-                typingText.textContent = current.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typingText.textContent = current.substring(0, charIndex + 1);
-                charIndex++;
+        nav.addEventListener('click', e => {
+            if (e.target.classList.contains('nav-link')) {
+                nav.classList.remove('open');
+                btn.setAttribute('aria-expanded', 'false');
             }
-
-            if (!isDeleting && charIndex === current.length) {
-                isDeleting = true;
-                setTimeout(type, newWordDelay);
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                wordIndex = (wordIndex + 1) % words.length;
-                setTimeout(type, typingDelay);
-            } else {
-                setTimeout(type, isDeleting ? erasingDelay : typingDelay);
-            }
-        }
-
-        // Start typing animation
-        document.addEventListener('DOMContentLoaded', () => {
-            type();
         });
-
-        // Add loading screen to body
-const loadingScreen = document.createElement('div');
-loadingScreen.className = 'loading-screen';
-document.body.appendChild(loadingScreen);
-
-// Intersection Observer for section animations
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            // Add animation classes to the section
-            entry.target.classList.add('animate');
-            
-            // Animate children elements
-            if (entry.target.id === 'projects') {
-                const cards = entry.target.querySelectorAll('.projects-card');
-                cards.forEach((card, index) => {
-                    setTimeout(() => {
-                        card.classList.add('animate');
-                    }, index * 200);
-                });
-            }
-            
-            if (entry.target.id === 'education') {
-                const items = entry.target.querySelectorAll('.timeline-item');
-                items.forEach((item, index) => {
-                    setTimeout(() => {
-                        item.classList.add('animate');
-                    }, index * 200);
-                });
-            }
-            
-            if (entry.target.id === 'education') {
-                const items = entry.target.querySelectorAll('.education-item');
-                items.forEach((item, index) => {
-                    setTimeout(() => {
-                        item.classList.add('animate');
-                    }, index * 200);
-                });
-            }
-            
-            if (entry.target.id === 'skills') {
-                const bars = entry.target.querySelectorAll('.skills-bar');
-                bars.forEach((bar, index) => {
-                    setTimeout(() => {
-                        bar.classList.add('animate');
-                    }, index * 200);
-                });
-            }
-            
-            if (entry.target.id === 'contact') {
-                const formElements = entry.target.querySelectorAll('input, textarea, button');
-                formElements.forEach((element, index) => {
-                    setTimeout(() => {
-                        element.classList.add('animate');
-                    }, index * 100);
-                });
-            }
-        }
-    });
-}, {
-    threshold: 0.2
-});
-
-// Observe all sections
-document.querySelectorAll('section').forEach(section => {
-    observer.observe(section);
-});
-// Add particle effects to skills section
-function createParticles() {
-    const skillsSection = document.getElementById('skills');
-    const particleCount = 20;
-
-    for (let i = 0; i < particleCount; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'skill-particle';
-        
-        // Random position
-        particle.style.left = Math.random() * 100 + '%';
-        particle.style.top = Math.random() * 100 + '%';
-        
-        // Random animation
-        particle.style.animation = `
-            particleFloat ${3 + Math.random() * 4}s linear infinite,
-            particleFade ${2 + Math.random() * 2}s ease-in-out infinite
-        `;
-        
-        skillsSection.appendChild(particle);
-    }
-}
-
-    // Call function when document is loaded
-    document.addEventListener('DOMContentLoaded', createParticles);
-
-        // Contact form handling
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const message = document.getElementById('message').value;
-        
-        // You can replace this email with your preferred email service
-        const mailtoLink = `mailto:muhdharris40@gmail.com?subject=Portfolio Contact from ${name}&body=${message}%0D%0A%0D%0AFrom: ${email}`;
-        
-        window.location.href = mailtoLink;
-        
-        // Clear the form
-        this.reset();
-        
-        // Optional: Show success message
-        alert('Thank you for your message! Opening your email client...');
-    });
-    document.addEventListener('DOMContentLoaded', function() {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('in-view');
-                }
-            });
-        }, { threshold: 0.2 });
-    
-        document.querySelectorAll('.skill-progress-container').forEach(container => {
-            observer.observe(container);
-        });
-    });
     </script>
 </body>
 </html>
