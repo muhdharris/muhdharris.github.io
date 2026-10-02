@@ -268,6 +268,24 @@ tbody td:nth-child(2) { color: var(--text-dim); }
 }
 .stack-card li:last-child { border-bottom: 0; }
 
+/* ---------- certifications ---------- */
+
+.certs { display: flex; flex-wrap: wrap; gap: 1rem; }
+.cert {
+    display: flex; align-items: center; gap: 1.25rem;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.4rem 1.75rem;
+    flex: 1 1 380px;
+}
+.cert-badge {
+    font-family: var(--mono); font-weight: 700; font-size: 1.05rem;
+    letter-spacing: 0.04em;
+    color: var(--bg); background: var(--accent);
+    padding: 0.5rem 0.85rem; border-radius: 6px; flex-shrink: 0;
+}
+.cert h3 { margin: 0 0 0.2rem; font-size: 1.02rem; }
+.cert p { margin: 0; color: var(--text-dim); font-size: 0.88rem; }
+
 /* ---------- timeline ---------- */
 
 .timeline { position: relative; padding-left: 1.75rem; max-width: 46rem; }
