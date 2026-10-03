@@ -444,3 +444,14 @@ footer p { color: var(--text-dim); font-size: 0.88rem; margin: 0; }
     margin: 0; color: var(--text-dim); font-size: 0.95rem; font-style: italic;
     border-left: 2px solid var(--border); padding-left: 1rem;
 }
+
+/* ---------- certifications: 4 cards + degree band ---------- */
+
+.learn-card.degree {
+    margin-bottom: 2.75rem;
+    border-left: 3px solid var(--accent);
+}
+
+.lang-list { list-style: none; margin: 0; padding: 0; display: flex; gap: 2.25rem; }
+.lang-list li { color: var(--text-dim); font-size: 0.94rem; }
+.lang-list strong { color: var(--text); }
