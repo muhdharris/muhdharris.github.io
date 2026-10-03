@@ -18,10 +18,10 @@
         </button>
         <nav>
             <a href="#about" class="nav-link">About</a>
+            <a href="#learning" class="nav-link">Learning</a>
             <a href="#infra" class="nav-link">Infrastructure</a>
-            <a href="#projects" class="nav-link">Projects</a>
+            <a href="#projects" class="nav-link">Portfolio</a>
             <a href="#stack" class="nav-link">Stack</a>
-            <a href="#certs" class="nav-link">Certifications</a>
             <a href="#education" class="nav-link">Background</a>
             <a href="#contact" class="nav-link">Contact</a>
         </nav>
@@ -31,20 +31,26 @@
 
     <section id="home" class="home">
         <div class="home-content">
-            <p class="eyebrow">Network &amp; Security Engineer · CCNA</p>
-            <h1>Network &amp; security engineer. CCNA, 10 months in, running a <span class="hl">two-node Proxmox cluster</span> with 16 containers — and documenting all of it.</h1>
+            <p class="eyebrow">Network &amp; Security Engineer · CCNA · ~10 months experience</p>
+            <h1><span class="name">Harris</span></h1>
+            <p class="role">Network &amp; Security Engineer</p>
             <p class="lede">
-                My work sits between the systems that are supposed to be secure and the
-                ones that aren't — configuration, diagnosis, and the unglamorous
-                debugging that keeps infrastructure up when something fails in a way
-                nobody expected.
+                I run a two-node Proxmox cluster with <span class="hl">16 containers</span>
+                and document all of it. My work sits between the systems that are
+                supposed to be secure and the ones that aren't — configuration,
+                diagnosis, and the unglamorous debugging that keeps infrastructure up
+                when something fails in a way nobody expected.
             </p>
+            <div class="hero-actions">
+                <a href="#contact" class="btn">Let's talk</a>
+                <a href="cv.pdf" class="btn btn-ghost" download>
+                    <i class="fas fa-download"></i> Download CV
+                </a>
+            </div>
             <div class="social-icons">
                 <a href="https://github.com/muhdharris" aria-label="GitHub"><i class="fab fa-github"></i></a>
                 <a href="https://www.linkedin.com/in/muhdharris/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
             </div>
-            <a href="#infra" class="btn">See the setup</a>
-            <a href="#contact" class="btn btn-ghost">Get in touch</a>
         </div>
     </section>
 
@@ -106,63 +112,110 @@
         </div>
     </section>
 
+    <section id="learning" class="section">
+        <h2 class="section-title">Learning &amp; achievement</h2>
+        <p class="section-intro">
+            Certified and continuously learning. The degree that started it, and the
+            credential that came out of it.
+        </p>
+
+        <div class="learn-grid">
+            <div class="learn-card">
+                <span class="cert-badge">CCNA</span>
+                <div>
+                    <h3>Cisco Certified Network Associate</h3>
+                    <p>Cisco Networking Academy — routing, switching, and the fundamentals
+                    of how networks actually behave.</p>
+                </div>
+            </div>
+            <div class="learn-card">
+                <span class="cert-badge alt">BS</span>
+                <div>
+                    <h3>Computer Systems &amp; Networks</h3>
+                    <p>University Malaya — networks, systems administration, and security.
+                    Grounded in the theory; the homelab is where it gets applied.</p>
+                </div>
+            </div>
+        </div>
+
+        <h3 class="sub-head">Practised, not just studied</h3>
+        <ul class="practice-list">
+            <li><strong>Segmentation and isolation</strong> — deliberate <code>/24</code> layout with fixed addressing, containers isolated on their own bridge network</li>
+            <li><strong>DNS control</strong> — Pi-hole as network-wide resolver, network hygiene rather than per-device settings</li>
+            <li><strong>Private access without exposing anything</strong> — Tailscale over port forwarding</li>
+            <li><strong>Least privilege at the storage layer</strong> — NFS exports scoped per share, hardened with <code>all_squash</code> and <code>anonuid</code></li>
+            <li><strong>Credential hygiene</strong> — passwords segregated into one vault, secrets never written into notes</li>
+            <li><strong>Hardware-level fault isolation</strong> — a failing NIC taking down every VM, and the driver-level fix</li>
+        </ul>
+    </section>
+
     <section id="projects" class="section">
-        <h2 class="section-title">Selected work</h2>
+        <h2 class="section-title">Portfolio</h2>
+        <p class="section-intro">
+            Infrastructure I've built and debugged, plus code I've shipped.
+        </p>
 
         <article class="project">
-            <h3>Two-node Proxmox cluster with a hard-won uptime</h3>
+            <h3>Home infrastructure — two-node Proxmox cluster</h3>
             <p class="project-meta">Infrastructure · Troubleshooting · Linux</p>
             <p>
-                A Proxmox cluster that kept dropping every VM's network at once. Two
-                independent faults, near-identical symptoms:
+                A Proxmox cluster running sixteen containers on hardware I own, and the two
+                hardware faults that took the whole thing offline. Both presented identically
+                from the outside — every VM losing network, host unresponsive — and had
+                nothing to do with each other.
             </p>
-            <ol class="steps">
-                <li>
-                    <strong>Intel I219-LM link drops.</strong> Firmware bug causing the
-                    NIC to lose link intermittently. EEE, ASPM and Wake-on-LAN all
-                    triggered it. Disabling those three held for days — then recurred,
-                    because a separate hardware-unit hang was being caused by packet
-                    offloads. Final fix disables EEE/ASPM/WoL <em>and</em>
-                    TSO/GSO/GRO, applied on boot.
-                </li>
-                <li>
-                    <strong>i915 crash on GPU passthrough handoff.</strong> The host hung
-                    when starting or stopping passthrough. Root cause was module load
-                    order; fixed by declaring <code>i915</code> soft-dependent on
-                    <code>vfio-pci</code>.
-                </li>
-            </ol>
-            <p class="note">
-                The first fix didn't hold. Diagnosing the second layer underneath is the
-                part that took the real work.
+            <p>
+                The first fix came from a forum post and held for four days. It wasn't the
+                real cause: a second, unrelated layer was causing a hardware-unit hang.
+                Diagnosing that is the part worth describing.
             </p>
+            <ul class="project-facts">
+                <li>2 Proxmox nodes · 3 VMs · 2 LXCs</li>
+                <li>16 containers — Arr stack, Jellyfin, Immich, Pi-hole, CouchDB</li>
+                <li>VAAPI hardware transcoding on Intel UHD 750</li>
+                <li>~1TB NAS over NFS and SMB with disk passthrough</li>
+            </ul>
         </article>
 
         <article class="project">
             <h3>Website in Docker</h3>
             <p class="project-meta">JavaScript · Nginx · Containers</p>
             <p>
-                A responsive frontend with a small backend API, built and served entirely
-                from containers. The containerisation was the point — reproducible
-                environments, one-command teardown.
+                A responsive frontend with a small backend API, served entirely from
+                containers. Reproducible environment, one-command teardown — the
+                containerisation was the point, not the app.
             </p>
-            <a class="repo-link" href="https://github.com/muhdharris/Website-in-Docker">View repository <i class="fab fa-github"></i></a>
+            <a class="repo-link" href="https://github.com/muhdharris/Website-in-Docker">GitHub <i class="fab fa-github"></i></a>
         </article>
 
         <article class="project">
-            <h3>Java cinema project</h3>
+            <h3>Cinema booking system</h3>
             <p class="project-meta">Java</p>
             <p>
-                A larger Java application — booking flow, listings, persistence. The
-                most substantial piece of application code I've written.
+                The largest piece of application code I've written — listings, seat booking,
+                and persistence. NetBeans project, plain Java, no framework.
             </p>
-            <a class="repo-link" href="https://github.com/muhdharris/cinemaProject">View repository <i class="fab fa-github"></i></a>
+            <a class="repo-link" href="https://github.com/muhdharris/cinemaProject">GitHub <i class="fab fa-github"></i></a>
+        </article>
+
+        <article class="project">
+            <h3>Network tooling experiments</h3>
+            <p class="project-meta">Ruby · Python · WebRTC</p>
+            <p>
+                Small tools built to understand a protocol rather than to ship:
+                a port scanner, a scraper, and WebRTC connectivity tests. Each one exists
+                because reading the spec left a question.
+            </p>
+            <p class="project-links">
+                <a href="https://github.com/muhdharris/PortScanner">PortScanner</a>
+                <a href="https://github.com/muhdharris/WebScraper">WebScraper</a>
+                <a href="https://github.com/muhdharris/WebRTCtest">WebRTCtest</a>
+            </p>
         </article>
 
         <p class="more">
-            Also on
-            <a href="https://github.com/muhdharris?tab=repositories">GitHub</a>:
-            small scraper, port scanner and WebRTC experiments.
+            Everything is public on
+            <a href="https://github.com/muhdharris?tab=repositories">GitHub</a>.
         </p>
     </section>
 
@@ -226,19 +279,6 @@
                     <li>Ruby</li>
                     <li>Git</li>
                 </ul>
-            </div>
-        </div>
-    </section>
-
-    <section id="certs" class="section alt">
-        <h2 class="section-title">Certifications</h2>
-        <div class="certs">
-            <div class="cert">
-                <span class="cert-badge">CCNA</span>
-                <div>
-                    <h3>Cisco Certified Network Associate</h3>
-                    <p>Cisco Networking Academy · routing, switching, and network fundamentals</p>
-                </div>
             </div>
         </div>
     </section>
