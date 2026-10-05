@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 740" width="1200" height="740" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif" role="img" aria-labelledby="t d">
+  <title id="t">Homelab topology</title>
+  <desc id="d">Two-node Proxmox cluster on a flat /24 LAN. Node pve runs a Docker VM with 16 containers and an OpenMediaVault NAS VM sharing over NFS and SMB. Node pve2 runs an LXC for agent and automation. Remote access is through a Tailscale overlay with no inbound ports opened.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+    <marker id="arrowP" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#7c3aed"/>
+    </marker>
+  </defs>
+
+  <rect width="1200" height="740" rx="16" fill="#f8fafc"/>
+
+  <!-- Header -->
+  <text x="40" y="46" font-size="26" font-weight="700" fill="#0f172a">Homelab topology</text>
+  <text x="40" y="70" font-size="14" fill="#64748b">Sanitised — host addresses omitted · home infrastructure only</text>
+
+  <!-- LAN band -->
+  <rect x="40" y="90" width="1120" height="540" rx="14" fill="#ffffff" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="7 6"/>
+  <text x="62" y="119" font-size="14" font-weight="600" fill="#475569">Flat /24 LAN · fixed addressing</text>
+
+  <!-- Node 1: pve -->
+  <rect x="80" y="150" width="520" height="395" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="104" y="182" font-size="18" font-weight="700" fill="#1e3a8a">pve · Dell OptiPlex 5090</text>
+  <text x="104" y="204" font-size="13" fill="#475569">i5-11500 · Intel I219-LM NIC · UHD 750 iGPU (VAAPI)</text>
+
+  <!-- VM 100 -->
+  <rect x="110" y="240" width="460" height="140" rx="10" fill="#ffffff" stroke="#60a5fa" stroke-width="1.5"/>
+  <text x="130" y="268" font-size="15" font-weight="700" fill="#0f172a">VM 100 · Docker host</text>
+  <text x="130" y="288" font-size="12.5" fill="#475569">16 containers · isolated bridge network</text>
+  <g font-size="13" fill="#1e3a8a" text-anchor="middle">
+    <rect x="130" y="302" width="130" height="28" rx="14" fill="#dbeafe"/><text x="195" y="321">Pi-hole DNS</text>
+    <rect x="270" y="302" width="130" height="28" rx="14" fill="#dbeafe"/><text x="335" y="321">Jellyfin</text>
+    <rect x="410" y="302" width="130" height="28" rx="14" fill="#dbeafe"/><text x="475" y="321">Immich</text>
+    <rect x="130" y="338" width="130" height="28" rx="14" fill="#dbeafe"/><text x="195" y="357">CouchDB</text>
+    <rect x="270" y="338" width="130" height="28" rx="14" fill="#dbeafe"/><text x="335" y="357">Uptime Kuma</text>
+    <rect x="410" y="338" width="130" height="28" rx="14" fill="#dbeafe"/><text x="475" y="357">Media pipeline</text>
+  </g>
+
+  <!-- NFS/SMB arrow -->
+  <line x1="340" y1="430" x2="340" y2="384" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="354" y="412" font-size="12.5" font-weight="600" fill="#475569">NFS · SMB</text>
+
+  <!-- VM 102 -->
+  <rect x="110" y="430" width="460" height="90" rx="10" fill="#ecfdf5" stroke="#10b981" stroke-width="1.5"/>
+  <text x="130" y="458" font-size="15" font-weight="700" fill="#064e3b">VM 102 · OpenMediaVault NAS</text>
+  <text x="130" y="480" font-size="12.5" fill="#475569">Direct disk passthrough · ~1 TB</text>
+  <text x="130" y="500" font-size="12.5" fill="#475569">Exports scoped per share</text>
+
+  <!-- Cluster link -->
+  <line x1="600" y1="345" x2="680" y2="345" stroke="#475569" stroke-width="2" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+  <text x="640" y="334" font-size="11.5" font-weight="600" fill="#475569" text-anchor="middle">cluster</text>
+
+  <!-- Node 2: pve2 -->
+  <rect x="680" y="150" width="420" height="395" rx="12" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="704" y="182" font-size="18" font-weight="700" fill="#1e3a8a">pve2 · spare laptop</text>
+  <text x="704" y="204" font-size="13" fill="#475569">Ryzen 7 · 10 Gb NIC</text>
+
+  <rect x="710" y="240" width="360" height="100" rx="10" fill="#fff7ed" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="730" y="270" font-size="15" font-weight="700" fill="#78350f">LXC · agent + automation</text>
+  <text x="730" y="292" font-size="12.5" fill="#475569">Lightweight container on the second node</text>
+
+  <rect x="710" y="430" width="360" height="90" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="730" y="458" font-size="15" font-weight="700" fill="#0f172a">Cluster totals</text>
+  <text x="730" y="480" font-size="12.5" fill="#475569">2 Proxmox nodes · 3 VMs · 2 LXCs</text>
+  <text x="730" y="500" font-size="12.5" fill="#475569">16 containers · KVM + LXC</text>
+
+  <!-- Tailscale overlay -->
+  <line x1="340" y1="630" x2="340" y2="664" stroke="#7c3aed" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arrowP)" marker-start="url(#arrowP)"/>
+  <line x1="890" y1="630" x2="890" y2="664" stroke="#7c3aed" stroke-width="2" stroke-dasharray="4 4" marker-end="url(#arrowP)" marker-start="url(#arrowP)"/>
+  <rect x="40" y="668" width="1120" height="56" rx="14" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+  <text x="600" y="702" font-size="16" font-weight="600" fill="#4c1d95" text-anchor="middle">Tailscale overlay — private remote access, no inbound ports opened</text>
+</svg>

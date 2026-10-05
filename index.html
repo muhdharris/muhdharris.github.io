@@ -159,29 +159,13 @@
         </div>
 
 <figure class="diagram">
-                <pre class="diagram-pre" role="img" aria-label="Homelab topology: two Proxmox nodes on a 192.168.100.0/24 flat network. Node one runs a Docker VM with sixteen containers and an OMV NAS reached over NFS and SMB; node two runs a container for automation. Storage, Pi-hole DNS and a Tailscale overlay complete the setup.">
-    ┌──────────────────────────────── 192.168.100.0/24 ───────────────────────────────┐
-    │                                                                              │
-    │   ┌─ pve · OptiPlex 5090 ────────────┐      ┌─ pve2 · spare laptop ──────┐   │
-    │   │  i5-11500 · I219-LM · UHD 750    │      │  Ryzen 7 · 10Gb NIC         │   │
-    │   │                                  │      │                             │   │
-    │   │  VM 100 ── Docker ── 16 ctr     │      │  LXC · agent + automation    │   │
-    │   │          bridge network          │      │                             │   │
-    │   │  VM 102 ── OMV NAS ──────────────┼──────┼── NFS / SMB · direct disk   │   │
-    │   └──────────────────────────────────┘      └─────────────────────────────┘   │
-    │                                                                              │
-    │   ┌─ storage ────────┐   ┌─ DNS ─────────┐   ┌─ remote access ────┐       │
-    │   │ NFS + SMB        │   │ Pi-hole       │   │ Tailscale overlay │       │
-    │   │ exports per share│   │ one resolver  │   │ no inbound ports  │       │
-    │   └─────────────────┘   └───────────────┘   └────────────────────┘       │
-    └──────────────────────────────────────────────────────────────────────────────┘
-
-        </pre>
+                <img src="infra-topology.svg" width="1200" height="740"
+                     alt="Topology of the homelab: two Proxmox nodes on a flat /24 LAN. The first node, a Dell OptiPlex 5090, runs a Docker host VM with 16 containers and an OpenMediaVault NAS VM reached over NFS and SMB. The second node, a spare laptop with a 10 Gb NIC, runs a lightweight container for agent and automation. Remote access is through a Tailscale overlay, so no inbound ports are opened.">
                 <figcaption>
-                    Sanitised topology of the homelab only. The cluster, the NAS
-                    path and the network services are as deployed; host addresses
-                    are omitted. This is a flat <code>/24</code> by design — VLAN
-                    segmentation is work I do at InnoSphere, not here.
+                    Homelab only — the edge router, managed switches and APs in my day
+                    job are not part of this. The home network is a flat
+                    <code>/24</code> by design; VLAN segmentation is work I do at
+                    InnoSphere.
                 </figcaption>
             </figure>
 
