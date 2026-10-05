@@ -17,7 +17,7 @@ Muhd-Harris-CV.pdf     CV
 
 ## Sections
 
-Experience · About · Infrastructure · Learning · Portfolio · Skills ·
+About · Experience · Infrastructure · Learning · Portfolio · Skills ·
 Background · Contact
 
 The Infrastructure section is the substantive one — a two-node Proxmox cluster

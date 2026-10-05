@@ -381,12 +381,6 @@ footer p { color: var(--text-dim); font-size: 0.88rem; margin: 0; }
     letter-spacing: -0.01em;
 }
 .practice-list { list-style: none; margin: 0; padding: 0; max-width: 62ch; }
-.practice-list li.practice-caveat {
-  border-style: dashed;
-  color: var(--text-dim);
-}
-.practice-list li.practice-caveat strong { color: var(--accent); }
-
 .practice-list li {
     padding: 0.7rem 0 0.7rem 1.5rem; position: relative;
     border-bottom: 1px solid var(--border); color: var(--text-dim);
@@ -480,14 +474,25 @@ footer p { color: var(--text-dim); font-size: 0.88rem; margin: 0; }
 .lang-list strong { color: var(--text); }
 
 .diagram { margin: 2rem 0; }
-.diagram img {
-  display: block;
-  width: 100%;
-  height: auto;
+.diagram-scroll {
+  overflow-x: auto;
+  max-width: 100%;
+  -webkit-overflow-scrolling: touch;
   border-radius: 8px;
   border: 1px solid var(--border);
   background: var(--bg);
 }
+.diagram-scroll a { display: block; }
+.diagram img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* below this the SVG's own labels stop being legible, so the box scrolls instead
+     of shrinking the drawing further */
+  min-width: 900px;
+  border-radius: 8px;
+}
+.diagram figcaption { margin-top: 0.85rem; }
 .diagram figcaption {
   margin-top: 0.75rem;
   font-size: 0.85rem;

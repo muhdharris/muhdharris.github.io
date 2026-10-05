@@ -43,7 +43,7 @@
 
     <section id="home" class="home">
         <div class="home-content">
-            <p class="eyebrow">Network &amp; Security Engineer · InnoSphere Technologies</p>
+            <p class="eyebrow">Currently at InnoSphere Technologies</p>
             <h1><span class="name">Muhd Harris</span></h1>
             <p class="role">Network &amp; Security Engineer</p>
             <p class="lede">
@@ -157,13 +157,17 @@
         </div>
 
 <figure class="diagram">
-                <img src="infra-topology.svg" width="1200" height="740"
-                     alt="Topology of the homelab: two Proxmox nodes on a flat /24 LAN. The first node, a Dell OptiPlex 5090, runs a Docker host VM with 16 containers and an OpenMediaVault NAS VM reached over NFS and SMB. The second node, a spare laptop with a 10 Gb NIC, runs a lightweight container for agent and automation. Remote access is through a Tailscale overlay, so no inbound ports are opened.">
+                <div class="diagram-scroll">
+                    <a href="infra-topology.svg" aria-label="Open the homelab topology at full size">
+                        <img src="infra-topology.svg" width="1200" height="740"
+                             alt="Topology of the homelab: two Proxmox nodes on a flat /24 LAN. The first node, a Dell OptiPlex 5090, runs a Docker host VM with 16 containers and an OpenMediaVault NAS VM reached over NFS and SMB. The second node, a spare laptop with a 10 Gb NIC, runs a lightweight container for agent and automation. Remote access is through a Tailscale overlay, so no inbound ports are opened.">
+                    </a>
+                </div>
                 <figcaption>
-                    Homelab only — the edge router, managed switches and APs in my day
-                    job are not part of this. The home network is a flat
-                    <code>/24</code> by design; VLAN segmentation is work I do at
-                    InnoSphere.
+                    Scroll sideways or tap to open full size. Homelab only — the edge
+                    router, managed switches and APs in my day job are not part of this.
+                    The home network is a flat <code>/24</code> by design; VLAN
+                    segmentation is work I do at InnoSphere.
                 </figcaption>
             </figure>
 
@@ -222,8 +226,9 @@
                 <span class="cert-badge alt">SECURITY</span>
                 <div>
                     <h3>Introduction to Cybersecurity</h3>
-                    <p>Jun 2024 — detection, investigation, and incident
-                    response.</p>
+                    <p>Jun 2024 — how attacks happen and the basics of defending
+                    against them: threat types, vulnerabilities, and where security
+                    controls sit.</p>
                 </div>
             </div>
         </div>
@@ -235,7 +240,7 @@
             <li><strong>Private access without exposing anything</strong> — Tailscale over port forwarding</li>
             <li><strong>Least privilege at the storage layer</strong> — NFS exports scoped per share, hardened with <code>all_squash</code> and <code>anonuid</code></li>
             <li><strong>Credential hygiene</strong> — passwords segregated into one vault, and secrets never written into notes. The public repository ships no compose files, because the private ones held credentials in plaintext <code>environment:</code> blocks and I would rather publish nothing than publish those</li>
-            <li class="practice-caveat"><strong>What I would change</strong> — the private compose files still hold those plaintext secrets. Moving them to <code>.env</code> or Docker secrets and publishing sanitised versions is the correct fix, and it is the first thing I would do with more time</li>
+            <li><strong>Credential hygiene</strong> — every secret in the compose files comes from a <code>.env</code> file at 0600, so the files themselves are safe to publish. The first pass had credentials in plaintext <code>environment:</code> blocks; moving them was a twenty-minute fix and it should have been done before publishing anything at all</li>
             <li><strong>Hardware-level fault isolation</strong> — a failing NIC taking down every VM, and the driver-level fix</li>
         </ul>
     </section>
@@ -337,34 +342,27 @@
             <a class="repo-link" href="https://github.com/muhdharris/cinemaProject">GitHub <i class="fab fa-github"></i></a>
         </article>
 
-        <article class="project">
-            <h3>Network scanner</h3>
-            <p class="project-meta">Python &middot; Flask &middot; Nmap</p>
-            <p>
-                A scheduled host scanning service: point it at a subnet and it walks
-                the range on an interval, logging what answers.
-            </p>
-            <p>
-                The interesting part was making it stoppable. A scheduler that spawns a
-                thread per request will eventually hold several at once, and a scan you
-                cannot interrupt is a scan you cannot shut down when it turns up
-                something you were not expecting. One scheduler thread, an interruptible
-                loop, and a stop endpoint that takes effect immediately.
-            </p>
-            <p class="project-links">
-                <a href="https://github.com/muhdharris/networkscanner">Repo</a>
-            </p>
-        </article>
+        
 
         <article class="project">
-            <h3>Network tooling experiments</h3>
-            <p class="project-meta">Ruby · Python · WebRTC</p>
+            <h3>Network scanner and small tools</h3>
+            <p class="project-meta">Python &middot; Flask &middot; Nmap &middot; Ruby</p>
             <p>
-                Small tools built to understand a protocol rather than to ship:
-                a port scanner, a scraper, and WebRTC connectivity tests. Each one exists
-                because reading the spec left a question.
+                A scheduled host scanning service: point it at a subnet and it walks
+                the range on an interval, logging what answers. The interesting part
+                was making it stoppable — a scheduler that spawns a thread per request
+                will eventually hold several at once, and a scan you cannot interrupt
+                is a scan you cannot shut down when it turns up something you were not
+                expecting. One scheduler thread, an interruptible loop, and a stop
+                endpoint that takes effect immediately.
+            </p>
+            <p>
+                Alongside it, smaller tools built to understand a protocol rather than
+                to ship: a standalone port scanner, a scraper, and WebRTC connectivity
+                tests. Scan only what you own or are authorised to test.
             </p>
             <p class="project-links">
+                <a href="https://github.com/muhdharris/networkscanner">Network scanner</a>
                 <a href="https://github.com/muhdharris/PortScanner">PortScanner</a>
                 <a href="https://github.com/muhdharris/WebScraper">WebScraper</a>
                 <a href="https://github.com/muhdharris/WebRTCtest">WebRTCtest</a>
