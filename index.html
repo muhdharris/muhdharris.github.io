@@ -43,15 +43,13 @@
 
     <section id="home" class="home">
         <div class="home-content">
-            <p class="eyebrow">Network &amp; Security Engineer · Cisco Networking Academy</p>
+            <p class="eyebrow">Network &amp; Security Engineer · InnoSphere Technologies</p>
             <h1><span class="name">Muhd Harris</span></h1>
             <p class="role">Network &amp; Security Engineer</p>
             <p class="lede">
-                I run a two-node Proxmox cluster with <span class="hl">16 containers</span>
-                and document all of it. My work sits between the systems that are
-                supposed to be secure and the ones that aren't — configuration,
-                diagnosis, and the unglamorous debugging that keeps infrastructure up
-                when something fails in a way nobody expected.
+                I design and run company networks — firewall policy, VLAN segmentation,
+                Peplink edge and EDR — and keep a two-node Proxmox homelab where I
+                diagnose faults to root cause and document them.
             </p>
             <div class="hero-actions">
                 <a href="#contact" class="btn">Let's talk</a>
@@ -70,12 +68,12 @@
         <h2 class="section-title">About</h2>
         <div class="prose">
             <p>
-                Currently a Network &amp; Security Engineer at InnoSphere Technologies,
-                working on firewall policy, switch and wireless configuration, and
-                endpoint tooling. My work sits between the systems that are supposed
-                to be secure and the ones that aren't — configuration, diagnosis, and
-                the unglamorous debugging that keeps infrastructure up when something
-                fails in a way nobody expected.
+                My work sits between the systems that are supposed to be secure and
+                the ones that aren't — configuration, diagnosis, and the unglamorous
+                debugging that keeps infrastructure up when something fails in a way
+                nobody expected. Most of it is quiet: a rule set that holds, a switch
+                that keeps passing traffic, a device that gets replaced before anyone
+                notices it was dying.
             </p>
             <p>
                 I built the homelab as a working testbed rather than a collection of
@@ -221,11 +219,11 @@
                 </div>
             </div>
             <div class="learn-card">
-                <span class="cert-badge alt">SECURITY OPS</span>
+                <span class="cert-badge alt">SECURITY</span>
                 <div>
-                    <h3>Security Operations</h3>
-                    <p>Jun 2024 — defensive security operations: detection,
-                    investigation, and incident response.</p>
+                    <h3>Introduction to Cybersecurity</h3>
+                    <p>Jun 2024 — detection, investigation, and incident
+                    response.</p>
                 </div>
             </div>
         </div>
@@ -236,7 +234,8 @@
             <li><strong>DNS control</strong> — Pi-hole as network-wide resolver, network hygiene rather than per-device settings</li>
             <li><strong>Private access without exposing anything</strong> — Tailscale over port forwarding</li>
             <li><strong>Least privilege at the storage layer</strong> — NFS exports scoped per share, hardened with <code>all_squash</code> and <code>anonuid</code></li>
-            <li><strong>Credential hygiene</strong> — passwords segregated into one vault, secrets never written into notes. The public repository ships no compose files at all, because the private ones carried credentials in plaintext <code>environment:</code> blocks. Writing sanitised ones is the obvious improvement, and not shipping them is why the README says why</li>
+            <li><strong>Credential hygiene</strong> — passwords segregated into one vault, and secrets never written into notes. The public repository ships no compose files, because the private ones held credentials in plaintext <code>environment:</code> blocks and I would rather publish nothing than publish those</li>
+            <li class="practice-caveat"><strong>What I would change</strong> — the private compose files still hold those plaintext secrets. Moving them to <code>.env</code> or Docker secrets and publishing sanitised versions is the correct fix, and it is the first thing I would do with more time</li>
             <li><strong>Hardware-level fault isolation</strong> — a failing NIC taking down every VM, and the driver-level fix</li>
         </ul>
     </section>
@@ -292,7 +291,7 @@
             <p class="project-meta">Solidity · Dart/Flutter · Testing · <a href="https://github.com/muhdharris/truechain">Repo</a></p>
             <p>
                 A final-year project I audited and rebuilt, after finding that it
-                proved nothing: the the customer
+                proved nothing: the customer
                 transparency screen — whose entire job is proving a supply chain record is
                 trustworthy — was reading a list stored in the browser. The app called four
                 contract functions that had never existed, and presented randomly generated
@@ -336,6 +335,25 @@
                 and persistence. NetBeans project, plain Java, no framework.
             </p>
             <a class="repo-link" href="https://github.com/muhdharris/cinemaProject">GitHub <i class="fab fa-github"></i></a>
+        </article>
+
+        <article class="project">
+            <h3>Network scanner</h3>
+            <p class="project-meta">Python &middot; Flask &middot; Nmap</p>
+            <p>
+                A scheduled host scanning service: point it at a subnet and it walks
+                the range on an interval, logging what answers.
+            </p>
+            <p>
+                The interesting part was making it stoppable. A scheduler that spawns a
+                thread per request will eventually hold several at once, and a scan you
+                cannot interrupt is a scan you cannot shut down when it turns up
+                something you were not expecting. One scheduler thread, an interruptible
+                loop, and a stop endpoint that takes effect immediately.
+            </p>
+            <p class="project-links">
+                <a href="https://github.com/muhdharris/networkscanner">Repo</a>
+            </p>
         </article>
 
         <article class="project">
