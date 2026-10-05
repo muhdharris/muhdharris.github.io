@@ -122,15 +122,12 @@
                     alerts and keeping coverage current</li>
                 <li>Handle incident response and troubleshooting — isolating faults,
                     restoring service and documenting what changed</li>
-                <li><strong>Ongoing:</strong> an STP loop during a Huawei switch refresh —
-                    around 50 switches including the data centre — took the firewall with
-                    it and downed the network. Found by disconnecting switches one at a
-                    time and contained in a few hours with BPDU filtering, edge ports,
-                    DHCP snooping and link-flap auto-recovery on the access layer. The
-                    root cause cannot be established: the old switch configuration was
-                    never handed over, so there is no baseline to compare the new design
-                    against and no way to trace which port bridged the loop. The fix
-                    contains the failure mode; it does not explain it</li>
+                <li><strong>Incident:</strong> an STP loop during a Huawei switch refresh of
+                    around 50 switches downed the network via the firewall. Isolated by
+                    disconnecting switches one at a time and contained within hours using
+                    BPDU filtering, edge ports, DHCP snooping and link-flap
+                    auto-recovery. Root cause not established — no baseline
+                    configuration was available to compare against</li>
             </ul>
 
         </div>
@@ -173,7 +170,7 @@
                     </a>
                 </div>
                 <figcaption>
-                    Scroll sideways or tap to open full size. Homelab only — the edge
+                    Tap to open full size. Homelab only — the edge
                     router, managed switches and APs in my day job are not part of this.
                     The home network is a flat <code>/24</code> by design; VLAN
                     segmentation is work I do at InnoSphere.
@@ -248,8 +245,7 @@
             <li><strong>DNS control</strong> — Pi-hole as network-wide resolver, network hygiene rather than per-device settings</li>
             <li><strong>Private access without exposing anything</strong> — Tailscale over port forwarding</li>
             <li><strong>Least privilege at the storage layer</strong> — NFS exports scoped per share, hardened with <code>all_squash</code> and <code>anonuid</code></li>
-            <li><strong>Credential hygiene</strong> — passwords segregated into one vault, and secrets never written into notes. The public repository ships no compose files, because the private ones held credentials in plaintext <code>environment:</code> blocks and I would rather publish nothing than publish those</li>
-            <li><strong>Credential hygiene</strong> — every secret in the compose files comes from a <code>.env</code> file at 0600, so the files themselves are safe to publish. The first pass had credentials in plaintext <code>environment:</code> blocks; moving them was a twenty-minute fix and it should have been done before publishing anything at all</li>
+            <li><strong>Credential hygiene</strong> — every secret in the compose files comes from a <code>.env</code> file at 0600, so the compose files are safe to publish. They did not start that way — the first pass had credentials in plaintext <code>environment:</code> blocks</li>
             <li><strong>Hardware-level fault isolation</strong> — a failing NIC taking down every VM, and the driver-level fix</li>
         </ul>
     </section>
