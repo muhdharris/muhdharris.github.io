@@ -3,27 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Harris — network and security engineer. CCNA, 10 months experience, running a two-node Proxmox cluster with 16 containers and documenting all of it.">
+    <meta name="description" content="Muhd Harris — network and security engineer. Cisco Networking Academy coursework, a working two-node Proxmox cluster, and documentation of every fault along the way.">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Muhd Harris — Network &amp; Security Engineer">
+    <meta property="og:description" content="Cisco Networking Academy coursework, a working two-node Proxmox cluster, and documentation of every fault along the way.">
+    <meta property="og:url" content="https://muhdharris.github.io/">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Muhd Harris — Network &amp; Security Engineer">
+    <meta name="twitter:description" content="Cisco Networking Academy coursework, a working two-node Proxmox cluster, and documentation of every fault along the way.">
+    <link rel="canonical" href="https://muhdharris.github.io/">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128737;</text></svg>">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
-    <title>Harris — Network &amp; Security Engineer</title>
+    <title>Muhd Harris — Network &amp; Security Engineer</title>
 </head>
 <body>
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header>
-        <a href="#home" class="logo">Harris</a>
+        <a href="#home" class="logo">Muhd Harris</a>
         <button class="menu-btn" aria-label="Toggle navigation" aria-expanded="false">
             <span></span><span></span><span></span>
         </button>
         <nav>
-            <a href="#about" class="nav-link">About</a>
             <a href="#experience" class="nav-link">Experience</a>
-            <a href="#learning" class="nav-link">Learning</a>
             <a href="#infra" class="nav-link">Infrastructure</a>
-            <a href="#projects" class="nav-link">Portfolio</a>
-            <a href="#stack" class="nav-link">Stack</a>
-            <a href="#education" class="nav-link">Background</a>
+            <a href="#projects" class="nav-link">Work</a>
+            <a href="#stack" class="nav-link">Skills</a>
             <a href="#contact" class="nav-link">Contact</a>
         </nav>
     </header>
@@ -32,8 +38,8 @@
 
     <section id="home" class="home">
         <div class="home-content">
-            <p class="eyebrow">Network &amp; Security Engineer · CCNA · ~10 months experience</p>
-            <h1><span class="name">Harris</span></h1>
+            <p class="eyebrow">Network &amp; Security Engineer · Cisco Networking Academy</p>
+            <h1><span class="name">Muhd Harris</span></h1>
             <p class="role">Network &amp; Security Engineer</p>
             <p class="lede">
                 I run a two-node Proxmox cluster with <span class="hl">16 containers</span>
@@ -44,7 +50,7 @@
             </p>
             <div class="hero-actions">
                 <a href="#contact" class="btn">Let's talk</a>
-                <a href="cv-personal.pdf" class="btn btn-ghost" download>
+                <a href="Muhd-Harris-CV.pdf" class="btn btn-ghost" download>
                     <i class="fas fa-download"></i> Download CV
                 </a>
             </div>
@@ -66,10 +72,10 @@
                 infrastructure up when something fails in a way nobody expected.
             </p>
             <p>
-                I run a two-node Proxmox cluster at home with sixteen containers. Not
-                because it counts for anything on paper, but because it's the fastest
-                way to be wrong about infrastructure at scale — and it's where the two
-                host faults below came from. Both looked identical from the outside
+                I built this as a working testbed rather than a collection of
+                labs — it's the fastest way to be wrong about infrastructure at
+                scale, and it's where the two host faults below came from. Both looked
+                identical from the outside
                 and had nothing to do with each other.
             </p>
             <p>
@@ -77,39 +83,6 @@
                 treated as source of truth. It's not an afterthought — it's how I avoid
                 re-applying a fix that already failed once.
             </p>
-        </div>
-    </section>
-
-    <section id="infra" class="section alt">
-        <h2 class="section-title">What I run</h2>
-        <p class="section-intro">
-            Self-hosted on hardware I own. No cloud credits, no managed services —
-            the whole stack is something I can take apart.
-        </p>
-
-        <div class="grid stats">
-            <div class="stat"><span class="num">2</span><span class="lab">Proxmox nodes</span></div>
-            <div class="stat"><span class="num">16</span><span class="lab">Containers running</span></div>
-            <div class="stat"><span class="num">3</span><span class="lab">VMs · 2 LXCs</span></div>
-            <div class="stat"><span class="num">~1<span class="unit">TB</span></span><span class="lab">NAS storage</span></div>
-        </div>
-
-        <div class="table-wrap">
-            <table>
-                <caption>Cluster and workload at a glance</caption>
-                <thead>
-                    <tr><th>Layer</th><th>What it is</th></tr>
-                </thead>
-                <tbody>
-                    <tr><td>Virtualisation</td><td>Proxmox VE, two nodes — a Dell OptiPlex 5090 (i5-11500, Intel UHD 750) and a spare laptop with 10Gb networking. KVM VMs plus LXC containers.</td></tr>
-                    <tr><td>Storage</td><td>OpenMediaVault VM with direct disk passthrough, exported over NFS and SMB. Hardlinked into the media pipeline.</td></tr>
-                    <tr><td>Containers</td><td>Docker Compose on one VM: Sonarr, Radarr, Prowlarr, qBittorrent, Jellyfin, Immich, Pi-hole, CouchDB, Homepage, Uptime Kuma, Portainer.</td></tr>
-                    <tr><td>Media</td><td>Download-to-library pipeline with hardware-accelerated VAAPI transcoding on the iGPU. Library scans itself.</td></tr>
-                    <tr><td>Networking</td><td>Pi-hole for DNS, Tailscale for private access, deliberate <code>/24</code> layout with fixed addressing.</td></tr>
-                    <tr><td>Observability</td><td>Scheduled health checks that only alert on failure, nightly snapshots, morning briefings.</td></tr>
-                    <tr><td>Documentation</td><td>Structured Obsidian vault — architecture, every bug and its fix, cross-linked and treated as source of truth.</td></tr>
-                </tbody>
-            </table>
         </div>
     </section>
 
@@ -165,6 +138,65 @@
         </div>
     </section>
 
+    <section id="infra" class="section alt">
+        <h2 class="section-title">What I run</h2>
+        <p class="section-intro">
+            Self-hosted on hardware I own. No cloud credits, no managed services —
+            the whole stack is something I can take apart.
+        </p>
+
+        <div class="grid stats">
+            <div class="stat"><span class="num">2</span><span class="lab">Proxmox nodes</span></div>
+            <div class="stat"><span class="num">16</span><span class="lab">Containers running</span></div>
+            <div class="stat"><span class="num">3</span><span class="lab">VMs · 2 LXCs</span></div>
+            <div class="stat"><span class="num">~1<span class="unit">TB</span></span><span class="lab">NAS storage</span></div>
+        </div>
+
+<figure class="diagram">
+                <pre class="diagram-pre">
+    ┌──────────────────────────────── 192.168.100.0/24 ───────────────────────────────┐
+    │                                                                              │
+    │   ┌─ pve · OptiPlex 5090 ────────────┐      ┌─ pve2 · spare laptop ──────┐   │
+    │   │  i5-11500 · I219-LM · UHD 750    │      │  Ryzen 7 · 10Gb NIC         │   │
+    │   │                                  │      │                             │   │
+    │   │  VM 100 ── Docker ── 16 ctr     │      │  LXC · agent + automation    │   │
+    │   │          bridge network          │      │                             │   │
+    │   │  VM 102 ── OMV NAS ──────────────┼──────┼── NFS / SMB · direct disk   │   │
+    │   └──────────────────────────────────┘      └─────────────────────────────┘   │
+    │                                                                              │
+    │   ┌─ edge ──────────┐   ┌─ access ──────────┐   ┌─ DNS ────────┐             │
+    │   │ Peplink router  │   │ managed switches  │   │ Pi-hole      │             │
+    │   │ VPN · failover  │   │ VLANs · APs      │   │ per-network  │             │
+    │   └─────────────────┘   └──────────────────┘   └──────────────┘             │
+    └──────────────────────────────────────────────────────────────────────────────┘
+
+              ╰─ Tailscale overlay ─ private access, no inbound ports opened
+                 </pre>
+                <figcaption>
+                    Sanitised topology. The cluster, the NAS path and the network
+                    services are as deployed; host addresses are omitted.
+                </figcaption>
+            </figure>
+
+        <div class="table-wrap">
+            <table>
+                <caption>Cluster and workload at a glance</caption>
+                <thead>
+                    <tr><th>Layer</th><th>What it is</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td>Virtualisation</td><td>Proxmox VE, two nodes — a Dell OptiPlex 5090 (i5-11500, Intel UHD 750) and a spare laptop with 10Gb networking. KVM VMs plus LXC containers.</td></tr>
+                    <tr><td>Storage</td><td>OpenMediaVault VM with direct disk passthrough, exported over NFS and SMB. Hardlinked into the media pipeline.</td></tr>
+                    <tr><td>Containers</td><td>Docker Compose on one VM: Sonarr, Radarr, Prowlarr, qBittorrent, Jellyfin, Immich, Pi-hole, CouchDB, Homepage, Uptime Kuma, Portainer.</td></tr>
+                    <tr><td>Media</td><td>Download-to-library pipeline with hardware-accelerated VAAPI transcoding on the iGPU. Library scans itself.</td></tr>
+                    <tr><td>Networking</td><td>Pi-hole for DNS, Tailscale for private access, deliberate <code>/24</code> layout with fixed addressing.</td></tr>
+                    <tr><td>Observability</td><td>Scheduled health checks that only alert on failure, nightly snapshots, morning briefings.</td></tr>
+                    <tr><td>Documentation</td><td>Structured Obsidian vault — architecture, every bug and its fix, cross-linked and treated as source of truth.</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
     <section id="learning" class="section">
         <h2 class="section-title">Learning &amp; achievement</h2>
         <p class="section-intro">
@@ -174,7 +206,7 @@
 
         <div class="learn-grid">
             <div class="learn-card">
-                <span class="cert-badge">CCNA</span>
+                <span class="cert-badge">NETWORKING</span>
                 <div>
                     <h3>Introduction to Networks</h3>
                     <p>Cisco Networking Academy · Jun 2022 — protocols, subnetting, and
@@ -182,7 +214,7 @@
                 </div>
             </div>
             <div class="learn-card">
-                <span class="cert-badge">CCNA</span>
+                <span class="cert-badge">NETWORKING</span>
                 <div>
                     <h3>Switching, Routing &amp; Wireless Essentials</h3>
                     <p>Cisco Networking Academy · Jul 2023 — OSPF, VLANs, NAT, and
@@ -190,7 +222,7 @@
                 </div>
             </div>
             <div class="learn-card">
-                <span class="cert-badge">CCNA</span>
+                <span class="cert-badge">NETWORKING</span>
                 <div>
                     <h3>Enterprise Networking, Security &amp; Automation</h3>
                     <p>Cisco Networking Academy · Jul 2023 — security controls and
@@ -198,9 +230,9 @@
                 </div>
             </div>
             <div class="learn-card">
-                <span class="cert-badge alt">CYBEROPS</span>
+                <span class="cert-badge alt">SECURITY OPS</span>
                 <div>
-                    <h3>CyberOps Associate</h3>
+                    <h3>Security Operations</h3>
                     <p>Jun 2024 — defensive security operations: detection,
                     investigation, and incident response.</p>
                 </div>
@@ -235,7 +267,7 @@
         </p>
 
         <article class="project">
-            <h3>Home infrastructure — two-node Proxmox cluster</h3>
+            <h3>Home infrastructure — the testbed that found two faults</h3>
             <p class="project-meta">Infrastructure · Troubleshooting · Linux</p>
             <p>
                 A Proxmox cluster running sixteen containers on hardware I own, and the two
@@ -244,15 +276,63 @@
                 nothing to do with each other.
             </p>
             <p>
-                The first fix came from a forum post and held for four days. It wasn't the
-                real cause: a second, unrelated layer was causing a hardware-unit hang.
-                Diagnosing that is the part worth describing.
+                <strong>Fault one.</strong> Every VM lost network at once and the host
+                stopped responding. A forum post pointed at the onboard Intel I219-LM,
+                where EEE, ASPM and Wake-on-LAN each trigger link drops. Disabling all
+                three held for four days — then it hung twice more with every setting
+                applied. The actual cause was a second layer: packet offloads triggering
+                an e1000e hardware-unit hang. Turning off TSO/GSO/GRO fixed it, and the
+                link has been stable since.
+            </p>
+            <p>
+                <strong>Fault two.</strong> The same symptom, a different cause — the host
+                hung whenever a GPU-passthrough VM started or stopped. The i915 driver
+                was claiming the device before VFIO could bind it. Ordering
+                <code>vfio-pci</code> ahead of <code>i915</code> fixed it, and dropping
+                passthrough entirely in favour of host-iGPU transcoding removed the
+                problem class.
+            </p>
+            <p>
+                The lesson was that a fix which appears to work is not evidence it works.
+                The first change held for four days and was still wrong.
+                <a href="https://github.com/muhdharris/homelab">Full write-ups</a>
+                include the approach that silently failed.
             </p>
             <ul class="project-facts">
                 <li>2 Proxmox nodes · 3 VMs · 2 LXCs</li>
-                <li>16 containers — Arr stack, Jellyfin, Immich, Pi-hole, CouchDB</li>
+                <li>16 containers — media pipeline, Jellyfin, Immich, Pi-hole, CouchDB</li>
                 <li>VAAPI hardware transcoding on Intel UHD 750</li>
                 <li>~1TB NAS over NFS and SMB with disk passthrough</li>
+            </ul>
+        </article>
+
+        <article class="project">
+            <h3>Supply chain tracking on Ethereum</h3>
+            <p class="project-meta">Solidity · Dart/Flutter · Testing</p>
+            <p>
+                A final-year project that didn't work, and what it took to find out why.
+                It looked like a blockchain application and proved nothing: the customer
+                transparency screen — whose entire job is proving a supply chain record is
+                trustworthy — was reading a list stored in the browser. The app called four
+                contract functions that had never existed, and presented randomly generated
+                bytes as transaction hashes.
+            </p>
+            <p>
+                Rebuilt so the contract is the only source of truth. Every read is a chain
+                call, every write returns the hash the chain produced, and the ABI is
+                generated and committed rather than inlined in Dart — which is how the
+                original drifted without anyone noticing.
+            </p>
+            <p>
+                Fixing it surfaced five further defects, including one where any address
+                could mark another customer's goods as delivered. Sixty-four assertions now
+                cover the flows the app performs, including that those attempts revert.
+            </p>
+            <ul class="project-facts">
+                <li>23 contract functions · 11 events</li>
+                <li>Forward-only shipment status, owner-gated attestation</li>
+                <li>Stock checked and decremented on chain</li>
+                <li>64 passing assertions</li>
             </ul>
         </article>
 
@@ -305,58 +385,56 @@
             <div class="stack-card">
                 <h3><i class="fas fa-network-wired"></i> Networking</h3>
                 <ul>
-                    <li>TCP/IP, DNS, DHCP, SNMP, ICMP</li>
-                    <li>OSPF, EIGRP, static routing, VLANs</li>
-                    <li>Subnetting, IP addressing, NAT</li>
-                    <li>LAN/WAN design, topologies, redundancy</li>
-                    <li>Wireshark, traceroute, Nmap</li>
+                    <li><strong>TCP/IP</strong> — subnetting, IP addressing, NAT, DHCP/DNS</li>
+                    <li><strong>Routing &amp; switching</strong> — OSPF, EIGRP, VLANs, trunks</li>
+                    <li><strong>Peplink</strong> — edge routers, SD-WAN policy, failover</li>
+                    <li><strong>Managed switches &amp; wireless APs</strong> — VLAN segmentation, guest coverage</li>
+                    <li><strong>Diagnostics</strong> — Wireshark, traceroute, Nmap</li>
                 </ul>
             </div>
             <div class="stack-card">
                 <h3><i class="fas fa-shield-halved"></i> Security</h3>
                 <ul>
-                    <li>Firewall configuration</li>
-                    <li>ACLs and network access control</li>
-                    <li>VPN configuration</li>
-                    <li>IDS/IPS</li>
-                    <li>Incident response (CyberOps)</li>
-                </ul>
-            </div>
-            <div class="stack-card">
-                <h3><i class="fas fa-cloud"></i> Cloud</h3>
-                <ul>
-                    <li>AWS</li>
-                    <li>VPC design</li>
-                    <li>Cloud firewall</li>
-                    <li>VPN setup</li>
+                    <li><strong>Firewall policy</strong> — rulesets, NAT, port forwarding, exposure review</li>
+                    <li><strong>Endpoint detection &amp; response</strong> — alert triage, coverage management</li>
+                    <li><strong>ACLs &amp; network access control</strong></li>
+                    <li><strong>Incident response</strong> — isolation, restore, documented</li>
+                    <li><strong>VPN</strong> — Tailscale mesh in the homelab, site-to-site at work</li>
                 </ul>
             </div>
             <div class="stack-card">
                 <h3><i class="fas fa-server"></i> Infrastructure</h3>
                 <ul>
-                    <li>Proxmox VE, KVM, LXC</li>
-                    <li>Linux server administration</li>
-                    <li>NFS, SMB, DNS (Pi-hole)</li>
-                    <li>Docker, Docker Compose</li>
-                    <li>Hardware diagnostics</li>
-                </ul>
-            </div>
-            <div class="stack-card">
-                <h3><i class="fas fa-network-wired"></i> Simulation</h3>
-                <ul>
-                    <li>Cisco Packet Tracer</li>
-                    <li>GNS3</li>
-                    <li>VMware</li>
+                    <li><strong>Proxmox VE</strong> — two-node cluster, KVM, LXC, passthrough</li>
+                    <li><strong>Linux</strong> — server administration, systemd, networking</li>
+                    <li><strong>Docker &amp; Compose</strong> — 16 containers on one VM</li>
+                    <li><strong>Storage</strong> — NFS, SMB, disk passthrough, direct-attached NAS</li>
+                    <li><strong>DNS</strong> — Pi-hole across the network</li>
                 </ul>
             </div>
             <div class="stack-card">
                 <h3><i class="fas fa-code"></i> Development</h3>
                 <ul>
-                    <li>Java, Python, C, JavaScript</li>
-                    <li>HTML, CSS, Bootstrap</li>
-                    <li>MySQL</li>
-                    <li>Git, GitHub</li>
-                    <li>Figma, Arduino IDE</li>
+                    <li><strong>Solidity</strong> — smart contracts, Hardhat, 64-assertion test suite</li>
+                    <li><strong>Dart / Flutter</strong> — the FYP app, with the contract as source of truth</li>
+                    <li><strong>Python, Java, JavaScript</strong></li>
+                    <li><strong>MySQL</strong></li>
+                    <li><strong>Git, GitHub Actions</strong></li>
+                </ul>
+            </div>
+            <div class="stack-card">
+                <h3><i class="fas fa-flask"></i> Simulation</h3>
+                <ul>
+                    <li><strong>Cisco Packet Tracer</strong></li>
+                    <li><strong>GNS3</strong></li>
+                    <li><strong>VMware</strong></li>
+                </ul>
+            </div>
+            <div class="stack-card">
+                <h3><i class="fas fa-cloud"></i> Cloud</h3>
+                <ul>
+                    <li><strong>AWS</strong> — VPC design, security groups, IAM basics</li>
+                    <li><strong>Foundations level</strong> — currently coursework, not production work</li>
                 </ul>
             </div>
         </div>
@@ -400,6 +478,11 @@
             Interested in infrastructure work, or want to talk about the homelab?
         </p>
         <div class="contact-cards">
+            <a class="contact-card" href="mailto:muhdharris40@gmail.com">
+                <i class="fab fa-envelope"></i>
+                <span>Email</span>
+                <small>muhdharris40@gmail.com</small>
+            </a>
             <a class="contact-card" href="https://github.com/muhdharris">
                 <i class="fab fa-github"></i>
                 <span>GitHub</span>
@@ -411,6 +494,10 @@
                 <small>/in/muhdharris</small>
             </a>
         </div>
+        <p class="contact-meta">
+            Based in Kuala Lumpur, Malaysia. Open to network and security engineering
+            roles, and happy to talk about infrastructure work.
+        </p>
     </section>
 
     </main>
