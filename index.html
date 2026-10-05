@@ -122,12 +122,14 @@
                     alerts and keeping coverage current</li>
                 <li>Handle incident response and troubleshooting — isolating faults,
                     restoring service and documenting what changed</li>
-                <li><strong>Ongoing:</strong> an STP loop during a Huawei switch refresh
-                    took the firewall with it and downed the whole network. Found it by
-                    disconnecting switches one at a time; contained with BPDU filtering,
-                    edge ports, DHCP snooping and link-flap auto-recovery on the access
-                    layer. Root cause still open — the fix contains the failure mode, it
-                    does not yet explain why the loop formed with STP already running</li>
+                <li><strong>Ongoing:</strong> an STP loop during a Huawei switch
+                    refresh — around 50 switches including the data centre — took the
+                    firewall with it and downed the network. Found by disconnecting
+                    switches one at a time and contained in a few hours with BPDU
+                    filtering, edge ports, DHCP snooping and link-flap auto-recovery on
+                    the access layer. Root cause still open: that contains the failure
+                    mode, it does not explain why the loop formed with STP already
+                    running</li>
             </ul>
 
         </div>

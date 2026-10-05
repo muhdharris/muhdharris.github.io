@@ -16,7 +16,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 6 0 R >>
 endobj
 6 0 obj
-<< /Length 6133 >>
+<< /Length 6158 >>
 stream
 BT
 /F2 17.5 Tf 1 0 0 1 46.0 795.9 Tm (Muhd Harris) Tj
@@ -37,8 +37,8 @@ BT
 /F1 8.4 Tf 1 0 0 1 58.0 620.4 Tm (• Ad-serving infrastructure deployment and upkeep.) Tj
 /F1 8.4 Tf 1 0 0 1 58.0 609.6 Tm (• Peplink routers and edge devices — configuration, firmware, and failover across sites.) Tj
 /F1 8.4 Tf 1 0 0 1 58.0 598.8 Tm (• EDR tooling — alert response and keeping endpoint coverage current.) Tj
-/F1 8.4 Tf 1 0 0 1 58.0 588.0 Tm (• Incident: an STP loop during a Huawei switch refresh took the firewall down and downed the network; isolated by disconnecting) Tj
-/F1 8.4 Tf 1 0 0 1 58.0 577.2 Tm (  switches one at a time, contained with BPDU filtering, edge ports and DHCP snooping. Root cause still open.) Tj
+/F1 8.4 Tf 1 0 0 1 58.0 588.0 Tm (• Incident: an STP loop during a Huawei refresh of ~50 switches, data centre included, downed the network via the firewall. Isolated) Tj
+/F1 8.4 Tf 1 0 0 1 58.0 577.2 Tm (  by disconnecting switches one at a time, contained in hours with BPDU filtering, edge ports and DHCP snooping. Root cause open.) Tj
 /F2 9.1 Tf 1 0 0 1 46.0 563.4 Tm (Intern — Wevo System Sdn. Bhd.) Tj
 ET
 BT
@@ -90,8 +90,8 @@ BT
 /F1 8.0 Tf 1 0 0 1 46.0 118.2 Tm (Security — firewall configuration, ACLs, network access control, VPN · EDR, incident response) Tj
 /F1 8.0 Tf 1 0 0 1 46.0 107.4 Tm (Troubleshooting — Wireshark, traceroute, Nmap — packet-level diagnosis) Tj
 /F1 8.0 Tf 1 0 0 1 46.0 96.6 Tm (Infrastructure — Proxmox VE, KVM, LXC · Linux administration · NFS, SMB, DNS \(Pi-hole\) · Docker, Compose · hardware diagnostics) Tj
-/F1 8.0 Tf 1 0 0 1 46.0 85.8 Tm (Cloud & Development — AWS foundations coursework · Solidity, Dart/Flutter, Java, Python, JavaScript, MySQL · Git, GitHub Actions · Packet) Tj
-/F1 8.0 Tf 1 0 0 1 46.0 75.4 Tm (Tracer, GNS3, VMware) Tj
+/F1 8.0 Tf 1 0 0 1 46.0 85.8 Tm (Cloud & Development — AWS foundations coursework · Solidity, Dart/Flutter, Java, Python, JavaScript, MySQL · Git, GitHub Actions ·) Tj
+/F1 8.0 Tf 1 0 0 1 46.0 75.4 Tm (Packet Tracer, GNS3, VMware) Tj
 ET
 endstream
 endobj
@@ -107,9 +107,9 @@ xref
 0000000218 00000 n 
 0000000320 00000 n 
 0000000462 00000 n 
-0000006647 00000 n 
+0000006672 00000 n 
 trailer
 << /Size 8 /Root 1 0 R /Info 7 0 R >>
 startxref
-6816
+6841
 %%EOF

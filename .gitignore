@@ -1,4 +1,1 @@
-# CV build artefacts
-cv_ops.json
-cv_layout.json
-cv_data.json
+.build/
