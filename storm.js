@@ -67,70 +67,109 @@ if (cv) {
     function colours() {
         const cs = getComputedStyle(document.documentElement);
         const g = (v) => cs.getPropertyValue(v).trim();
-        return { ink: g("--ink"), dim: g("--dim"), acc: g("--accent"), paper: g("--paper") };
+        return { ink: g("--ink"), dim: g("--dim"), acc: g("--accent"), paper: g("--paper"), rule: g("--rule") };
     }
 
+    // drawn like a printed diagram: dot grid, ruled links, boxed devices with port ticks
     function draw() {
         const c = colours();
         ctx.clearRect(0, 0, W, H);
-        ctx.lineWidth = 1;
         ctx.font = '500 11px "IBM Plex Mono", ui-monospace, monospace';
         ctx.textAlign = "center";
 
+        // dot grid
+        ctx.fillStyle = c.rule; ctx.globalAlpha = 0.9;
+        for (let x = 14; x < W; x += 22) for (let y = 14; y < H; y += 22) ctx.fillRect(x, y, 1.5, 1.5);
+        ctx.globalAlpha = 1;
+
+        // the loop, shaded as a region while it exists
+        const looping = plugged && LOOP.every((i) => !off.has(i));
+        if (looping) {
+            ctx.beginPath();
+            LOOP.forEach((n, k) => { const [x, y] = xy(n); k ? ctx.lineTo(x, y) : ctx.moveTo(x, y); });
+            ctx.closePath();
+            ctx.globalAlpha = 0.07; ctx.fillStyle = c.acc; ctx.fill();
+            ctx.globalAlpha = 0.5; ctx.strokeStyle = c.acc; ctx.lineWidth = 1;
+            ctx.setLineDash([2, 4]); ctx.stroke(); ctx.setLineDash([]);
+            ctx.globalAlpha = 1; ctx.fillStyle = c.acc;
+            const cx = (xy(2)[0] + xy(3)[0] + xy(4)[0] + xy(5)[0]) / 4;
+            ctx.fillText("LOOP", (cx + xy(5)[0]) / 2 + 4, H / 2 - 12);
+        }
+
+        // links
         for (const [a, b] of EDGES) {
             if (off.has(a) || off.has(b)) continue;
             const [x1, y1] = xy(a), [x2, y2] = xy(b);
             const stray = isStray(a, b);
             ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2);
-            ctx.globalAlpha = 0.75;
-            ctx.setLineDash(stray ? [5, 4] : []);
-            ctx.strokeStyle = stray && plugged ? c.acc : c.dim;
-            ctx.stroke();
-            ctx.setLineDash([]);
+            ctx.globalAlpha = 1;
+            ctx.lineWidth = stray && plugged ? 1.6 : 1.1;
+            ctx.setLineDash(stray ? [6, 4] : []);
+            ctx.strokeStyle = stray && plugged ? c.acc : c.ink;
+            ctx.stroke(); ctx.setLineDash([]);
             if (stray && plugged) {
-                ctx.globalAlpha = 1; ctx.fillStyle = c.acc; ctx.textAlign = "left";
-                ctx.fillText("stray cable", x1 + 10, (y1 + y2) / 2);
+                ctx.fillStyle = c.acc; ctx.textAlign = "left";
+                ctx.fillText("stray cable", x1 + 8, (y1 + y2) / 2 + 8);
                 ctx.textAlign = "center";
             }
         }
 
-        ctx.fillStyle = c.acc;
+        // frames in flight: short dashes along the link, not dots
+        ctx.strokeStyle = c.acc; ctx.lineWidth = 2; ctx.lineCap = "round";
         for (const p of pkts) {
             const [x1, y1] = xy(p.a), [x2, y2] = xy(p.b);
-            const t = Math.min(1, p.t);
-            ctx.globalAlpha = 0.85;
-            ctx.beginPath();
-            ctx.arc(x1 + (x2 - x1) * t, y1 + (y2 - y1) * t, 2.2, 0, 6.2832);
-            ctx.fill();
+            const t = Math.min(1, p.t), d = Math.hypot(x2 - x1, y2 - y1) || 1;
+            const ux = (x2 - x1) / d, uy = (y2 - y1) / d;
+            const x = x1 + (x2 - x1) * t, y = y1 + (y2 - y1) * t;
+            ctx.globalAlpha = 0.8;
+            ctx.beginPath(); ctx.moveTo(x - ux * 5, y - uy * 5); ctx.lineTo(x, y); ctx.stroke();
         }
+        ctx.lineCap = "butt"; ctx.globalAlpha = 1;
 
+        // devices
         for (let i = 0; i < 7; i++) {
             const [x, y] = xy(i);
-            const w = i === FW ? fwW() : 30, h = 30;
+            const isFw = i === FW;
+            const w = isFw ? fwW() : (W < 600 ? 32 : 38), h = isFw ? 44 : 26;
+            const left = x - w / 2, top = y - h / 2;
             const load = Math.min(1, rate[i] / RMAX);
-            ctx.globalAlpha = 1;
+            ctx.lineWidth = 1.4;
             if (off.has(i)) {
+                ctx.fillStyle = c.paper; ctx.fillRect(left, top, w, h);
                 ctx.setLineDash([3, 3]); ctx.strokeStyle = c.dim;
-                ctx.strokeRect(x - w / 2, y - h / 2, w, h);
-                ctx.setLineDash([]);
+                ctx.strokeRect(left, top, w, h); ctx.setLineDash([]);
                 ctx.beginPath(); ctx.moveTo(x - 7, y - 7); ctx.lineTo(x + 7, y + 7);
                 ctx.moveTo(x + 7, y - 7); ctx.lineTo(x - 7, y + 7); ctx.stroke();
             } else {
+                ctx.globalAlpha = 1; ctx.fillStyle = c.paper; ctx.fillRect(left, top, w, h);
+                // load shown as ink rising from the bottom of the box
                 ctx.fillStyle = c.acc;
-                ctx.globalAlpha = i === FW && fwDown ? 1 : load * 0.85;
-                ctx.fillRect(x - w / 2, y - h / 2, w, h);
+                ctx.globalAlpha = isFw && fwDown ? 1 : 0.18 + load * 0.62;
+                const fh = isFw && fwDown ? h : h * load;
+                ctx.fillRect(left, top + h - fh, w, fh);
                 ctx.globalAlpha = 1;
-                ctx.strokeStyle = c.ink;
-                ctx.strokeRect(x - w / 2, y - h / 2, w, h);
-                if (i === FW) {
+                ctx.strokeStyle = c.ink; ctx.strokeRect(left, top, w, h);
+                if (isFw) {
+                    // firewall: brick courses
+                    ctx.strokeStyle = fwDown ? c.paper : c.dim; ctx.lineWidth = 1; ctx.globalAlpha = 0.6;
+                    for (let r = 1; r < 4; r++) { ctx.beginPath(); ctx.moveTo(left, top + r * h / 4); ctx.lineTo(left + w, top + r * h / 4); ctx.stroke(); }
+                    ctx.globalAlpha = 1;
                     ctx.fillStyle = fwDown ? c.paper : c.ink;
+                    ctx.font = '600 11px "IBM Plex Mono", ui-monospace, monospace';
+                    ctx.fillStyle = c.paper; ctx.fillRect(x - 17, y - 8, 34, 16);
+                    ctx.fillStyle = fwDown ? c.acc : c.ink;
                     ctx.fillText(fwDown ? "DOWN" : "up", x, y + 4);
+                    ctx.font = '500 11px "IBM Plex Mono", ui-monospace, monospace';
+                } else {
+                    // port ticks along the front of a switch
+                    ctx.fillStyle = c.ink;
+                    for (let k = 0; k < 4; k++) ctx.fillRect(left + 5 + k * (w < 36 ? 6 : 8), top + h - 8, 4, 4);
                 }
             }
             ctx.fillStyle = c.dim;
-            ctx.fillText(i === FW ? "firewall" : "sw" + (i + 1), x, y + h / 2 + 15);
+            ctx.fillText(isFw ? "firewall" : "sw" + (i + 1), x, y + h / 2 + 15);
         }
-        ctx.globalAlpha = 1;
+        ctx.globalAlpha = 1; ctx.lineWidth = 1;
     }
 
     function message() {
@@ -187,7 +226,7 @@ if (cv) {
         const mx = e.clientX - r.left, my = e.clientY - r.top;
         for (let i = 0; i < N; i++) {
             const [x, y] = xy(i);
-            if (Math.abs(mx - x) < 22 && Math.abs(my - y) < 22) { press(i); break; }
+            if (Math.abs(mx - x) < 24 && Math.abs(my - y) < 24) { press(i); break; }
         }
     });
 
