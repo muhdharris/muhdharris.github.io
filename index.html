@@ -133,6 +133,15 @@
                     configuration was available to compare against</li>
             </ul>
 
+            <figure class="storm" id="storm-fig">
+                <figcaption class="storm-head">Find the loop</figcaption>
+                <p class="storm-lede">An illustration of the outage above, not the real topology. A loop is already running. Unplug switches one at a time, as I did on site, until the firewall recovers.</p>
+                <canvas id="storm" width="900" height="360" role="img" aria-label="Animated diagram: six switches and a firewall. Four switches form a loop, flooding traffic that overloads the firewall."></canvas>
+                <div class="storm-ctl" id="storm-ctl"></div>
+                <p class="storm-state" id="storm-state" role="status" aria-live="polite">Normal traffic.</p>
+                <noscript><p>This demo needs JavaScript. The short version: a loop made frames multiply until the firewall went down; disconnecting switches one at a time found the one causing it.</p></noscript>
+            </figure>
+
         </div>
 
         <div class="role-block reveal">
@@ -272,6 +281,15 @@
                 an e1000e hardware-unit hang. Turning off TSO/GSO/GRO fixed it, and the
                 link has been stable since.
             </p>
+            <ol class="fl" aria-label="Fault one, in order">
+                <li><b>Start</b><span>Every VM loses network at once. The host stops responding.</span></li>
+                <li><b>The forum fix</b><span>EEE, ASPM and Wake-on-LAN disabled on the Intel I219-LM.</span></li>
+                <li><b>Days 1&ndash;4</b><span>Stable. Looks fixed.</span></li>
+                <li class="bad"><b>Then</b><span>It hangs twice more, with all three still disabled. The fix was wrong.</span></li>
+                <li><b>Second layer</b><span>Packet offloads trigger an e1000e hardware-unit hang.</span></li>
+                <li class="good"><b>TSO / GSO / GRO off</b><span>Stable since.</span></li>
+            </ol>
+
             <p>
                 <strong>Fault two.</strong> The same symptom, a different cause — the host
                 hung whenever a GPU-passthrough VM started or stopped. The i915 driver
@@ -505,5 +523,7 @@
         document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     </script>
     <script type="module" src="net.js"></script>
+    <script type="module" src="motion.js"></script>
+    <script type="module" src="storm.js"></script>
 </body>
 </html>

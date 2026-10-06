@@ -83,7 +83,7 @@ header {
     position: sticky; top: 0; z-index: 50;
     display: flex; align-items: baseline; justify-content: space-between;
     padding: 0.9rem var(--gutter);
-    background: color-mix(in srgb, var(--paper) 94%, transparent);
+    background: var(--paper);
     border-bottom: 1px solid var(--rule);
 }
 .logo { font-family: var(--serif); font-size: 1.35rem; text-decoration: none; letter-spacing: 0.01em; }
@@ -288,6 +288,8 @@ footer p { margin: 0; }
 
 /* ---------- small screens ---------- */
 
+@media (max-width: 700px) { .hop { display: none; } }
+
 @media (max-width: 860px) {
     .section { grid-template-columns: minmax(0, 1fr); }
     .section > :not(.section-title) { grid-column: 1; }
@@ -304,4 +306,80 @@ footer p { margin: 0; }
     .hero-note { display: none; }
     .stack-card, .learn-card, .tl-item { grid-template-columns: 1fr; gap: 0.3rem; }
     td:first-child { white-space: normal; width: auto; }
+}
+
+/* ============================================================
+   Motion layer (motion.js, storm.js). Everything degrades to the static page.
+   ============================================================ */
+
+/* name: letters rise */
+h1.split .ch { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
+h1.split .ch > span { display: inline-block; transform: translateY(110%); animation: rise .9s cubic-bezier(.2,.8,.2,1) forwards; }
+@keyframes rise { to { transform: none; } }
+.js .eyebrow, .js .role, .js .lede, .js .hero-actions { animation: fadeup .9s .7s both; }
+.js .role { animation-delay: .85s; } .js .lede { animation-delay: 1s; } .js .hero-actions { animation-delay: 1.15s; }
+@keyframes fadeup { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+
+/* progress bar and hop counter */
+header .bar { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: var(--accent); transform: scaleX(0); transform-origin: left; }
+.hop {
+    position: fixed; right: var(--gutter); bottom: 1rem; z-index: 40;
+    font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.04em; color: var(--dim);
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    border: 1px solid var(--rule); padding: 0.35rem 0.6rem;
+    transition: opacity .3s; pointer-events: none;
+}
+.hop.off { opacity: 0; }
+
+/* sections: ghost numeral behind, rule draws in */
+.section { position: relative; overflow: hidden; border-bottom: 0; }
+.section::after { content: ""; position: absolute; left: var(--gutter); right: var(--gutter); bottom: 0; height: 1px; background: var(--rule); transform: scaleX(0); transform-origin: left; transition: transform 1.2s cubic-bezier(.2,.8,.2,1); }
+.section.in-sec::after { transform: scaleX(1); }
+.section > .ghost {
+    position: absolute; right: calc(var(--gutter) * 0.5); top: 0; grid-column: auto; z-index: 0;
+    font-family: var(--serif); font-size: clamp(9rem, 26vw, 24rem); line-height: 0.8;
+    color: transparent; -webkit-text-stroke: 1px color-mix(in srgb, var(--ink) 14%, transparent);
+    pointer-events: none; user-select: none; will-change: transform;
+}
+.section > :not(.ghost) { position: relative; z-index: 1; }
+.section > .section-title { position: sticky; }
+@media (max-width: 860px) { .section > .section-title { position: relative; } }
+
+/* staggered children */
+.js .reveal .stag { opacity: 0; transform: translateY(10px); transition: opacity .6s ease, transform .6s ease; transition-delay: calc(var(--i, 0) * 70ms); }
+.js .reveal.in .stag { opacity: 1; transform: none; }
+
+/* fault-one timeline, filled by scroll */
+.fl { --p: 0; list-style: none; margin: 1.8rem 0 1.8rem 0.4rem; padding: 0 0 0 1.6rem; position: relative; max-width: 40rem; }
+.fl::before, .fl::after { content: ""; position: absolute; left: 0; top: 0.4rem; bottom: 0.4rem; width: 1px; }
+.fl::before { background: var(--rule); }
+.fl::after { background: var(--accent); transform-origin: top; transform: scaleY(var(--p)); }
+.fl li { position: relative; padding: 0 0 1.2rem; opacity: 0.35; transition: opacity .4s; }
+.fl li:last-child { padding-bottom: 0; }
+.fl li::before { content: ""; position: absolute; left: -1.6rem; top: 0.45rem; width: 9px; height: 9px; margin-left: -4px; border: 1px solid var(--ink); background: var(--paper); transition: background .3s, border-color .3s; }
+.fl li.on { opacity: 1; }
+.fl li.on::before { background: var(--accent); border-color: var(--accent); }
+.fl li.bad b { color: var(--accent); }
+.fl li b { display: block; font-family: var(--mono); font-weight: 500; font-size: 0.78rem; letter-spacing: 0.05em; text-transform: uppercase; }
+.fl li span { font-size: 0.95rem; color: var(--dim); }
+
+/* STP demo */
+.storm { margin: 2.2rem 0 0; padding: 1.2rem 0 0; border-top: 1px solid var(--ink); display: none; }
+.storm.ready { display: block; }
+.storm-head { font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); }
+.storm-lede { color: var(--dim); font-size: 0.95rem; max-width: 40rem; margin: 0.4rem 0 1rem; }
+.storm canvas { display: block; width: 100%; height: clamp(230px, 34vw, 360px); touch-action: manipulation; cursor: pointer; background: color-mix(in srgb, var(--paper2) 60%, transparent); border: 1px solid var(--rule); }
+.storm-ctl { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.8rem; }
+.storm-ctl button { font: 500 0.76rem var(--mono); letter-spacing: 0.03em; padding: 0.55rem 0.8rem; min-height: 44px; background: transparent; color: var(--ink); border: 1px solid var(--ink); cursor: pointer; }
+.storm-ctl button:hover { border-color: var(--accent); color: var(--accent); }
+.storm-ctl button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+.storm-ctl .reset { margin-left: auto; border-style: dashed; }
+.storm-state { font-family: var(--mono); font-size: 0.84rem; margin: 0.9rem 0 0; min-height: 2.6em; }
+
+@media (prefers-reduced-motion: reduce) {
+    h1.split .ch > span { transform: none; animation: none; }
+    .js .eyebrow, .js .role, .js .lede, .js .hero-actions { animation: none; }
+    .section::after { transform: none; transition: none; }
+    .js .reveal .stag { opacity: 1; transform: none; transition: none; }
+    .fl li { opacity: 1; transition: none; }
 }

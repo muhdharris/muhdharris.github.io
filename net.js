@@ -204,6 +204,17 @@ canvas.addEventListener("pointerup", end);
 canvas.addEventListener("pointercancel", end);
 canvas.addEventListener("pointerleave", () => { px = 0; py = 0; dirty = true; });
 
+/* ---------- scroll drives the scene ---------- */
+
+let lastY = scrollY, boost = 0, scrollYaw = 0;
+addEventListener("scroll", () => {
+    const d = scrollY - lastY; lastY = scrollY;
+    if (reduced) return;
+    scrollYaw += d * 0.0022;                     // the scene turns as you scroll
+    boost = Math.min(5, boost + Math.abs(d) * 0.02);  // traffic speeds up with scroll speed
+    dirty = true;
+}, { passive: true });
+
 /* ---------- loop ---------- */
 
 let visible = true, hidden = false;
@@ -229,8 +240,9 @@ function frame() {
 
     if (!reduced) {
         if (!dragging) { yaw += velYaw; velYaw *= 0.94; yaw += dt * 0.07; }   // slow drift
+        boost *= 0.95;
         for (const p of packets) {
-            p.t += dt * p.s; if (p.t > 1) p.t -= 1;
+            p.t += dt * p.s * (1 + boost); if (p.t > 1) p.t -= 1;
             p.m.position.lerpVectors(p.a, p.b, p.t);
         }
         dirty = true;
@@ -238,7 +250,7 @@ function frame() {
     if (!dirty) return;
     dirty = false;
 
-    world.rotation.y = yaw + px * 0.25;
+    world.rotation.y = yaw + scrollYaw + px * 0.25;
     world.rotation.x = pitch + py * 0.15;
     world.updateMatrixWorld(true);
     renderer.render(scene, camera);
