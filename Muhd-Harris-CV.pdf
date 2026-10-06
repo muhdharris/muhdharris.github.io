@@ -16,7 +16,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 6 0 R >>
 endobj
 6 0 obj
-<< /Length 6161 >>
+<< /Length 6212 >>
 stream
 BT
 /F2 17.5 Tf 1 0 0 1 46.0 795.9 Tm (Muhd Harris) Tj
@@ -37,9 +37,9 @@ BT
 /F1 8.4 Tf 1 0 0 1 58.0 623.4 Tm (• Ad-serving infrastructure deployment and upkeep.) Tj
 /F1 8.4 Tf 1 0 0 1 58.0 612.6 Tm (• Peplink routers and edge devices — configuration, firmware, and failover across sites.) Tj
 /F1 8.4 Tf 1 0 0 1 58.0 601.8 Tm (• EDR tooling — alert response and keeping endpoint coverage current.) Tj
-/F1 8.4 Tf 1 0 0 1 58.0 591.0 Tm (• Incident: an STP loop during a Huawei refresh of ~50 switches downed the network via the firewall. Isolated by disconnecting) Tj
-/F1 8.4 Tf 1 0 0 1 58.0 580.2 Tm (  switches one at a time, contained within hours using BPDU filtering, edge ports, DHCP snooping and link-flap auto-recovery. Root) Tj
-/F1 8.4 Tf 1 0 0 1 58.0 569.4 Tm (  cause not established — no baseline configuration was available.) Tj
+/F1 8.4 Tf 1 0 0 1 58.0 591.0 Tm (• Incident: during a Huawei switch refresh, a Layer 2 loop formed with STP already running and took the firewall, and so the whole) Tj
+/F1 8.4 Tf 1 0 0 1 58.0 580.2 Tm (  network, down. Found the cause by disconnecting switches one at a time; contained within hours with BPDU filtering, edge ports,) Tj
+/F1 8.4 Tf 1 0 0 1 58.0 569.4 Tm (  DHCP snooping and link-flap auto-recovery. Root cause not established — no baseline configuration was available.) Tj
 /F2 9.1 Tf 1 0 0 1 46.0 555.6 Tm (Intern — Wevo System Sdn. Bhd.) Tj
 ET
 BT
@@ -112,9 +112,9 @@ xref
 0000000218 00000 n 
 0000000320 00000 n 
 0000000462 00000 n 
-0000006675 00000 n 
+0000006726 00000 n 
 trailer
 << /Size 8 /Root 1 0 R /Info 7 0 R >>
 startxref
-6844
+6895
 %%EOF

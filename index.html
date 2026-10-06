@@ -128,12 +128,15 @@
                     alerts and keeping coverage current</li>
                 <li>Handle incident response and troubleshooting — isolating faults,
                     restoring service and documenting what changed</li>
-                <li><strong>Incident:</strong> an STP loop during a Huawei switch refresh of
-                    around 50 switches downed the network via the firewall. Isolated by
-                    disconnecting switches one at a time and contained within hours using
-                    BPDU filtering, edge ports, DHCP snooping and link-flap
-                    auto-recovery. Root cause not established — no baseline
-                    configuration was available to compare against</li>
+                <li><strong>Incident:</strong> during a Huawei switch refresh, a Layer 2 loop
+                    formed even though STP was already running. The traffic it generated
+                    took the firewall down with it, so the whole network went offline, not
+                    one segment. I found the switch causing it by disconnecting switches
+                    one at a time, then contained it within hours with BPDU filtering and
+                    edge ports on access ports, DHCP snooping, and link-flap
+                    auto-recovery, so a flapping port shuts itself down and recovers on a
+                    timer. Root cause not established: no baseline configuration was
+                    available to compare the new design against</li>
             </ul>
 
             <figure class="storm" id="storm-fig">
