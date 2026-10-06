@@ -305,6 +305,7 @@ footer p { margin: 0; }
     .nav-link { padding: 1rem var(--gutter); border-top: 1px solid var(--rule); font-size: 0.86rem; }
 
     .hero-note { display: none; }
+    .hero-actions { gap: 0.8rem 1.6rem; }
     .stack-card, .learn-card, .tl-item { grid-template-columns: 1fr; gap: 0.3rem; }
     td:first-child { white-space: normal; width: auto; }
 }
@@ -344,7 +345,7 @@ header .bar { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100
 }
 .section > :not(.ghost) { position: relative; z-index: 1; }
 .section > .section-title { position: sticky; }
-@media (max-width: 860px) { .section > .section-title { position: relative; } }
+@media (max-width: 860px) { .section > .section-title { position: relative; top: auto; } }
 
 /* staggered children */
 .js .reveal .stag { opacity: 0; transform: translateY(10px); transition: opacity .6s ease, transform .6s ease; transition-delay: calc(var(--i, 0) * 70ms); }
