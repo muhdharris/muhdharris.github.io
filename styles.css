@@ -336,8 +336,8 @@ header .bar { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100
 .section::after { content: ""; position: absolute; left: var(--gutter); right: var(--gutter); bottom: 0; height: 1px; background: var(--rule); transform: scaleX(0); transform-origin: left; transition: transform 1.2s cubic-bezier(.2,.8,.2,1); }
 .section.in-sec::after { transform: scaleX(1); }
 .section > .ghost {
-    position: absolute; right: calc(var(--gutter) * 0.5); top: 0; grid-column: auto; z-index: 0;
-    font-family: var(--serif); font-size: clamp(9rem, 26vw, 24rem); line-height: 0.8;
+    position: absolute; right: calc(var(--gutter) * 0.5); top: 0.5rem; grid-column: auto; z-index: 0;
+    font-family: var(--serif); font-size: clamp(9rem, 26vw, 24rem); line-height: 1;
     color: transparent; -webkit-text-stroke: 1px color-mix(in srgb, var(--ink) 14%, transparent);
     pointer-events: none; user-select: none; will-change: transform;
 }

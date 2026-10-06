@@ -188,10 +188,13 @@ let px = 0, py = 0;                            // pointer parallax
 let dirty = true;
 
 canvas.addEventListener("pointerdown", (e) => { dragging = true; lx = e.clientX; ly = e.clientY; velYaw = 0; canvas.setPointerCapture(e.pointerId); });
-canvas.addEventListener("pointermove", (e) => {
+// the pointer is tracked on the whole hero, not the canvas: the links sit on top of the
+// canvas, so listening on the canvas made moving onto a link look like leaving it
+let tpx = 0, tpy = 0;                          // target tilt; px/py ease toward it
+host.addEventListener("pointermove", (e) => {
     const r = canvas.getBoundingClientRect();
-    px = ((e.clientX - r.left) / r.width - 0.5);
-    py = ((e.clientY - r.top) / r.height - 0.5);
+    tpx = ((e.clientX - r.left) / r.width - 0.5);
+    tpy = ((e.clientY - r.top) / r.height - 0.5);
     if (!dragging) { dirty = true; return; }
     const dx = e.clientX - lx, dy = e.clientY - ly;
     lx = e.clientX; ly = e.clientY;
@@ -202,7 +205,7 @@ canvas.addEventListener("pointermove", (e) => {
 const end = () => { dragging = false; };
 canvas.addEventListener("pointerup", end);
 canvas.addEventListener("pointercancel", end);
-canvas.addEventListener("pointerleave", () => { px = 0; py = 0; dirty = true; });
+host.addEventListener("pointerleave", () => { tpx = 0; tpy = 0; dirty = true; });
 
 /* ---------- scroll drives the scene ---------- */
 
@@ -246,6 +249,10 @@ function frame() {
             p.m.position.lerpVectors(p.a, p.b, p.t);
         }
         dirty = true;
+    }
+    if (!reduced) {                              // ease the tilt so it can never jump
+        px += (tpx - px) * 0.08; py += (tpy - py) * 0.08;
+        if (Math.abs(tpx - px) + Math.abs(tpy - py) > 0.0004) dirty = true;
     }
     if (!dirty) return;
     dirty = false;

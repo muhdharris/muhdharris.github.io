@@ -144,7 +144,7 @@ function update() {
         for (const s of sections) {
             const r = s.getBoundingClientRect();
             if (r.bottom < -200 || r.top > vh + 200) continue;
-            s._g.style.transform = `translate3d(0,${(-r.top * 0.14).toFixed(1)}px,0)`;
+            s._g.style.transform = `translate3d(0,${Math.max(0, -r.top * 0.14).toFixed(1)}px,0)`;   // drift down only, never above the section
         }
     }
 
