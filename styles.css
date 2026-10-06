@@ -214,10 +214,10 @@ h3 { font-family: var(--serif); font-weight: 400; font-size: 1.7rem; line-height
 }
 .facts-line b { color: var(--ink); font-weight: 500; }
 
-.diagram { margin: 0 0 2.4rem; }
-.diagram-scroll { overflow-x: auto; max-width: 100%; background: #0f1219; -webkit-overflow-scrolling: touch; }
+.diagram { margin: 0 0 2.4rem; max-width: 40rem; }
+.diagram-scroll { overflow-x: auto; max-width: 100%; -webkit-overflow-scrolling: touch; }
 .diagram-scroll a { display: block; }
-.diagram img { display: block; min-width: 900px; width: 100%; height: auto; }
+.diagram img { display: block; min-width: 620px; width: 100%; height: auto; }
 .diagram figcaption { font-size: 0.86rem; color: var(--dim); margin-top: 0.7rem; }
 
 .table-wrap { overflow-x: auto; }
