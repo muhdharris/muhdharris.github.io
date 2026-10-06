@@ -132,11 +132,12 @@
                     formed even though STP was already running. The traffic it generated
                     took the firewall down with it, so the whole network went offline, not
                     one segment. I found the switch causing it by disconnecting switches
-                    one at a time, then contained it within hours with BPDU filtering and
-                    edge ports on access ports, DHCP snooping, and link-flap
-                    auto-recovery, so a flapping port shuts itself down and recovers on a
-                    timer. Root cause not established: no baseline configuration was
-                    available to compare the new design against</li>
+                    one at a time, which stopped the loop within hours. Afterwards I added
+                    protections on my own initiative so one device cannot take the whole
+                    network down again: BPDU filtering and edge ports on access ports, DHCP
+                    snooping, and link-flap auto-recovery, so a flapping port shuts itself
+                    down and recovers on a timer. Root cause not established: no baseline
+                    configuration was available to compare the new design against</li>
             </ul>
 
             <figure class="storm" id="storm-fig">
