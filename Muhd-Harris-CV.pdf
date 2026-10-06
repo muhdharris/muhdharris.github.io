@@ -16,7 +16,7 @@ endobj
 << /Type /Page /Parent 2 0 R /MediaBox [0 0 595.28 841.89] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 6 0 R >>
 endobj
 6 0 obj
-<< /Length 6258 >>
+<< /Length 6161 >>
 stream
 BT
 /F2 17.5 Tf 1 0 0 1 46.0 795.9 Tm (Muhd Harris) Tj
@@ -52,47 +52,51 @@ BT
 /F1 7.2 Tf 1 0 0 1 46.0 465.6 Tm (Solidity · Dart/Flutter · Hardhat · Testing · github.com/muhdharris/truechain) Tj
 /F1 8.4 Tf 1 0 0 1 58.0 455.7 Tm (• Final-year project, audited and rebuilt after finding the contract could not support what the app claimed.) Tj
 /F1 8.4 Tf 1 0 0 1 58.0 444.9 Tm (• Rebuilt so the contract is the only source of truth: every read is a chain call, every write returns a real hash.) Tj
-/F1 8.4 Tf 1 0 0 1 58.0 434.1 Tm (• Committed the generated ABI rather than inlining it in Dart — the drift was invisible until reads failed.) Tj
-/F1 8.4 Tf 1 0 0 1 58.0 423.3 Tm (• Role-gated transitions, on-chain stock checks, bounded pagination; 64 assertions.) Tj
-/F2 8.9 Tf 1 0 0 1 46.0 410.5 Tm (Home infrastructure and fault diagnosis) Tj
-/F1 7.2 Tf 1 0 0 1 46.0 399.2 Tm (Proxmox VE · Linux · Docker · NFS/SMB · Write-ups · github.com/muhdharris/homelab) Tj
-/F1 8.4 Tf 1 0 0 1 58.0 389.3 Tm (• Two-node Proxmox cluster, Docker host with 16 containers, NAS over NFS and SMB.) Tj
-/F1 8.4 Tf 1 0 0 1 58.0 378.5 Tm (• Diagnosed two hardware faults that each took the cluster offline; published the full write-ups.) Tj
-/F1 8.4 Tf 1 0 0 1 58.0 367.7 Tm (• The first fix came from a forum post, held four days, and was still wrong.) Tj
-/F2 8.9 Tf 1 0 0 1 46.0 354.9 Tm (Network scanner) Tj
-/F1 7.2 Tf 1 0 0 1 46.0 343.6 Tm (Python · Flask · Nmap · github.com/muhdharris/networkscanner) Tj
-/F1 8.4 Tf 1 0 0 1 58.0 333.7 Tm (• Scheduled host scanning service: single scheduler thread, interruptible loop, stop endpoint.) Tj
-/F1 8.4 Tf 1 0 0 1 58.0 322.9 Tm (• Scan failures are caught and logged instead of silently killing the scheduler.) Tj
-/F2 9.6 Tf 1 0 0 1 46.0 304.1 Tm (EDUCATION) Tj
-/F2 9.1 Tf 1 0 0 1 46.0 289.1 Tm (BSc Computer Systems and Networks) Tj
+/F1 8.4 Tf 1 0 0 1 58.0 434.1 Tm (• Role-gated transitions, on-chain stock checks, bounded pagination; 64 assertions.) Tj
+/F2 8.9 Tf 1 0 0 1 46.0 421.3 Tm (Home infrastructure and fault diagnosis) Tj
+/F1 7.2 Tf 1 0 0 1 46.0 410.0 Tm (Proxmox VE · Linux · Docker · NFS/SMB · Write-ups · github.com/muhdharris/homelab) Tj
+/F1 8.4 Tf 1 0 0 1 58.0 400.1 Tm (• Two-node Proxmox cluster, Docker host with 16 containers, NAS over NFS and SMB.) Tj
+/F1 8.4 Tf 1 0 0 1 58.0 389.3 Tm (• Diagnosed two hardware faults that each took the cluster offline; the first fix held four days and was still wrong. Write-ups published.) Tj
+/F2 8.9 Tf 1 0 0 1 46.0 376.5 Tm (Network scanner) Tj
+/F1 7.2 Tf 1 0 0 1 46.0 365.2 Tm (Python · Flask · Nmap · github.com/muhdharris/networkscanner) Tj
+/F1 8.4 Tf 1 0 0 1 58.0 355.3 Tm (• Scheduled host scanning service: single scheduler thread, interruptible loop, stop endpoint.) Tj
+/F2 9.6 Tf 1 0 0 1 46.0 336.5 Tm (EDUCATION) Tj
+/F2 9.1 Tf 1 0 0 1 46.0 321.5 Tm (Bachelor of Computer Systems and Networks — Universiti Malaya \(CGPA 3.32\)) Tj
 ET
 BT
-/F1 8.0 Tf 1 0 0 1 549.3 277.6 Tm (2020 – 2025) Tj
-/F1 7.8 Tf 1 0 0 1 46.0 266.8 Tm (University Malaya \(CGPA 3.32, following a foundation year\)) Tj
-/F2 9.6 Tf 1 0 0 1 46.0 250.3 Tm (CISCO NETWORKING ACADEMY COURSEWORK) Tj
-/F2 8.2 Tf 1 0 0 1 46.0 235.3 Tm (Introduction to Networks — protocols, subnetting, traffic behaviour) Tj
+/F1 8.0 Tf 1 0 0 1 549.3 310.0 Tm (2021 – 2025) Tj
+/F2 9.1 Tf 1 0 0 1 46.0 299.2 Tm (Foundation in Physical Sciences — Universiti Malaya) Tj
 ET
 BT
-/F1 8.0 Tf 1 0 0 1 549.3 224.7 Tm (Jun 2022) Tj
-/F2 8.2 Tf 1 0 0 1 46.0 213.9 Tm (Switching, Routing & Wireless Essentials — OSPF, VLANs, NAT, wireless config) Tj
+/F1 8.0 Tf 1 0 0 1 549.3 287.7 Tm (2020 – 2021) Tj
+/F2 9.1 Tf 1 0 0 1 46.0 276.9 Tm (SPM — Sekolah Menengah Sains Tengku Muhammad Faris Petra) Tj
 ET
 BT
-/F1 8.0 Tf 1 0 0 1 549.3 203.3 Tm (Jul 2023) Tj
-/F2 8.2 Tf 1 0 0 1 46.0 192.5 Tm (Enterprise Networking, Security & Automation — security controls, automation at scale) Tj
+/F1 8.0 Tf 1 0 0 1 549.3 265.4 Tm (2015 – 2019) Tj
+/F2 9.6 Tf 1 0 0 1 46.0 248.6 Tm (CISCO NETWORKING ACADEMY COURSEWORK) Tj
+/F2 8.2 Tf 1 0 0 1 46.0 233.6 Tm (Introduction to Networks — protocols, subnetting, traffic behaviour) Tj
 ET
 BT
-/F1 8.0 Tf 1 0 0 1 549.3 181.9 Tm (Jul 2023) Tj
-/F2 8.2 Tf 1 0 0 1 46.0 171.1 Tm (Introduction to Cybersecurity — threat types, vulnerabilities, security controls) Tj
+/F1 8.0 Tf 1 0 0 1 549.3 223.0 Tm (Jun 2022) Tj
+/F2 8.2 Tf 1 0 0 1 46.0 212.2 Tm (Switching, Routing & Wireless Essentials — OSPF, VLANs, NAT, wireless config) Tj
 ET
 BT
-/F1 8.0 Tf 1 0 0 1 549.3 160.5 Tm (Jun 2024) Tj
-/F2 9.6 Tf 1 0 0 1 46.0 143.7 Tm (TECHNICAL SKILLS) Tj
-/F1 8.0 Tf 1 0 0 1 46.0 128.7 Tm (Networking — TCP/IP, DNS, DHCP, SNMP · OSPF, EIGRP, static routing, VLANs · subnetting, addressing, NAT · LAN/WAN design) Tj
-/F1 8.0 Tf 1 0 0 1 46.0 117.9 Tm (Security — firewall configuration, ACLs, network access control, VPN · EDR, incident response) Tj
-/F1 8.0 Tf 1 0 0 1 46.0 107.1 Tm (Troubleshooting — Wireshark, traceroute, Nmap — packet-level diagnosis) Tj
-/F1 8.0 Tf 1 0 0 1 46.0 96.3 Tm (Infrastructure — Proxmox VE, KVM, LXC · Linux administration · NFS, SMB, DNS \(Pi-hole\) · Docker, Compose · hardware diagnostics) Tj
-/F1 8.0 Tf 1 0 0 1 46.0 85.5 Tm (Cloud & Development — AWS foundations coursework · Solidity, Dart/Flutter, Java, Python, JavaScript, MySQL · Git, GitHub Actions ·) Tj
-/F1 8.0 Tf 1 0 0 1 46.0 75.1 Tm (Packet Tracer, GNS3, VMware) Tj
+/F1 8.0 Tf 1 0 0 1 549.3 201.6 Tm (Jul 2023) Tj
+/F2 8.2 Tf 1 0 0 1 46.0 190.8 Tm (Enterprise Networking, Security & Automation — security controls, automation at scale) Tj
+ET
+BT
+/F1 8.0 Tf 1 0 0 1 549.3 180.2 Tm (Jul 2023) Tj
+/F2 8.2 Tf 1 0 0 1 46.0 169.4 Tm (Introduction to Cybersecurity — threat types, vulnerabilities, security controls) Tj
+ET
+BT
+/F1 8.0 Tf 1 0 0 1 549.3 158.8 Tm (Jun 2024) Tj
+/F2 9.6 Tf 1 0 0 1 46.0 142.0 Tm (TECHNICAL SKILLS) Tj
+/F1 8.0 Tf 1 0 0 1 46.0 127.0 Tm (Networking — TCP/IP, DNS, DHCP, SNMP · OSPF, EIGRP, static routing, VLANs · subnetting, addressing, NAT · LAN/WAN design) Tj
+/F1 8.0 Tf 1 0 0 1 46.0 116.2 Tm (Security — firewall configuration, ACLs, network access control, VPN · EDR, incident response) Tj
+/F1 8.0 Tf 1 0 0 1 46.0 105.4 Tm (Troubleshooting — Wireshark, traceroute, Nmap — packet-level diagnosis) Tj
+/F1 8.0 Tf 1 0 0 1 46.0 94.6 Tm (Infrastructure — Proxmox VE, KVM, LXC · Linux administration · NFS, SMB, DNS \(Pi-hole\) · Docker, Compose · hardware diagnostics) Tj
+/F1 8.0 Tf 1 0 0 1 46.0 83.8 Tm (Cloud & Development — AWS foundations coursework · Solidity, Dart/Flutter, Java, Python, JavaScript, MySQL · Git, GitHub Actions ·) Tj
+/F1 8.0 Tf 1 0 0 1 46.0 73.4 Tm (Packet Tracer, GNS3, VMware) Tj
 ET
 endstream
 endobj
@@ -108,9 +112,9 @@ xref
 0000000218 00000 n 
 0000000320 00000 n 
 0000000462 00000 n 
-0000006772 00000 n 
+0000006675 00000 n 
 trailer
 << /Size 8 /Root 1 0 R /Info 7 0 R >>
 startxref
-6941
+6844
 %%EOF

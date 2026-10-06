@@ -258,7 +258,8 @@ td:first-child { font-family: var(--mono); font-size: 0.82rem; white-space: nowr
 
 /* ---------- background ---------- */
 
-.tl-item { display: grid; grid-template-columns: 8rem 1fr; gap: 1rem; }
+.tl-item { display: grid; grid-template-columns: 8rem 1fr; gap: 1rem; padding-bottom: 1.8rem; }
+.tl-item:last-child { padding-bottom: 0; }
 .tl-when { font-family: var(--mono); font-size: 0.8rem; color: var(--accent); padding-top: 0.5rem; }
 .tl-body p { margin: 0.4rem 0 0; color: var(--dim); }
 
