@@ -2,14 +2,17 @@
 
 Personal site — live at https://muhdharris.github.io
 
-Hand-written HTML and CSS. No framework, no build step, no template.
-Dark and light mode via `prefers-color-scheme`.
+Hand-written HTML, CSS and one small WebGL scene. No framework, no build step, no template.
+Paper-and-ink design, dark and light mode via `prefers-color-scheme`. Fonts are self-hosted.
 
 ## Files
 
 ```
 index.html             the whole site, single page
 styles.css             all styling, CSS custom properties for theming
+net.js                 hero scene: the homelab as a 3D schematic (three.js)
+vendor/                three.js, self-hosted
+fonts/                 Instrument Serif and IBM Plex, self-hosted
 infra-topology.svg     homelab diagram, drawn in the dark palette
 og-image.png           1200x630 share card for link previews
 Muhd-Harris-CV.pdf     CV

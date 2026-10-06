@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
     <meta name="description" content="Muhd Harris, Network &amp; Security Engineer. Firewalls, VLANs and Peplink at work; Proxmox homelab with documented fault write-ups at home.">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Muhd Harris — Network &amp; Security Engineer">
@@ -18,7 +19,8 @@
     <meta name="twitter:description" content="Muhd Harris, Network &amp; Security Engineer. Firewalls, VLANs and Peplink at work; Proxmox homelab with documented fault write-ups at home.">
     <link rel="canonical" href="https://muhdharris.github.io/">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128737;</text></svg>">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="preload" href="fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+    <script>document.documentElement.classList.add("js")</script>
     <link rel="stylesheet" href="styles.css">
     <title>Muhd Harris — Network &amp; Security Engineer</title>
 </head>
@@ -42,9 +44,10 @@
     <main id="main">
 
     <section id="home" class="home">
+        <canvas id="net" aria-hidden="true"></canvas>
         <div class="home-content">
             <p class="eyebrow">Currently at InnoSphere Technologies</p>
-            <h1><span class="name">Muhd Harris</span></h1>
+            <h1>Muhd Harris</h1>
             <p class="role">Network &amp; Security Engineer</p>
             <p class="lede">
                 I design and run company networks — firewall policy, VLAN segmentation,
@@ -52,21 +55,21 @@
                 diagnose faults to root cause and document them.
             </p>
             <div class="hero-actions">
-                <a href="#contact" class="btn">Let's talk</a>
-                <a href="Muhd-Harris-CV.pdf" class="btn btn-ghost" download>
-                    <i class="fas fa-download"></i> Download CV
-                </a>
-            </div>
-            <div class="social-icons">
-                <a href="https://github.com/muhdharris" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/muhdharris/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#contact">Let's talk</a>
+                <a href="Muhd-Harris-CV.pdf" download>Download CV</a>
+                <a href="https://github.com/muhdharris">GitHub</a>
+                <a href="https://www.linkedin.com/in/muhdharris/">LinkedIn</a>
             </div>
         </div>
+        <p class="hero-note" id="net-note" hidden>
+            <b>The homelab, as a schematic.</b><br>
+            2 nodes · 3 VMs · 2 LXCs · 16 containers.<br>Drag to turn it.
+        </p>
     </section>
 
     <section id="about" class="section">
-        <h2 class="section-title">About</h2>
-        <div class="prose">
+        <h2 class="section-title" data-n="01">About</h2>
+        <div class="prose reveal">
             <p>
                 My work sits between the systems that are supposed to be secure and
                 the ones that aren't — configuration, diagnosis, and the unglamorous
@@ -91,9 +94,9 @@
     </section>
 
     <section id="experience" class="section alt">
-        <h2 class="section-title">Experience</h2>
+        <h2 class="section-title" data-n="02">Experience</h2>
 
-        <div class="role-block">
+        <div class="role-block reveal">
             <div class="role-head">
                 <div>
                     <h3>Network &amp; Security Engineer</h3>
@@ -132,7 +135,7 @@
 
         </div>
 
-        <div class="role-block">
+        <div class="role-block reveal">
             <div class="role-head">
                 <div>
                     <h3>Intern</h3>
@@ -149,20 +152,15 @@
     </section>
 
     <section id="infra" class="section">
-        <h2 class="section-title">What I run</h2>
+        <h2 class="section-title" data-n="03">What I run</h2>
         <p class="section-intro">
             Self-hosted on hardware I own. No cloud credits, no managed services —
             the whole stack is something I can take apart.
         </p>
 
-        <div class="grid stats">
-            <div class="stat"><span class="num">2</span><span class="lab">Proxmox nodes</span></div>
-            <div class="stat"><span class="num">16</span><span class="lab">Containers running</span></div>
-            <div class="stat"><span class="num">3</span><span class="lab">VMs · 2 LXCs</span></div>
-            <div class="stat"><span class="num">~1<span class="unit">TB</span></span><span class="lab">NAS storage</span></div>
-        </div>
+        <p class="facts-line reveal"><b>2</b> Proxmox nodes &nbsp;·&nbsp; <b>16</b> containers &nbsp;·&nbsp; <b>3</b> VMs, <b>2</b> LXCs &nbsp;·&nbsp; <b>~1TB</b> NAS</p>
 
-<figure class="diagram">
+        <figure class="diagram reveal">
                 <div class="diagram-scroll">
                     <a href="infra-topology.svg" aria-label="Open the homelab topology at full size">
                         <img src="infra-topology.svg" width="1200" height="740"
@@ -177,7 +175,7 @@
                 </figcaption>
             </figure>
 
-        <div class="table-wrap">
+        <div class="table-wrap reveal">
             <table>
                 <caption>Cluster and workload at a glance</caption>
                 <thead>
@@ -197,13 +195,13 @@
     </section>
 
     <section id="learning" class="section">
-        <h2 class="section-title">Learning &amp; achievement</h2>
+        <h2 class="section-title" data-n="04">Learning &amp; achievement</h2>
         <p class="section-intro">
             Coursework, and still learning. The degree that started it, and the
             Cisco Networking Academy modules that came out of it.
         </p>
 
-        <div class="learn-grid">
+        <div class="learn-grid reveal">
             <div class="learn-card">
                 <span class="cert-badge">NETWORKING</span>
                 <div>
@@ -251,12 +249,12 @@
     </section>
 
     <section id="projects" class="section">
-        <h2 class="section-title">Portfolio</h2>
+        <h2 class="section-title" data-n="05">Portfolio</h2>
         <p class="section-intro">
             Infrastructure I've built and debugged, plus code I've shipped.
         </p>
 
-        <article class="project">
+        <article class="project reveal">
             <h3>Home infrastructure — the testbed that found two faults</h3>
             <p class="project-meta">Infrastructure · Troubleshooting · Linux</p>
             <p>
@@ -296,7 +294,7 @@
             </ul>
         </article>
 
-        <article class="project">
+        <article class="project reveal">
             <h3>Supply chain tracking on Ethereum</h3>
             <p class="project-meta">Solidity · Dart/Flutter · Testing · <a href="https://github.com/muhdharris/truechain">Repo</a></p>
             <p>
@@ -326,7 +324,7 @@
             </ul>
         </article>
 
-        <article class="project">
+        <article class="project reveal">
             <h3>Website in Docker</h3>
             <p class="project-meta">JavaScript · Nginx · Containers</p>
             <p>
@@ -334,22 +332,22 @@
                 containers. Reproducible environment, one-command teardown — the
                 containerisation was the point, not the app.
             </p>
-            <a class="repo-link" href="https://github.com/muhdharris/Website-in-Docker">GitHub <i class="fab fa-github"></i></a>
+            <a class="repo-link" href="https://github.com/muhdharris/Website-in-Docker">GitHub &rarr;</a>
         </article>
 
-        <article class="project">
+        <article class="project reveal">
             <h3>Cinema booking system</h3>
             <p class="project-meta">Java</p>
             <p>
                 The largest piece of application code I've written — listings, seat booking,
                 and persistence. NetBeans project, plain Java, no framework.
             </p>
-            <a class="repo-link" href="https://github.com/muhdharris/cinemaProject">GitHub <i class="fab fa-github"></i></a>
+            <a class="repo-link" href="https://github.com/muhdharris/cinemaProject">GitHub &rarr;</a>
         </article>
 
         
 
-        <article class="project">
+        <article class="project reveal">
             <h3>Network scanner and small tools</h3>
             <p class="project-meta">Python &middot; Flask &middot; Nmap &middot; Ruby</p>
             <p>
@@ -381,11 +379,11 @@
     </section>
 
     <section id="stack" class="section alt">
-        <h2 class="section-title">Stack</h2>
+        <h2 class="section-title" data-n="06">Stack</h2>
 
-        <div class="grid stack-grid">
+        <div class="stack-grid reveal">
             <div class="stack-card">
-                <h3><i class="fas fa-network-wired"></i> Networking</h3>
+                <h3>Networking</h3>
                 <ul>
                     <li><strong>TCP/IP</strong> — subnetting, IP addressing, NAT, DHCP/DNS</li>
                     <li><strong>Routing &amp; switching</strong> — OSPF, EIGRP, VLANs, trunks</li>
@@ -395,7 +393,7 @@
                 </ul>
             </div>
             <div class="stack-card">
-                <h3><i class="fas fa-shield-halved"></i> Security</h3>
+                <h3>Security</h3>
                 <ul>
                     <li><strong>Firewall policy</strong> — rulesets, NAT, port forwarding, exposure review</li>
                     <li><strong>Endpoint detection &amp; response</strong> — alert triage, coverage management</li>
@@ -405,7 +403,7 @@
                 </ul>
             </div>
             <div class="stack-card">
-                <h3><i class="fas fa-server"></i> Infrastructure</h3>
+                <h3>Infrastructure</h3>
                 <ul>
                     <li><strong>Proxmox VE</strong> — two-node cluster, KVM, LXC, passthrough</li>
                     <li><strong>Linux</strong> — server administration, systemd, networking</li>
@@ -415,7 +413,7 @@
                 </ul>
             </div>
             <div class="stack-card">
-                <h3><i class="fas fa-code"></i> Development</h3>
+                <h3>Development</h3>
                 <ul>
                     <li><strong>Solidity</strong> — smart contracts, Hardhat, 64-assertion test suite</li>
                     <li><strong>Dart / Flutter</strong> — the FYP app, with the contract as source of truth</li>
@@ -425,7 +423,7 @@
                 </ul>
             </div>
             <div class="stack-card">
-                <h3><i class="fas fa-flask"></i> Simulation</h3>
+                <h3>Simulation</h3>
                 <ul>
                     <li><strong>Cisco Packet Tracer</strong></li>
                     <li><strong>GNS3</strong></li>
@@ -433,7 +431,7 @@
                 </ul>
             </div>
             <div class="stack-card">
-                <h3><i class="fas fa-cloud"></i> Cloud</h3>
+                <h3>Cloud</h3>
                 <ul>
                     <li><strong>AWS</strong> — VPC design, security groups, IAM basics</li>
                     <li><strong>Foundations level</strong> — currently coursework, not production work</li>
@@ -449,7 +447,7 @@
     </section>
 
     <section id="education" class="section">
-        <h2 class="section-title">Background</h2>
+        <h2 class="section-title" data-n="07">Background</h2>
         <div class="timeline">
             <div class="tl-item">
                 <span class="tl-when">2020 — 2025</span>
@@ -464,26 +462,15 @@
     </section>
 
     <section id="contact" class="section alt">
-        <h2 class="section-title">Get in touch</h2>
+        <h2 class="section-title" data-n="08">Get in touch</h2>
         <p class="section-intro">
             Interested in infrastructure work, or want to talk about the homelab?
         </p>
+        <p><a class="contact-mail" href="mailto:muhdharris40@gmail.com">muhdharris40@gmail.com</a></p>
         <div class="contact-cards">
-            <a class="contact-card" href="mailto:muhdharris40@gmail.com">
-                <i class="fas fa-envelope"></i>
-                <span>Email</span>
-                <small>muhdharris40@gmail.com</small>
-            </a>
-            <a class="contact-card" href="https://github.com/muhdharris">
-                <i class="fab fa-github"></i>
-                <span>GitHub</span>
-                <small>@muhdharris</small>
-            </a>
-            <a class="contact-card" href="https://www.linkedin.com/in/muhdharris/">
-                <i class="fab fa-linkedin"></i>
-                <span>LinkedIn</span>
-                <small>/in/muhdharris</small>
-            </a>
+            <a href="https://github.com/muhdharris">GitHub /muhdharris</a>
+            <a href="https://www.linkedin.com/in/muhdharris/">LinkedIn /in/muhdharris</a>
+            <a href="Muhd-Harris-CV.pdf" download>CV (PDF)</a>
         </div>
         <p class="contact-meta">
             Based in Kuala Lumpur, Malaysia. Open to network and security engineering
@@ -494,7 +481,7 @@
     </main>
 
     <footer>
-        <p>Built by hand. No template.</p>
+        <p>Built by hand. No template. Type: Instrument Serif and IBM Plex. 3D: three.js.</p>
     </footer>
 
     <script>
@@ -510,6 +497,13 @@
                 btn.setAttribute('aria-expanded', 'false');
             }
         });
+
+        // reveal-on-scroll; content is visible by default without JS
+        const io = new IntersectionObserver((es) => es.forEach(x => {
+            if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); }
+        }), { rootMargin: '0px 0px -8% 0px' });
+        document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     </script>
+    <script type="module" src="net.js"></script>
 </body>
 </html>
