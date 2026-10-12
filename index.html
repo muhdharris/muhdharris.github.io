@@ -362,13 +362,25 @@
         </article>
 
         <article class="project reveal">
-            <h3>Cinema booking system</h3>
-            <p class="project-meta">Java</p>
+            <h3>CIDR Atlas: a subnet calculator</h3>
+            <p class="project-meta">JavaScript &middot; IPv4 &amp; IPv6 &middot; Testing</p>
             <p>
-                The first coding project I wrote during my degree: listings, seat booking,
-                and persistence. NetBeans project, plain Java, no framework.
+                An IPv4 and IPv6 subnet calculator that shows the bits: which are network
+                and which are host, so changing the prefix is something you see rather than
+                a number you recompute. It also splits blocks, plans VLSM allocations
+                largest-first with correct alignment, merges and subtracts lists of
+                networks, and writes starting-point config for Cisco, Huawei, MikroTik
+                and Linux. A command-line version runs on the same engine.
             </p>
-            <a class="repo-link" href="https://github.com/muhdharris/cinemaProject">GitHub &rarr;</a>
+            <p>
+                The maths is checked against Python's <code>ipaddress</code> module on
+                1,050 seeded random cases, on top of the unit tests. It runs entirely in
+                the browser, with no dependencies and no build step.
+            </p>
+            <p class="project-links">
+                <a href="https://muhdharris.github.io/cidr-atlas/">Open it</a>
+                <a href="https://github.com/muhdharris/cidr-atlas">GitHub</a>
+            </p>
         </article>
 
         
