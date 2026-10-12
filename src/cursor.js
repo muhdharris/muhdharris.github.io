@@ -1,6 +1,7 @@
 // Traceroute cursor: a small ring that trails the pointer, grows over things you can
 // click and names them, and leaves a few fading dots behind when you move fast.
-// The real cursor is never hidden. Mouse only; off for touch and for reduced motion.
+// The arrow is replaced by a tiny dot at the exact pointer position, so clicks stay precise.
+// Mouse only; off for touch and for reduced motion, where the normal cursor stays.
 
 import { reduced, fine, $ } from "./lib.js";
 
@@ -11,6 +12,10 @@ if (fine && !reduced) {
     const tag = document.createElement("span");
     ring.appendChild(tag);
 
+    const pt = document.createElement("div");
+    pt.className = "cur-pt";
+    pt.setAttribute("aria-hidden", "true");
+
     const TRAIL = 7;
     const trail = Array.from({ length: TRAIL }, () => {
         const d = document.createElement("i");
@@ -18,7 +23,7 @@ if (fine && !reduced) {
         d.setAttribute("aria-hidden", "true");
         return d;
     });
-    document.body.append(ring, ...trail);
+    document.body.append(ring, pt, ...trail);
 
     const life = new Float32Array(TRAIL);
     let tx = -100, ty = -100, x = tx, y = ty, lx = tx, ly = ty;
@@ -68,7 +73,8 @@ if (fine && !reduced) {
     addEventListener("pointermove", (e) => {
         if (e.pointerType !== "mouse") return;
         tx = e.clientX; ty = e.clientY;
-        if (!shown) { shown = true; x = tx; y = ty; lx = tx; ly = ty; ring.classList.add("on"); }
+        pt.style.transform = `translate3d(${tx}px,${ty}px,0)`;   // no easing: this is the real position
+        if (!shown) { shown = true; x = tx; y = ty; lx = tx; ly = ty; ring.classList.add("on"); pt.classList.add("on"); document.documentElement.classList.add("no-arrow"); }
         wake();
     }, { passive: true });
 
@@ -79,5 +85,5 @@ if (fine && !reduced) {
     }, { passive: true });
     document.addEventListener("pointerdown", () => ring.classList.add("press"), { passive: true });
     addEventListener("pointerup", () => ring.classList.remove("press"), { passive: true });
-    document.documentElement.addEventListener("pointerleave", () => { shown = false; ring.classList.remove("on", "hot"); });
+    document.documentElement.addEventListener("pointerleave", () => { shown = false; ring.classList.remove("on", "hot"); pt.classList.remove("on"); document.documentElement.classList.remove("no-arrow"); });
 }

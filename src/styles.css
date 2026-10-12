@@ -427,6 +427,11 @@ footer { position: relative; }   /* keeps the footer text above the dot grid */
     transition: opacity .18s, transform .18s;
 }
 .cur.hot span:not(:empty) { opacity: 1; transform: none; }
+/* the arrow is hidden only once the ring is running, so nothing is lost if the script fails */
+html.no-arrow, html.no-arrow * { cursor: none !important; }
+.cur-pt { position: fixed; left: 0; top: 0; width: 0; height: 0; pointer-events: none; z-index: 91; opacity: 0; }
+.cur-pt.on { opacity: 1; }
+.cur-pt::before { content: ""; position: absolute; left: -3px; top: -3px; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
 .cur-dot { width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; border-radius: 50%; background: var(--accent); opacity: 0; }
 
 /* section rail: one tick per hop on the left edge, red fill follows the scroll */
@@ -466,6 +471,6 @@ html.boot .boot-screen {
 
 @media (prefers-reduced-motion: reduce) {
     .dots { transform: none !important; }
-    .cur, .cur-dot, .boot-screen { display: none !important; }
+    .cur, .cur-pt, .cur-dot, .boot-screen { display: none !important; }
     main a:not(.hero-actions a):not(.contact-mail):not(.nav-link) { transition: none; }
 }
