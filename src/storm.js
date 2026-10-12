@@ -2,13 +2,14 @@
 // Unplug switches one at a time, the way the fault was found on site.
 // Not the real topology: six switches, a firewall on the first, one stray cable.
 
+import { reduced } from "./lib.js";
+
 const cv = document.getElementById("storm");
 if (cv) {
     const fig = cv.closest("figure");
     const ctl = document.getElementById("storm-ctl");
     const stateEl = document.getElementById("storm-state");
     const ctx = cv.getContext("2d");
-    const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     const N = 6, FW = 6, CAP = 260, RMAX = 70, SPEED = 260;
     // sw1..sw6, then the firewall (fractions of the canvas)

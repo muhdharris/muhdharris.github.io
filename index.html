@@ -20,11 +20,12 @@
     <link rel="canonical" href="https://muhdharris.github.io/">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128737;</text></svg>">
     <link rel="preload" href="fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-    <script>document.documentElement.classList.add("js")</script>
-    <link rel="stylesheet" href="styles.css">
+    <script>document.documentElement.classList.add("js");try{if(!sessionStorage.getItem("seen")&&!location.hash&&!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("boot");sessionStorage.setItem("seen","1")}}catch(e){}</script>
+    <link rel="stylesheet" href="dist/styles.css">
     <title>Muhd Harris — Network &amp; Security Engineer</title>
 </head>
 <body>
+    <div class="boot-screen" aria-hidden="true"><p><b>$</b> <span class="bt">traceroute muhdharris.github.io</span><span class="bc"></span></p></div>
     <a class="skip-link" href="#main">Skip to content</a>
 
     <header>
@@ -549,8 +550,6 @@
         }), { rootMargin: '0px 0px -8% 0px' });
         document.querySelectorAll('.reveal').forEach(el => io.observe(el));
     </script>
-    <script type="module" src="net.js"></script>
-    <script type="module" src="motion.js"></script>
-    <script type="module" src="storm.js"></script>
+    <script type="module" src="dist/main.js"></script>
 </body>
 </html>

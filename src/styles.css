@@ -5,19 +5,19 @@
    ============================================================ */
 
 @font-face { font-family: "Instrument Serif"; font-style: normal; font-weight: 400; font-display: swap;
-    src: url("fonts/instrument-serif-latin-400-normal.woff2") format("woff2"); }
+    src: url("../fonts/instrument-serif-latin-400-normal.woff2") format("woff2"); }
 @font-face { font-family: "Instrument Serif"; font-style: italic; font-weight: 400; font-display: swap;
-    src: url("fonts/instrument-serif-latin-400-italic.woff2") format("woff2"); }
+    src: url("../fonts/instrument-serif-latin-400-italic.woff2") format("woff2"); }
 @font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 400; font-display: swap;
-    src: url("fonts/ibm-plex-sans-latin-400-normal.woff2") format("woff2"); }
+    src: url("../fonts/ibm-plex-sans-latin-400-normal.woff2") format("woff2"); }
 @font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 500; font-display: swap;
-    src: url("fonts/ibm-plex-sans-latin-500-normal.woff2") format("woff2"); }
+    src: url("../fonts/ibm-plex-sans-latin-500-normal.woff2") format("woff2"); }
 @font-face { font-family: "IBM Plex Sans"; font-style: normal; font-weight: 600; font-display: swap;
-    src: url("fonts/ibm-plex-sans-latin-600-normal.woff2") format("woff2"); }
+    src: url("../fonts/ibm-plex-sans-latin-600-normal.woff2") format("woff2"); }
 @font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 400; font-display: swap;
-    src: url("fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2"); }
+    src: url("../fonts/ibm-plex-mono-latin-400-normal.woff2") format("woff2"); }
 @font-face { font-family: "IBM Plex Mono"; font-style: normal; font-weight: 500; font-display: swap;
-    src: url("fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2"); }
+    src: url("../fonts/ibm-plex-mono-latin-500-normal.woff2") format("woff2"); }
 
 :root {
     --paper:  #ebe6db;
@@ -25,7 +25,7 @@
     --ink:    #16140f;
     --dim:    #5c574b;
     --rule:   #bfb8a7;
-    --accent: #c4361a;
+    --accent: #b02f14;
 
     --serif: "Instrument Serif", "Times New Roman", serif;
     --sans:  "IBM Plex Sans", system-ui, sans-serif;
@@ -66,6 +66,15 @@ body {
 a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.2em;
     text-decoration-color: color-mix(in srgb, currentColor 40%, transparent); transition: color .15s, text-decoration-color .15s; }
 a:hover { color: var(--accent); text-decoration-color: currentColor; }
+/* text links: a faint rule, and a red one that draws left to right on hover */
+main a:not(.hero-actions a):not(.contact-mail):not(.nav-link) {
+    text-decoration: none; padding-bottom: 0.05em;
+    background: linear-gradient(var(--accent), var(--accent)) 0 100% / 0 1px no-repeat,
+                linear-gradient(color-mix(in srgb, currentColor 40%, transparent), color-mix(in srgb, currentColor 40%, transparent)) 0 100% / 100% 1px no-repeat;
+    -webkit-box-decoration-break: clone; box-decoration-break: clone;
+    transition: color .15s, background-size .35s cubic-bezier(.2,.8,.2,1);
+}
+main a:not(.hero-actions a):not(.contact-mail):not(.nav-link):hover { background-size: 100% 1px, 100% 1px; }
 a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 code { font-family: var(--mono); font-size: 0.86em; color: var(--accent); }
@@ -318,8 +327,9 @@ footer p { margin: 0; }
 h1.split .ch { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; margin-bottom: -0.08em; }
 h1.split .ch > span { display: inline-block; transform: translateY(110%); animation: rise .9s cubic-bezier(.2,.8,.2,1) forwards; }
 @keyframes rise { to { transform: none; } }
-.js .eyebrow, .js .role, .js .lede, .js .hero-actions { animation: fadeup .9s .7s both; }
-.js .role { animation-delay: .85s; } .js .lede { animation-delay: 1s; } .js .hero-actions { animation-delay: 1.15s; }
+.js .eyebrow, .js .role, .js .lede, .js .hero-actions { animation: fadeup .9s calc(var(--b, 0s) + .7s) both; }
+.js .role { animation-delay: calc(var(--b, 0s) + .85s); } .js .lede { animation-delay: calc(var(--b, 0s) + 1s); } .js .hero-actions { animation-delay: calc(var(--b, 0s) + 1.15s); }
+html.boot { --b: .95s; }
 @keyframes fadeup { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
 
 /* progress bar and hop counter */
@@ -384,4 +394,78 @@ header .bar { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100
     .section::after { transform: none; transition: none; }
     .js .reveal .stag { opacity: 1; transform: none; transition: none; }
     .fl li { opacity: 1; transition: none; }
+}
+
+/* ============================================================
+   Polish layer: cursor, section rail, dot grid, boot line.
+   ============================================================ */
+
+footer { position: relative; }   /* keeps the footer text above the dot grid */
+/* dot grid fixed behind the page, drifting slower than the text */
+.dots {
+    position: fixed; inset: -24px 0 0 0; z-index: 0; pointer-events: none;
+    background-image: radial-gradient(color-mix(in srgb, var(--ink) 11%, transparent) 1px, transparent 1.3px);
+    background-size: 24px 24px; will-change: transform;
+}
+
+/* traceroute cursor: the ring trails the real cursor, which stays visible */
+.cur, .cur-dot { position: fixed; left: 0; top: 0; pointer-events: none; z-index: 90; }
+.cur { width: 0; height: 0; opacity: 0; transition: opacity .2s; will-change: transform; }
+.cur.on { opacity: 1; }
+.cur::before {
+    content: ""; position: absolute; left: -14px; top: -14px; width: 28px; height: 28px; border-radius: 50%;
+    border: 1.5px solid var(--accent); transform: scale(1);
+    transition: transform .22s cubic-bezier(.2,.8,.2,1), background-color .22s, border-color .22s;
+}
+.cur.hot::before { transform: scale(1.9); background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.cur.press::before { transform: scale(.7); }
+.cur.hot.press::before { transform: scale(1.6); }
+.cur span {
+    position: absolute; left: 30px; top: 18px; white-space: nowrap; opacity: 0; transform: translateX(-4px);
+    font: 500 0.66rem var(--mono); letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent);
+    background: var(--paper); border: 1px solid var(--rule); padding: 0.12rem 0.4rem;
+    transition: opacity .18s, transform .18s;
+}
+.cur.hot span:not(:empty) { opacity: 1; transform: none; }
+.cur-dot { width: 5px; height: 5px; margin: -2.5px 0 0 -2.5px; border-radius: 50%; background: var(--accent); opacity: 0; }
+
+/* section rail: one tick per hop on the left edge, red fill follows the scroll */
+.rail { display: none; }
+@media (min-width: 1100px) {
+    .rail { display: block; position: fixed; left: 0.9rem; top: 50%; height: min(58vh, 26rem); transform: translateY(-50%); z-index: 45; width: 1px; }
+    .rail::before, .rail-fill { content: ""; position: absolute; left: 0; top: 0; width: 1px; height: 100%; }
+    .rail::before { background: var(--rule); }
+    .rail-fill { background: var(--accent); transform-origin: top; transform: scaleY(0); }
+    .rail ul { list-style: none; margin: 0; padding: 0; }
+    .rail a { position: absolute; left: -9px; width: 19px; height: 19px; margin-top: -9px; text-decoration: none; background: none !important; }
+    .rail a::before {
+        content: ""; position: absolute; left: 5px; top: 5px; width: 9px; height: 9px;
+        border: 1px solid var(--dim); background: var(--paper); transition: background-color .25s, border-color .25s, transform .25s;
+    }
+    .rail a.now::before, .rail a:hover::before { background: var(--accent); border-color: var(--accent); }
+    .rail a:hover::before { transform: scale(1.25); }
+    .rail a b, .rail a span { position: absolute; left: 24px; top: 50%; transform: translateY(-50%); white-space: nowrap; opacity: 0; pointer-events: none;
+        font: 500 0.66rem var(--mono); letter-spacing: 0.05em; text-transform: uppercase; background: var(--paper); border: 1px solid var(--rule); padding: 0.1rem 0.4rem; transition: opacity .15s; }
+    .rail a b { display: none; }
+    .rail a:hover span, .rail a:focus-visible span { opacity: 1; }
+}
+
+/* boot line: first visit of a session only, about one second */
+.boot-screen { display: none; }
+html.boot .boot-screen {
+    display: flex; align-items: center; justify-content: center; position: fixed; inset: 0; z-index: 200;
+    background: var(--paper); animation: boot-out .4s .62s ease forwards;
+}
+.boot-screen p { margin: 0; font: 500 clamp(.8rem, 2.4vw, 1.05rem) var(--mono); letter-spacing: 0.02em; }
+.boot-screen b { color: var(--accent); font-weight: 500; }
+.boot-screen .bt { display: inline-block; overflow: hidden; white-space: nowrap; vertical-align: bottom; width: 0; animation: boot-type .5s steps(31, end) .08s forwards; }
+.boot-screen .bc { display: inline-block; width: .55em; height: 1.1em; margin-left: .15em; vertical-align: -.2em; background: var(--accent); animation: boot-blink .5s steps(1) infinite; }
+@keyframes boot-type { to { width: 31ch; } }
+@keyframes boot-blink { 50% { opacity: 0; } }
+@keyframes boot-out { to { opacity: 0; visibility: hidden; } }
+
+@media (prefers-reduced-motion: reduce) {
+    .dots { transform: none !important; }
+    .cur, .cur-dot, .boot-screen { display: none !important; }
+    main a:not(.hero-actions a):not(.contact-mail):not(.nav-link) { transition: none; }
 }

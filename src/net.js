@@ -2,13 +2,15 @@
 // Two Proxmox nodes, their VMs and LXCs, and the 16 containers on the Docker VM.
 // Drag to turn it. Falls back to nothing (the page is complete without it).
 
-import * as THREE from "./vendor/three.module.min.js";
+import * as THREE from "three";
+import { reduced } from "./lib.js";
 
 const canvas = document.getElementById("net");
 const note = document.getElementById("net-note");
 if (!canvas) throw new Error("no canvas");
 
-const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+// phones get a lighter scene: fewer pixels, simpler spheres
+const small = innerWidth < 700;
 
 let renderer;
 try {
@@ -17,7 +19,7 @@ try {
     canvas.remove();
     throw e;
 }
-renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
+renderer.setPixelRatio(Math.min(devicePixelRatio || 1, small ? 1.5 : 2));
 renderer.setClearColor(0x000000, 0);
 
 const scene = new THREE.Scene();
@@ -66,7 +68,7 @@ function wire(geom, mat, pos, scale = 1) {
     return m;
 }
 function dot(pos, r, mat) {
-    const m = new THREE.Mesh(new THREE.SphereGeometry(r, 10, 8), mat);
+    const m = new THREE.Mesh(new THREE.SphereGeometry(r, small ? 6 : 10, small ? 5 : 8), mat);
     m.position.copy(pos);
     world.add(m);
     return m;
@@ -121,7 +123,7 @@ for (const [a, b, dim] of edges) {
 {
     const mid = pts.pve.clone().add(pts.pve2).multiplyScalar(0.5).add(V(0, 3.4, -1.5));
     const curve = new THREE.QuadraticBezierCurve3(pts.pve, mid, pts.pve2);
-    const g = new THREE.BufferGeometry().setFromPoints(curve.getPoints(60));
+    const g = new THREE.BufferGeometry().setFromPoints(curve.getPoints(small ? 32 : 60));
     const m = new THREE.LineDashedMaterial({ dashSize: 0.18, gapSize: 0.14, transparent: true, opacity: 0.7 });
     const l = new THREE.Line(g, m);
     l.computeLineDistances();
@@ -134,7 +136,7 @@ for (const [a, b, dim] of edges) {
 const packets = [];
 const routes = [["pve", "docker"], ["docker", "nas"], ["pve", "pve2"], ["pve2", "agent"], ["docker", "c3"], ["docker", "c11"]];
 routes.forEach(([a, b], i) => {
-    const m = new THREE.Mesh(new THREE.SphereGeometry(0.06, 8, 6), mats.pulse);
+    const m = new THREE.Mesh(new THREE.SphereGeometry(0.06, small ? 5 : 8, small ? 4 : 6), mats.pulse);
     world.add(m);
     packets.push({ m, a: pts[a], b: pts[b], t: (i * 0.37) % 1, s: 0.18 + (i % 3) * 0.05 });
 });

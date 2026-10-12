@@ -2,10 +2,11 @@
 // The page reads as a traceroute: every section is a hop, TTL drops as you go.
 // Everything here is decoration; the page is complete without it.
 
-const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-const $ = (s, r = document) => r.querySelector(s);
-const $$ = (s, r = document) => [...r.querySelectorAll(s)];
-const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+import { reduced, $, $$, clamp, onFrame, schedule, view } from "./lib.js";
+
+// On the first visit of a session a short boot screen covers the hero; hold the hero
+// animations back until it has gone.
+const base = document.documentElement.classList.contains("boot") ? 0.95 : 0;
 
 /* ---------- name: letters rise one at a time ---------- */
 
@@ -21,7 +22,7 @@ if (h1) {
             w.setAttribute("aria-hidden", "true");
             const s = document.createElement("span");
             s.textContent = c === " " ? "\u00a0" : c;
-            s.style.animationDelay = (0.15 + i * 0.05) + "s";
+            s.style.animationDelay = (base + 0.15 + i * 0.05) + "s";
             w.appendChild(s);
             h1.appendChild(w);
         });
@@ -42,8 +43,7 @@ function scramble(el) {
         const p = clamp((now - t0) / dur);
         let out = "";
         for (let i = 0; i < n; i++) {
-            const c = final[i];
-            out += (c === " " || i < p * n * 1.15) ? c : GLYPHS[(Math.random() * GLYPHS.length) | 0];
+            out += (final[i] === " " || i < p * n * 1.15) ? final[i] : GLYPHS[(Math.random() * GLYPHS.length) | 0];
         }
         el.textContent = out;
         if (p < 1) requestAnimationFrame(tick); else el.textContent = final;
@@ -53,10 +53,11 @@ function scramble(el) {
 /* ---------- sections: ghost numerals, rule that draws in, decode on entry ---------- */
 
 const sections = $$("section.section");
-const marks = [["home", "home"]];
+// hop 01 is the top of the page; the rail and the hop badge both read this list
+export const marks = [{ id: "home", label: "home" }];
 sections.forEach((s, i) => {
     const title = $(".section-title", s);
-    marks.push([s.id, (title ? title.textContent : s.id).trim().toLowerCase()]);
+    marks.push({ id: s.id, label: (title ? title.textContent : s.id).trim().toLowerCase() });
     const g = document.createElement("span");
     g.className = "ghost";
     g.setAttribute("aria-hidden", "true");
@@ -78,9 +79,8 @@ sections.forEach((s) => secIO.observe(s));
 
 $$(".role-points li, .practice-list li, .stack-card, .learn-card, tbody tr, .project-facts li").forEach((el) => {
     if (!el.closest(".reveal")) return;
-    const sibs = [...el.parentElement.children];
     el.classList.add("stag");
-    el.style.setProperty("--i", Math.min(sibs.indexOf(el), 10));
+    el.style.setProperty("--i", Math.min([...el.parentElement.children].indexOf(el), 10));
 });
 
 /* ---------- the numbers count up ---------- */
@@ -104,7 +104,7 @@ const factIO = new IntersectionObserver((es) => es.forEach((e) => {
 }), { threshold: 0.6 });
 $$(".facts-line").forEach((f) => factIO.observe(f));
 
-/* ---------- progress bar and hop counter ---------- */
+/* ---------- progress bar, hop counter, parallax ---------- */
 
 const header = $("header");
 const bar = document.createElement("div");
@@ -116,52 +116,76 @@ hop.className = "hop";
 hop.setAttribute("aria-hidden", "true");
 document.body.appendChild(hop);
 
+// faint dot grid fixed behind the page; it drifts slower than the text
+const dots = document.createElement("div");
+dots.className = "dots";
+dots.setAttribute("aria-hidden", "true");
+document.body.prepend(dots);
+
 const home = $("#home"), homeInner = $(".home-content");
-let lastIdx = -1;
+const timelines = $$(".fl");
+
+// Layout is measured once and again when the page changes size, never on scroll.
+// The old version asked every section for its rectangle on every scroll tick, and
+// wrote styles in between, which forced a layout each time.
+let tops = [], secTop = [], docH = 0, homeH = 1, flGeo = [];
+function measure() {
+    const sy = scrollY;
+    tops = marks.map((m) => { const el = document.getElementById(m.id); return el ? el.getBoundingClientRect().top + sy : 0; });
+    secTop = sections.map((s) => s.getBoundingClientRect().top + sy);
+    docH = document.documentElement.scrollHeight;
+    homeH = Math.max(1, home.offsetHeight);
+    flGeo = timelines.map((el) => ({ el, top: el.getBoundingClientRect().top + sy, dots: $$("li", el) }));
+    schedule();
+}
+new ResizeObserver(measure).observe(document.body);   // fonts, the STP demo appearing, rotation
+addEventListener("load", measure);
+if (document.fonts) document.fonts.ready.then(measure);
+
+let lastIdx = -1, hopOff = null;
 
 function update() {
+    // reads
     const y = scrollY, vh = innerHeight;
-    const max = document.documentElement.scrollHeight - vh;
+    const max = Math.max(0, docH - vh);
     const p = max > 0 ? clamp(y / max) : 0;
-    bar.style.transform = `scaleX(${p.toFixed(4)})`;
-
     let idx = 0;
-    marks.forEach(([id], i) => {
-        const el = document.getElementById(id);
-        if (el && el.getBoundingClientRect().top <= vh * 0.4) idx = i;
-    });
+    for (let i = 0; i < tops.length; i++) if (tops[i] - y <= vh * 0.4) idx = i;
+    const span = (tops[idx + 1] || docH) - tops[idx];
+    const frac = clamp((y + vh * 0.4 - tops[idx]) / Math.max(1, span));
+    view.y = y; view.vh = vh; view.p = p; view.idx = idx; view.frac = frac;
+
+    // writes
+    bar.style.transform = `scaleX(${p.toFixed(4)})`;
     if (idx !== lastIdx) {
         lastIdx = idx;
-        hop.textContent = `hop ${String(idx + 1).padStart(2, "0")}/${String(marks.length).padStart(2, "0")} · ${marks[idx][1]} · ttl ${64 - idx}`;
+        hop.textContent = `hop ${String(idx + 1).padStart(2, "0")}/${String(marks.length).padStart(2, "0")} · ${marks[idx].label} · ttl ${64 - idx}`;
     }
-    hop.classList.toggle("off", p > 0.985 || y < 80);
+    const off = p > 0.985 || y < 80;
+    if (off !== hopOff) { hopOff = off; hop.classList.toggle("off", off); }
 
     if (!reduced) {
-        const hp = clamp(y / Math.max(1, home.offsetHeight));
+        const hp = clamp(y / homeH);
         homeInner.style.transform = `translate3d(0,${(hp * 56).toFixed(1)}px,0)`;
         homeInner.style.opacity = (1 - hp * 0.9).toFixed(3);
+        dots.style.transform = `translate3d(0,${(-(y * 0.18) % 24).toFixed(1)}px,0)`;
 
-        for (const s of sections) {
-            const r = s.getBoundingClientRect();
-            if (r.bottom < -200 || r.top > vh + 200) continue;
-            s._g.style.transform = `translate3d(0,${Math.max(0, -r.top * 0.14).toFixed(1)}px,0)`;   // drift down only, never above the section
+        for (let i = 0; i < sections.length; i++) {
+            const top = secTop[i];
+            if (top - y > vh + 200 || (secTop[i + 1] || docH) - y < -200) continue;
+            sections[i]._g.style.transform = `translate3d(0,${Math.max(0, y - top) * 0.14}px,0)`;   // drift down only, never above the section
         }
     }
 
-    for (const el of $$(".fl")) {
-        const r = el.getBoundingClientRect();
-        const fp = reduced ? 1 : clamp((vh * 0.88 - r.top) / (vh * 0.5));
-        el.style.setProperty("--p", fp.toFixed(3));
-        const dots = el._d || (el._d = $$("li", el));
-        dots.forEach((d, i) => d.classList.toggle("on", fp >= i / (dots.length - 1) - 0.001));
+    for (const g of flGeo) {
+        const fp = reduced ? 1 : clamp((vh * 0.88 - (g.top - y)) / (vh * 0.5));
+        g.el.style.setProperty("--p", fp.toFixed(3));
+        const n = g.dots.length - 1;
+        g.dots.forEach((d, i) => d.classList.toggle("on", fp >= i / n - 0.001));
     }
 }
-
-let queued = false;
-const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; update(); }); } };
-addEventListener("scroll", onScroll, { passive: true });
-addEventListener("resize", onScroll);
-update();
+onFrame(update);
+measure();
 
 /* ---------- footer: a real round trip, measured now ---------- */
 
