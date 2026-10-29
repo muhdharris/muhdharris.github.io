@@ -18,7 +18,7 @@
     <meta name="twitter:title" content="Muhd Harris — Network &amp; Security Engineer">
     <meta name="twitter:description" content="Muhd Harris, Network &amp; Security Engineer. Firewalls, VLANs and Peplink at work; Proxmox homelab with documented fault write-ups at home.">
     <link rel="canonical" href="https://muhdharris.github.io/">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#128737;</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%2314130f'/><text x='8' y='44' font-family='monospace' font-weight='700' font-size='34' fill='%23ff6e48'>$_</text></svg>">
     <link rel="preload" href="fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
     <script>document.documentElement.classList.add("js");try{if(!sessionStorage.getItem("seen")&&!location.hash&&!matchMedia("(prefers-reduced-motion: reduce)").matches){document.documentElement.classList.add("boot");sessionStorage.setItem("seen","1")}}catch(e){}</script>
     <link rel="stylesheet" href="dist/styles.css">
@@ -256,12 +256,12 @@
 
         <h3 class="sub-head">Practised, not just studied</h3>
         <ul class="practice-list">
-            <li><strong>Isolation where it counts</strong> — containers on their own Docker bridge network, not sharing the host's <code>/24</code>. The home network itself is a flat subnet by design; VLAN segmentation is what I do at InnoSphere</li>
+            <li><strong>Isolation where it counts</strong> — containers on their own Docker bridge network, not sharing the host's <code>/24</code></li>
             <li><strong>DNS control</strong> — Pi-hole as network-wide resolver, network hygiene rather than per-device settings</li>
             <li><strong>Private access without exposing anything</strong> — Tailscale over port forwarding</li>
             <li><strong>Least privilege at the storage layer</strong> — NFS exports scoped per share, hardened with <code>all_squash</code> and <code>anonuid</code></li>
             <li><strong>Credential hygiene</strong> — every secret in the compose files comes from a <code>.env</code> file at 0600, so the compose files are safe to publish. They did not start that way — the first pass had credentials in plaintext <code>environment:</code> blocks</li>
-            <li><strong>Hardware-level fault isolation</strong> — a failing NIC taking down every VM, and the driver-level fix</li>
+            <li><strong>Hardware-level fault isolation</strong> — a NIC driver hang taking down every VM, traced past the first fix to packet offloads</li>
         </ul>
     </section>
 
