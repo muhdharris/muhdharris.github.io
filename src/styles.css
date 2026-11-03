@@ -172,7 +172,6 @@ h1 {
     padding: clamp(3.5rem, 9vw, 7rem) var(--gutter);
     border-bottom: 1px solid var(--rule);
 }
-.section.alt { background: var(--paper2); }
 .section-title {
     font-family: var(--mono); font-weight: 400;
     font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase;

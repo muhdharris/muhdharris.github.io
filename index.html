@@ -64,7 +64,7 @@
         </div>
         <p class="hero-note" id="net-note" hidden>
             <b>The homelab, as a schematic.</b><br>
-            2 nodes · 3 VMs · 2 LXCs · 16 containers.<br>Drag to turn it.
+            2 nodes · 3 VMs · 2 LXCs · 20 containers.<br>Drag to turn it.
         </p>
     </section>
 
@@ -94,7 +94,7 @@
         </div>
     </section>
 
-    <section id="experience" class="section alt">
+    <section id="experience" class="section">
         <h2 class="section-title" data-n="02">Experience</h2>
         <p class="section-intro">
             Network and security work at a company now, and server and support work before that.
@@ -130,15 +130,11 @@
                 <li>Handle incident response and troubleshooting — isolating faults,
                     restoring service and documenting what changed</li>
                 <li><strong>Incident:</strong> during a Huawei switch refresh, a Layer 2 loop
-                    formed even though STP was already running. The traffic it generated
-                    took the firewall down with it, so the whole network went offline, not
-                    one segment. I found the switch causing it by disconnecting switches
-                    one at a time, which stopped the loop within hours. Afterwards I added
-                    protections on my own initiative so one device cannot take the whole
-                    network down again: BPDU filtering and edge ports on access ports, DHCP
-                    snooping, and link-flap auto-recovery, so a flapping port shuts itself
-                    down and recovers on a timer. Root cause not established: no baseline
-                    configuration was available to compare the new design against</li>
+                    formed with STP running and took the firewall, and the whole network,
+                    offline. I found the faulty switch by disconnecting switches one at a
+                    time and restored service within hours, then added BPDU filtering, edge
+                    ports, DHCP snooping and link-flap recovery so one device cannot do it
+                    again. Root cause unknown: there was no baseline configuration to compare</li>
             </ul>
 
             <figure class="storm" id="storm-fig">
@@ -175,13 +171,13 @@
             the whole stack is something I can take apart.
         </p>
 
-        <p class="facts-line reveal"><b>2</b> Proxmox nodes &nbsp;·&nbsp; <b>16</b> containers &nbsp;·&nbsp; <b>3</b> VMs, <b>2</b> LXCs &nbsp;·&nbsp; <b>~1TB</b> NAS</p>
+        <p class="facts-line reveal"><b>2</b> Proxmox nodes &nbsp;·&nbsp; <b>20</b> containers &nbsp;·&nbsp; <b>3</b> VMs, <b>2</b> LXCs &nbsp;·&nbsp; <b>~1TB</b> NAS</p>
 
         <figure class="diagram reveal">
                 <div class="diagram-scroll">
                     <a href="infra-topology.svg" aria-label="Open the homelab topology at full size">
                         <img src="infra-topology.svg" width="760" height="440"
-                             alt="Topology of the homelab: two Proxmox nodes on a flat /24 LAN. The first node, a Dell OptiPlex 5090, runs a Docker host VM with 16 containers and an OpenMediaVault NAS VM reached over NFS and SMB. The second node, a spare laptop with a 10 Gb NIC, runs a lightweight container for agent and automation. Remote access is through a Tailscale overlay, so no inbound ports are opened.">
+                             alt="Topology of the homelab: two Proxmox nodes on a flat /24 LAN. The first node, a Dell OptiPlex 5090, runs a Docker host VM with 20 containers and an OpenMediaVault NAS VM reached over NFS and SMB. The second node, a spare laptop with a 10 Gb NIC, runs a lightweight container for agent and automation. Remote access is through a Tailscale overlay, so no inbound ports are opened.">
                     </a>
                 </div>
                 <figcaption>
@@ -314,7 +310,7 @@
             </p>
             <ul class="project-facts">
                 <li>2 Proxmox nodes · 3 VMs · 2 LXCs</li>
-                <li>16 containers — media pipeline, Jellyfin, Immich, Pi-hole, CouchDB</li>
+                <li>20 containers — media pipeline, Jellyfin, Immich, Pi-hole, CouchDB</li>
                 <li>VAAPI hardware transcoding on Intel UHD 750</li>
                 <li>~1TB NAS over NFS and SMB with disk passthrough</li>
             </ul>
@@ -416,7 +412,7 @@
         </p>
     </section>
 
-    <section id="stack" class="section alt">
+    <section id="stack" class="section">
         <h2 class="section-title" data-n="06">Stack</h2>
         <p class="section-intro">
             What I use at work and at home, grouped by where it sits.
@@ -449,7 +445,7 @@
                 <ul>
                     <li><strong>Proxmox VE</strong> — two-node cluster, KVM, LXC, passthrough</li>
                     <li><strong>Linux</strong> — server administration, systemd, networking</li>
-                    <li><strong>Docker &amp; Compose</strong> — 16 containers on one VM</li>
+                    <li><strong>Docker &amp; Compose</strong> — 20 containers on one VM</li>
                     <li><strong>Storage</strong> — NFS, SMB, disk passthrough, direct-attached NAS</li>
                     <li><strong>DNS</strong> — Pi-hole across the network</li>
                 </ul>
@@ -519,7 +515,7 @@
         </div>
     </section>
 
-    <section id="contact" class="section alt">
+    <section id="contact" class="section">
         <h2 class="section-title" data-n="08">Get in touch</h2>
         <p class="section-intro">
             Interested in infrastructure work, or want to talk about the homelab?
