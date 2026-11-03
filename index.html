@@ -139,8 +139,8 @@
 
             <figure class="storm" id="storm-fig">
                 <figcaption class="storm-head">Find the loop</figcaption>
-                <p class="storm-lede">An illustration of the outage above, not the real topology. A loop is already running. Unplug switches one at a time, as I did on site, until the firewall recovers.</p>
-                <canvas id="storm" width="900" height="360" role="img" aria-label="Animated diagram: six switches and a firewall. Four switches form a loop, flooding traffic that overloads the firewall."></canvas>
+                <p class="storm-lede">An illustration of the outage above, not the real topology. Someone plugs in a cable that closes a loop, in a different place each round. Use the clues a real network gives you (which switches are busiest, the switch log, the firewall) and unplug switches one at a time until the firewall recovers.</p>
+                <canvas id="storm" width="900" height="360" role="img" aria-label="Animated diagram: six switches and a firewall. A stray cable forms a loop, flooding traffic that overloads the firewall."></canvas>
                 <div class="storm-ctl" id="storm-ctl"></div>
                 <p class="storm-state" id="storm-state" role="status" aria-live="polite">Normal traffic.</p>
                 <noscript><p>This demo needs JavaScript. The short version: a loop made frames multiply until the firewall went down; disconnecting switches one at a time found the one causing it.</p></noscript>

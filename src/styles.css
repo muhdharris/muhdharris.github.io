@@ -385,6 +385,9 @@ header .bar { position: absolute; left: 0; bottom: -1px; height: 2px; width: 100
 .storm-ctl button:hover { border-color: var(--accent); color: var(--accent); }
 .storm-ctl button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
 .storm-ctl .reset { margin-left: auto; border-style: dashed; }
+.storm-log { font: 400 0.74rem/1.55 var(--mono); color: var(--dim); margin: 0; padding: 0.6rem 0.8rem; min-height: 6.9em; border: 1px solid var(--rule); border-top: 0; white-space: pre-wrap; overflow-wrap: anywhere; }
+.storm-ctl .harden { border-color: var(--accent); color: var(--accent); }
+.storm-ctl .harden[hidden] { display: none; }
 .storm-state { font-family: var(--mono); font-size: 0.84rem; margin: 0.9rem 0 0; min-height: 2.6em; }
 
 @media (prefers-reduced-motion: reduce) {
