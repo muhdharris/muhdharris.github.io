@@ -196,7 +196,7 @@ h3 { font-family: var(--serif); font-weight: 400; font-size: 1.7rem; line-height
 }
 
 /* the column is full width; only running text is capped so lines stay readable */
-.prose p, .project > p, .role-points li, .practice-list li, .tl-body p, .contact-meta { max-width: 52rem; }
+.prose p, .project > p, .role-points li, .practice-list li, .r-body p, .contact-meta { max-width: 52rem; }
 .section-intro { max-width: 40rem; }
 
 /* ---------- experience ---------- */
@@ -266,10 +266,6 @@ td:first-child { font-family: var(--mono); font-size: 0.82rem; white-space: nowr
 
 /* ---------- background ---------- */
 
-.tl-item { display: grid; grid-template-columns: 8rem 1fr; gap: 1rem; padding-bottom: 1.8rem; }
-.tl-item:last-child { padding-bottom: 0; }
-.tl-when { font-family: var(--mono); font-size: 0.8rem; color: var(--accent); padding-top: 0.5rem; }
-.tl-body p { margin: 0.4rem 0 0; color: var(--dim); }
 
 /* ---------- contact ---------- */
 
@@ -314,7 +310,7 @@ footer p { margin: 0; }
 
     .hero-note { display: none; }
     .hero-actions { gap: 0.8rem 1.6rem; }
-    .stack-card, .learn-card, .tl-item { grid-template-columns: 1fr; gap: 0.3rem; }
+    .stack-card, .learn-card { grid-template-columns: 1fr; gap: 0.3rem; }
     td:first-child { white-space: normal; width: auto; }
 }
 
@@ -475,4 +471,92 @@ html.boot .boot-screen {
     .dots { transform: none !important; }
     .cur, .cur-pt, .cur-dot, .boot-screen { display: none !important; }
     main a:not(.hero-actions a):not(.contact-mail):not(.nav-link) { transition: none; }
+}
+
+/* ============================================================
+   Per-section entrances (sections.js). Each one is borrowed from its subject.
+   ============================================================ */
+
+/* About: words ink in as you read */
+.wd { transition: color .35s ease; }
+.js #about .wd { color: color-mix(in srgb, var(--ink) 22%, transparent); }
+.js #about .wd.on { color: var(--ink); }
+
+/* Experience: bullets come up like links, the dash first, then the text */
+.js .linkup li { opacity: 0; transform: translateX(-10px); transition: opacity .5s ease, transform .5s ease; }
+.js .linkup li::before { transform: scaleX(0); transform-origin: left; display: inline-block; transition: transform .3s ease; }
+.js .linkup.up li { opacity: 1; transform: none; }
+.js .linkup.up li::before { transform: none; }
+.js .linkup li:nth-child(1) { transition-delay: .05s; } .js .linkup li:nth-child(2) { transition-delay: .15s; }
+.js .linkup li:nth-child(3) { transition-delay: .25s; } .js .linkup li:nth-child(4) { transition-delay: .35s; }
+.js .linkup li:nth-child(5) { transition-delay: .45s; } .js .linkup li:nth-child(6) { transition-delay: .55s; }
+.js .linkup li:nth-child(7) { transition-delay: .65s; } .js .linkup li:nth-child(n+8) { transition-delay: .75s; }
+
+/* What I run: the diagram draws open, a scan line sweeps the table */
+.js #infra .diagram img { clip-path: inset(0 100% 0 0); transition: clip-path 1.4s cubic-bezier(.6,.1,.2,1); }
+.js #infra .diagram.drawn img { clip-path: inset(0 0 0 0); }
+#infra .table-wrap { position: relative; }
+.js #infra .table-wrap::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--accent); opacity: 0; box-shadow: 0 0 12px var(--accent); pointer-events: none; }
+.js #infra .table-wrap.scanned::after { animation: scan 1.6s ease-in-out .2s both; }
+@keyframes scan { 0% { top: 0; opacity: 0; } 8% { opacity: .9; } 92% { opacity: .9; } 100% { top: 100%; opacity: 0; } }
+
+/* Learning: each course loads, then reads */
+.learn-card { position: relative; }
+.learn-card .load { display: none; }
+.js .learn-card .load { display: block; position: absolute; left: 0; bottom: -1px; height: 2px; width: 100%; background: var(--accent); transform: scaleX(0); transform-origin: left; }
+.js .learn-grid.loaded .load { animation: load 0.9s cubic-bezier(.3,.6,.2,1) var(--d) both; }
+@keyframes load { 0% { transform: scaleX(0); opacity: 1; } 70% { transform: scaleX(1); opacity: 1; } 100% { transform: scaleX(1); opacity: 0; } }
+.js .learn-card > div { opacity: 0; transition: opacity .5s ease; }
+.js .learn-grid.loaded .learn-card > div { opacity: 1; }
+.js .learn-grid.loaded .learn-card:nth-child(1) > div { transition-delay: .7s; } .js .learn-grid.loaded .learn-card:nth-child(2) > div { transition-delay: .92s; }
+.js .learn-grid.loaded .learn-card:nth-child(3) > div { transition-delay: 1.14s; } .js .learn-grid.loaded .learn-card:nth-child(4) > div { transition-delay: 1.36s; }
+
+/* Portfolio: a highlighter passes behind each title */
+.project h3.mark { background: linear-gradient(color-mix(in srgb, var(--accent) 16%, transparent), color-mix(in srgb, var(--accent) 16%, transparent)) no-repeat 0 85% / 0% 0.42em; transition: background-size .9s cubic-bezier(.3,.7,.2,1) .2s; display: inline; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+.project h3.mark.on { background-size: 100% 0.42em; }
+.js .project h3.mark { background-size: 0% 0.42em; }
+.js .project h3.mark.on { background-size: 100% 0.42em; }
+
+/* Stack: a status light per item, lit in sequence */
+.stack-card.leds li { position: relative; padding-left: 1rem; }
+.stack-card.leds li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 5px; height: 5px; background: var(--accent); }
+.js .stack-card.leds li::before { background: var(--rule); }
+.js .stack-grid.lit .stack-card.leds li::before { animation: led .5s steps(1) var(--d) both; }
+@keyframes led { 0% { background: var(--rule); } 30% { background: var(--ink); } 60% { background: var(--rule); } 100% { background: var(--accent); } }
+
+/* Background: a traceroute. Uses the .fl timeline, filled by scroll in motion.js */
+.route-cmd { font-family: var(--mono); font-size: 0.8rem; color: var(--dim); margin: 0 0 0.6rem; }
+.fl.route { max-width: 52rem; margin-top: 1rem; }
+.fl.route li { display: grid; grid-template-columns: 2.2rem 9rem 4.8rem 1fr; gap: 0.2rem 1rem; padding-bottom: 1.6rem; align-items: baseline; }
+.fl.route li span { font-size: 0.8rem; }
+.route .r-hop { font-family: var(--mono); color: var(--dim); }
+.route .r-when { font-family: var(--mono); color: var(--accent); }
+.route .r-ms { font-family: var(--mono); color: var(--dim); text-align: right; font-variant-numeric: tabular-nums; }
+.route .r-body h3 { margin: 0; font-size: 1.3rem; }
+.route .r-body p { margin: 0.3rem 0 0; color: var(--dim); font-size: 0.95rem; }
+.route li.dest::before { width: 13px; height: 13px; margin-left: -6px; top: 0.3rem; }
+.route li.dest.on::before { box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 22%, transparent); animation: ping 1.8s ease-out infinite; }
+@keyframes ping { 0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 45%, transparent); } 100% { box-shadow: 0 0 0 12px transparent; } }
+@media (max-width: 860px) {
+    .fl.route li { grid-template-columns: 2rem 1fr auto; }
+    .route .r-body { grid-column: 1 / -1; }
+}
+
+/* Contact: the address types out with a cursor, the links follow */
+.contact-mail.typing .ghost-text { color: transparent; }
+.contact-mail.typing > span:first-child::after { content: ""; display: inline-block; width: 0.08em; height: 0.85em; margin-left: 0.04em; vertical-align: -0.05em; background: var(--accent); animation: caret 1s steps(1) infinite; }
+.contact-mail.typed > span:first-child::after { animation: caret 1s steps(1) 3, fadeout .1s 3s forwards; }
+@keyframes caret { 50% { opacity: 0; } }
+@keyframes fadeout { to { opacity: 0; } }
+.js .contact-cards a { opacity: 0; transform: translateY(8px); transition: opacity .5s ease, transform .5s ease; transition-delay: var(--d, 0s); }
+.js .contact-cards.in a { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+    .js #about .wd, .js .linkup li, .js .learn-card > div, .js .contact-cards a { color: inherit; opacity: 1; transform: none; transition: none; }
+    .js .linkup li::before { transform: none; }
+    .js #infra .diagram img { clip-path: none; transition: none; }
+    .js #infra .table-wrap::after, .js .learn-card .load { display: none; }
+    .js .stack-card.leds li::before { background: var(--accent); animation: none; }
+    .js .project h3.mark { background-size: 100% 0.42em; transition: none; }
+    .route li.dest.on::before { animation: none; }
 }

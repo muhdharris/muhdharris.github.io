@@ -6,6 +6,7 @@ import { idle } from "./lib.js";
 import "./motion.js";
 import "./cursor.js";
 import "./rail.js";
+import "./sections.js";
 
 import("./net.js").catch(() => {});
 idle(() => import("./storm.js").catch(() => {}), 2500);
