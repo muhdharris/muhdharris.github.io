@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <meta name="description" content="Muhd Harris, Network &amp; Security Engineer. Firewalls, VLANs and Peplink at work; Proxmox homelab with documented fault write-ups at home.">
+    <meta name="description" content="Network &amp; Security Engineer. I keep client networks up by day and run a Proxmox homelab where every fault gets written up.">
     <meta property="og:type" content="website">
     <meta property="og:title" content="Muhd Harris — Network &amp; Security Engineer">
-    <meta property="og:description" content="Muhd Harris, Network &amp; Security Engineer. Firewalls, VLANs and Peplink at work; Proxmox homelab with documented fault write-ups at home.">
+    <meta property="og:description" content="Network &amp; Security Engineer. I keep client networks up by day and run a Proxmox homelab where every fault gets written up.">
     <meta property="og:url" content="https://muhdharris.github.io/">
     <meta property="og:image" content="https://muhdharris.github.io/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Muhd Harris — Network &amp; Security Engineer. Firewalls, VLANs and Peplink at work; Proxmox homelab with documented fault write-ups at home.">
+    <meta property="og:image:alt" content="Muhd Harris — Network &amp; Security Engineer. Client networks by day, a Proxmox homelab by night.">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:image" content="https://muhdharris.github.io/og-image.png">
     <meta name="twitter:title" content="Muhd Harris — Network &amp; Security Engineer">
-    <meta name="twitter:description" content="Muhd Harris, Network &amp; Security Engineer. Firewalls, VLANs and Peplink at work; Proxmox homelab with documented fault write-ups at home.">
+    <meta name="twitter:description" content="Network &amp; Security Engineer. I keep client networks up by day and run a Proxmox homelab where every fault gets written up.">
     <link rel="canonical" href="https://muhdharris.github.io/">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='12' fill='%2314130f'/><text x='8' y='44' font-family='monospace' font-weight='700' font-size='34' fill='%23ff6e48'>$_</text></svg>">
     <link rel="preload" href="fonts/instrument-serif-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
@@ -51,9 +51,7 @@
             <h1>Muhd Harris</h1>
             <p class="role">Network &amp; Security Engineer</p>
             <p class="lede">
-                I design, build and secure networks, and troubleshoot them when they
-                fail. My two-node Proxmox homelab is where I test and write up real
-                faults.
+                I build and secure networks, and find out why they fail. My two-node Proxmox homelab is where I test ideas and write down what breaks.
             </p>
             <div class="hero-actions">
                 <a href="#contact">Let's talk</a>
@@ -72,24 +70,18 @@
         <h2 class="section-title" data-n="01">About</h2>
         <div class="prose reveal">
             <p>
-                My work sits between the systems that are supposed to be secure and
-                the ones that aren't — configuration, diagnosis, and the unglamorous
-                debugging that keeps infrastructure up when something fails in a way
-                nobody expected. Most of it is quiet: a rule set that holds, a switch
-                that keeps passing traffic, a device that gets replaced before anyone
-                notices it was dying.
+                I work in the gap between networks that should be secure and networks
+                that are. Most of it is quiet: a rule set that holds, a switch that keeps
+                passing traffic, a dying device swapped before anyone notices.
             </p>
             <p>
-                I built the homelab as a working testbed rather than a collection of
-                labs — it's the fastest way to be wrong about infrastructure at
-                scale, and it's where the two host faults below came from. Both looked
-                identical from the outside
-                and had nothing to do with each other.
+                The homelab is a testbed, not a lab collection. It is the fastest way to be
+                wrong about infrastructure, and it produced the two host faults below:
+                identical symptoms, unrelated causes.
             </p>
             <p>
-                I keep everything in a structured, cross-linked documentation vault
-                treated as source of truth. It's not an afterthought — it's how I avoid
-                re-applying a fix that already failed once.
+                Everything goes into a cross-linked notes vault, my source of truth. It is
+                how I avoid applying the same failed fix twice.
             </p>
         </div>
     </section>
@@ -97,7 +89,7 @@
     <section id="experience" class="section">
         <h2 class="section-title" data-n="02">Experience</h2>
         <p class="section-intro">
-            Network and security work at a company now, and server and support work before that.
+            Networks and security now. Servers and support before that.
         </p>
 
         <div class="role-block reveal">
@@ -113,33 +105,28 @@
                 <span class="role-when">Jan 2026 — present</span>
             </div>
             <ul class="role-points">
-                <li>Design, deploy and maintain client networks — IP addressing and
-                    VLAN segmentation, routing and switching, DNS and DHCP, and the
-                    configuration that keeps them stable as services are added</li>
-                <li>Deploy and manage the firewall policy — rulesets, NAT, port
-                    forwarding, and reviewing which internal services are actually
-                    reachable from outside</li>
-                <li>Install and configure the access layer — managed switches, and
-                    wireless access points for staff and guest coverage</li>
-                <li>Stand up and run the ad-serving infrastructure, keeping the
-                    platform reachable and monitored</li>
-                <li>Maintain the Peplink routers and edge devices — configuration,
-                    firmware and failover behaviour across sites</li>
-                <li>Operate endpoint detection and response tooling, responding to
-                    alerts and keeping coverage current</li>
-                <li>Handle incident response and troubleshooting — isolating faults,
-                    restoring service and documenting what changed</li>
+                <li>Design, deploy and maintain client networks: addressing, VLANs,
+                    routing, switching, DNS and DHCP, kept stable as services grow</li>
+                <li>Run firewall policy: rulesets, NAT, port forwarding, and checking what
+                    is really reachable from outside</li>
+                <li>Install the access layer: managed switches and wireless APs for staff
+                    and guests</li>
+                <li>Run the ad-serving infrastructure, reachable and monitored</li>
+                <li>Maintain Peplink routers and edge devices: config, firmware and failover
+                    across sites</li>
+                <li>Operate EDR: triage alerts, keep coverage complete</li>
+                <li>Respond to incidents: isolate, restore, document</li>
                 <li><strong>Incident:</strong> during a Huawei switch refresh, a Layer 2 loop
                     formed with STP running and took the firewall, and the whole network,
-                    offline. I found the faulty switch by disconnecting switches one at a
-                    time and restored service within hours, then added BPDU filtering, edge
-                    ports, DHCP snooping and link-flap recovery so one device cannot do it
-                    again. Root cause unknown: there was no baseline configuration to compare</li>
+                    down. I unplugged switches one at a time, found the culprit and
+                    restored service within hours, then added BPDU filtering, edge ports,
+                    DHCP snooping and link-flap recovery so one device can't do it again.
+                    Root cause unknown: there was no baseline configuration to compare</li>
             </ul>
 
             <figure class="storm" id="storm-fig">
                 <figcaption class="storm-head">Find the loop</figcaption>
-                <p class="storm-lede">An illustration of the outage above, not the real topology. Someone plugs in a cable that closes a loop, in a different place each round. Use the clues a real network gives you (which switches are busiest, the switch log, the firewall) and unplug switches one at a time until the firewall recovers.</p>
+                <p class="storm-lede">The outage above as a puzzle (not the real topology). A stray cable closes a loop somewhere new each round. Read the clues, busy switches, the log, the firewall, and unplug switches until it recovers.</p>
                 <canvas id="storm" width="900" height="360" role="img" aria-label="Animated diagram: six switches and a firewall. A stray cable forms a loop, flooding traffic that overloads the firewall."></canvas>
                 <div class="storm-ctl" id="storm-ctl"></div>
                 <p class="storm-state" id="storm-state" role="status" aria-live="polite">Normal traffic.</p>
@@ -157,9 +144,9 @@
                 <span class="role-when">Mar 2025 — Aug 2025</span>
             </div>
             <ul class="role-points">
-                <li>Set up and configured physical and cloud servers — physical build, Linux OS installation, domain and network configuration, then testing and validation</li>
-                <li>Installed and configured IP phones — hardware installation, network configuration, PBX integration, and user training</li>
-                <li>Provided onsite hardware support — diagnostics, troubleshooting, reconfiguration, component replacement, retest and validation</li>
+                <li>Built physical and cloud servers: hardware, Linux, domain and network setup, testing</li>
+                <li>Rolled out IP phones: install, network config, PBX integration, user training</li>
+                <li>Onsite hardware support: diagnose, fix or replace, retest</li>
             </ul>
         </div>
     </section>
@@ -167,8 +154,8 @@
     <section id="infra" class="section">
         <h2 class="section-title" data-n="03">What I run</h2>
         <p class="section-intro">
-            Self-hosted on hardware I own. No cloud credits, no managed services —
-            the whole stack is something I can take apart.
+            Hardware I own, software I host. No cloud credits, no managed services,
+            nothing I can't take apart.
         </p>
 
         <p class="facts-line reveal"><b>2</b> Proxmox nodes &nbsp;·&nbsp; <b>20</b> containers &nbsp;·&nbsp; <b>3</b> VMs, <b>2</b> LXCs &nbsp;·&nbsp; <b>~1TB</b> NAS</p>
@@ -181,10 +168,9 @@
                     </a>
                 </div>
                 <figcaption>
-                    Tap to open full size. Homelab only — the edge
-                    router, managed switches and APs in my day job are not part of this.
-                    The home network is a flat <code>/24</code> by design; VLAN
-                    segmentation is work I do at InnoSphere.
+                    Tap for full size. Homelab only, none of my day-job
+                    kit. The home network is a flat <code>/24</code> by design;
+                    VLANs are what I do at InnoSphere.
                 </figcaption>
             </figure>
 
@@ -195,13 +181,13 @@
                     <tr><th>Layer</th><th>What it is</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td>Virtualisation</td><td>Proxmox VE, two nodes — a Dell OptiPlex 5090 (i5-11500, Intel UHD 750) and a spare laptop with 10Gb networking. KVM VMs plus LXC containers.</td></tr>
-                    <tr><td>Storage</td><td>OpenMediaVault VM with direct disk passthrough, exported over NFS and SMB. Hardlinked into the media pipeline.</td></tr>
-                    <tr><td>Containers</td><td>Docker Compose on one VM: a media automation pipeline (download client, request management, library search), Jellyfin, Immich, Pi-hole, CouchDB, Homepage, Uptime Kuma, Portainer.</td></tr>
-                    <tr><td>Media</td><td>Download-to-library pipeline with hardware-accelerated VAAPI transcoding on the iGPU. Library scans itself.</td></tr>
-                    <tr><td>Networking</td><td>Pi-hole for DNS, Tailscale for private access, deliberate <code>/24</code> layout with fixed addressing.</td></tr>
-                    <tr><td>Observability</td><td>Scheduled health checks that only alert on failure, nightly snapshots, morning briefings.</td></tr>
-                    <tr><td>Documentation</td><td>Structured Obsidian vault — architecture, every bug and its fix, cross-linked and treated as source of truth.</td></tr>
+                    <tr><td>Virtualisation</td><td>Proxmox VE on two nodes: a Dell OptiPlex 5090 (i5-11500, UHD 750) and a spare laptop with 10Gb networking. KVM VMs and LXCs.</td></tr>
+                    <tr><td>Storage</td><td>OpenMediaVault VM with disk passthrough, shared over NFS and SMB, hardlinked into the media pipeline.</td></tr>
+                    <tr><td>Containers</td><td>Docker Compose on one VM: a media automation pipeline, Jellyfin, Immich, Pi-hole, CouchDB, Homepage, Uptime Kuma, Portainer.</td></tr>
+                    <tr><td>Media</td><td>Download to library on its own, with VAAPI transcoding on the iGPU.</td></tr>
+                    <tr><td>Networking</td><td>Pi-hole for DNS, Tailscale for private access, a planned <code>/24</code> with fixed addresses.</td></tr>
+                    <tr><td>Observability</td><td>Health checks that speak only when something breaks, nightly snapshots, a morning briefing.</td></tr>
+                    <tr><td>Documentation</td><td>An Obsidian vault: architecture, every bug and its fix, cross-linked.</td></tr>
                 </tbody>
             </table>
         </div>
@@ -210,8 +196,8 @@
     <section id="learning" class="section">
         <h2 class="section-title" data-n="04">Learning &amp; achievement</h2>
         <p class="section-intro">
-            Coursework, and still learning. The degree that started it, and the
-            Cisco Networking Academy modules that came out of it.
+            Coursework, still in progress: the degree that started it and the Cisco
+            Networking Academy modules that followed.
         </p>
 
         <div class="learn-grid reveal">
@@ -219,8 +205,7 @@
                 <span class="cert-badge">NETWORKING</span>
                 <div>
                     <h3>Introduction to Networks</h3>
-                    <p>Cisco Networking Academy · Jun 2022 — protocols, subnetting, and
-                    how traffic actually moves.</p>
+                    <p>Cisco Networking Academy · Jun 2022 — protocols, subnetting, how packets really move.</p>
                 </div>
             </div>
             <div class="learn-card">
@@ -235,55 +220,49 @@
                 <span class="cert-badge">NETWORKING</span>
                 <div>
                     <h3>Enterprise Networking, Security &amp; Automation</h3>
-                    <p>Cisco Networking Academy · Jul 2023 — security controls and
-                    network automation at enterprise scale.</p>
+                    <p>Cisco Networking Academy · Jul 2023 — security controls and automation at enterprise scale.</p>
                 </div>
             </div>
             <div class="learn-card">
                 <span class="cert-badge alt">SECURITY</span>
                 <div>
                     <h3>Introduction to Cybersecurity</h3>
-                    <p>Jun 2024 — how attacks happen and the basics of defending
-                    against them: threat types, vulnerabilities, and where security
-                    controls sit.</p>
+                    <p>Jun 2024 — how attacks happen and how to start defending:
+                    threats, vulnerabilities, where controls sit.</p>
                 </div>
             </div>
         </div>
 
         <h3 class="sub-head">Practised, not just studied</h3>
         <ul class="practice-list">
-            <li><strong>Isolation where it counts</strong> — containers on their own Docker bridge network, not sharing the host's <code>/24</code></li>
-            <li><strong>DNS control</strong> — Pi-hole as network-wide resolver, network hygiene rather than per-device settings</li>
-            <li><strong>Private access without exposing anything</strong> — Tailscale over port forwarding</li>
-            <li><strong>Least privilege at the storage layer</strong> — NFS exports scoped per share, hardened with <code>all_squash</code> and <code>anonuid</code></li>
-            <li><strong>Credential hygiene</strong> — every secret in the compose files comes from a <code>.env</code> file at 0600, so the compose files are safe to publish. They did not start that way — the first pass had credentials in plaintext <code>environment:</code> blocks</li>
-            <li><strong>Hardware-level fault isolation</strong> — a NIC driver hang taking down every VM, traced past the first fix to packet offloads</li>
+            <li><strong>Isolation where it counts</strong> — containers on their own Docker bridge, off the host's <code>/24</code></li>
+            <li><strong>DNS control</strong> — Pi-hole resolves for the whole network, not per device</li>
+            <li><strong>Private access without exposing anything</strong> — Tailscale, no port forwarding</li>
+            <li><strong>Least privilege at the storage layer</strong> — NFS exports scoped per share, with <code>all_squash</code> and <code>anonuid</code></li>
+            <li><strong>Credential hygiene</strong> — secrets live in <code>.env</code> files at 0600, so the compose files are safe to publish. The first draft had them in plain text</li>
+            <li><strong>Hardware-level fault isolation</strong> — a NIC hang that took down every VM, traced past the first fix to packet offloads</li>
         </ul>
     </section>
 
     <section id="projects" class="section">
         <h2 class="section-title" data-n="05">Portfolio</h2>
         <p class="section-intro">
-            Infrastructure I've built and debugged, plus code I've shipped.
+            Things I built, broke and fixed.
         </p>
 
         <article class="project reveal">
             <h3>Home infrastructure — the testbed that found two faults</h3>
             <p class="project-meta">Infrastructure · Troubleshooting · Linux</p>
             <p>
-                A Proxmox cluster running twenty containers on hardware I own, and the two
-                hardware faults that took the whole thing offline. Both presented identically
-                from the outside — every VM losing network, host unresponsive — and had
-                nothing to do with each other.
+                Twenty containers on a Proxmox cluster I own, and two hardware faults that
+                took it all offline. Same symptom, every VM off the network and the host
+                frozen. Unrelated causes.
             </p>
             <p>
-                <strong>Fault one.</strong> Every VM lost network at once and the host
-                stopped responding. A forum post pointed at the onboard Intel I219-LM,
-                where EEE, ASPM and Wake-on-LAN each trigger link drops. Disabling all
-                three held for four days — then it hung twice more with every setting
-                applied. The actual cause was a second layer: packet offloads triggering
-                an e1000e hardware-unit hang. Turning off TSO/GSO/GRO fixed it, and the
-                link has been stable since.
+                <strong>Fault one.</strong> A forum post blamed the Intel I219-LM's EEE, ASPM
+                and Wake-on-LAN. Disabling all three held for four days, then the host
+                hung twice more. The real cause sat a layer down: packet offloads
+                tripping an e1000e hardware hang. TSO/GSO/GRO off, stable since.
             </p>
             <ol class="fl" aria-label="Fault one, in order">
                 <li><b>Start</b><span>Every VM loses network at once. The host stops responding.</span></li>
@@ -295,18 +274,16 @@
             </ol>
 
             <p>
-                <strong>Fault two.</strong> The same symptom, a different cause — the host
-                hung whenever a GPU-passthrough VM started or stopped. The i915 driver
-                was claiming the device before VFIO could bind it. Ordering
-                <code>vfio-pci</code> ahead of <code>i915</code> fixed it, and dropping
-                passthrough entirely in favour of host-iGPU transcoding removed the
-                problem class.
+                <strong>Fault two.</strong> Same symptom, new cause: the host froze whenever
+                a GPU-passthrough VM started or stopped, because i915 grabbed the device
+                before VFIO could. Loading <code>vfio-pci</code> first fixed it; moving
+                transcoding to the host iGPU removed the problem for good.
             </p>
             <p>
-                The lesson was that a fix which appears to work is not evidence it works.
-                The first change held for four days and was still wrong.
+                The lesson: a fix that seems to work proves nothing. Mine held four days
+                and was still wrong.
                 <a href="https://github.com/muhdharris/homelab">Full write-ups</a>
-                include the approach that silently failed.
+                include the attempt that failed quietly.
             </p>
             <ul class="project-facts">
                 <li>2 Proxmox nodes · 3 VMs · 2 LXCs</li>
@@ -320,23 +297,20 @@
             <h3>Supply chain tracking on Ethereum</h3>
             <p class="project-meta">Solidity · Dart/Flutter · Testing · <a href="https://github.com/muhdharris/truechain">Repo</a></p>
             <p>
-                A final-year project I audited and rebuilt, after finding that it
-                proved nothing: the customer
-                transparency screen — whose entire job is proving a supply chain record is
-                trustworthy — was reading a list stored in the browser. The app called four
-                contract functions that had never existed, and presented randomly generated
-                bytes as transaction hashes.
+                A final-year project I audited and rebuilt because it proved nothing. The
+                screen meant to prove a record was trustworthy read a list stored in the
+                browser, the app called four contract functions that never existed, and
+                its "transaction hashes" were random bytes.
             </p>
             <p>
-                Rebuilt so the contract is the only source of truth. Every read is a chain
-                call, every write returns the hash the chain produced, and the ABI is
-                generated and committed rather than inlined in Dart — which is how the
-                original drifted without anyone noticing.
+                Now the contract is the only source of truth: every read is a chain call,
+                every write returns the chain's own hash, and the ABI is generated, not
+                hand-copied into Dart, which is how the original drifted unnoticed.
             </p>
             <p>
-                Fixing it surfaced five further defects, including one where any address
-                could mark another customer's goods as delivered. Sixty-four assertions now
-                cover the flows the app performs, including that those attempts revert.
+                The rebuild turned up five more defects, including one that let anyone mark
+                another customer's goods as delivered. Sixty-four assertions now cover
+                every flow the app uses, and prove those attempts fail.
             </p>
             <ul class="project-facts">
                 <li>23 contract functions · 11 events</li>
@@ -350,9 +324,8 @@
             <h3>Website in Docker</h3>
             <p class="project-meta">JavaScript · Nginx · Containers</p>
             <p>
-                A responsive frontend with a small backend API, served entirely from
-                containers. Reproducible environment, one-command teardown — the
-                containerisation was the point, not the app.
+                A small frontend and API, served entirely from containers. One command up,
+                one command down. The containers were the point, not the app.
             </p>
             <a class="repo-link" href="https://github.com/muhdharris/Website-in-Docker">GitHub &rarr;</a>
         </article>
@@ -361,17 +334,14 @@
             <h3>CIDR Atlas: a subnet calculator</h3>
             <p class="project-meta">JavaScript &middot; IPv4 &amp; IPv6 &middot; Testing</p>
             <p>
-                An IPv4 and IPv6 subnet calculator that shows the bits: which are network
-                and which are host, so changing the prefix is something you see rather than
-                a number you recompute. It also splits blocks, plans VLSM allocations
-                largest-first with correct alignment, merges and subtracts lists of
-                networks, and writes starting-point config for Cisco, Huawei, MikroTik
-                and Linux. A command-line version runs on the same engine.
+                An IPv4 and IPv6 subnet calculator that shows the bits, so you watch the
+                network and host split move as the prefix changes. It splits blocks, plans
+                VLSM largest-first, merges and subtracts network lists, and drafts config
+                for Cisco, Huawei, MikroTik and Linux. A CLI shares the same engine.
             </p>
             <p>
-                The maths is checked against Python's <code>ipaddress</code> module on
-                1,050 seeded random cases, on top of the unit tests. It runs entirely in
-                the browser, with no dependencies and no build step.
+                Checked against Python's <code>ipaddress</code> on 1,050 random cases plus
+                unit tests. Runs in the browser, no dependencies, no build step.
             </p>
             <p class="project-links">
                 <a href="https://muhdharris.github.io/cidr-atlas/">Open it</a>
@@ -385,18 +355,15 @@
             <h3>Network scanner and small tools</h3>
             <p class="project-meta">Python &middot; Flask &middot; Nmap &middot; Ruby</p>
             <p>
-                A scheduled host scanning service: point it at a subnet and it walks
-                the range on an interval, logging what answers. The interesting part
-                was making it stoppable — a scheduler that spawns a thread per request
-                will eventually hold several at once, and a scan you cannot interrupt
-                is a scan you cannot shut down when it turns up something you were not
-                expecting. One scheduler thread, an interruptible loop, and a stop
-                endpoint that takes effect immediately.
+                Point it at a subnet and it sweeps the range on a schedule, logging what
+                answers. The hard part was making it stop: a thread per request piles up,
+                and a scan you can't interrupt is a scan you can't kill when it finds
+                something odd. One scheduler thread, an interruptible loop, a stop button
+                that works at once.
             </p>
             <p>
-                Alongside it, smaller tools built to understand a protocol rather than
-                to ship: a standalone port scanner, a scraper, and WebRTC connectivity
-                tests. Scan only what you own or are authorised to test.
+                Plus small tools built to learn a protocol, not to ship: a port scanner,
+                a scraper and WebRTC tests. Scan only what you own or may test.
             </p>
             <p class="project-links">
                 <a href="https://github.com/muhdharris/networkscanner">Network scanner</a>
@@ -407,7 +374,7 @@
         </article>
 
         <p class="more">
-            Everything is public on
+            The rest is on
             <a href="https://github.com/muhdharris?tab=repositories">GitHub</a>.
         </p>
     </section>
@@ -415,8 +382,7 @@
     <section id="stack" class="section">
         <h2 class="section-title" data-n="06">Stack</h2>
         <p class="section-intro">
-            What I use at work and at home, grouped by where it sits.
-            The cloud entry is coursework, not production.
+            My toolkit at work and at home. Cloud is coursework so far.
         </p>
 
         <div class="stack-grid reveal">
@@ -487,7 +453,7 @@
     <section id="education" class="section">
         <h2 class="section-title" data-n="07">Background</h2>
         <p class="section-intro">
-            Where the theory came from. The homelab and the job are where it gets used.
+            Where the theory came from, traced hop by hop to where I use it.
         </p>
         <p class="route-cmd" aria-hidden="true">$ traceroute school &rarr; now &nbsp;&middot;&nbsp; 5 hops</p>
         <ol class="fl route" aria-label="Background, oldest first">
@@ -523,7 +489,7 @@
     <section id="contact" class="section">
         <h2 class="section-title" data-n="08">Get in touch</h2>
         <p class="section-intro">
-            Interested in infrastructure work, or want to talk about the homelab?
+            Hiring, or curious about the homelab? Send a packet.
         </p>
         <p><a class="contact-mail" href="mailto:muhdharris40@gmail.com">muhdharris40@gmail.com</a></p>
         <div class="contact-cards">
@@ -532,15 +498,14 @@
             <a href="Muhd-Harris-CV.pdf" download>CV (PDF)</a>
         </div>
         <p class="contact-meta">
-            Based in Kuala Lumpur, Malaysia. Open to network and security engineering
-            roles, and happy to talk about infrastructure work.
+            Kuala Lumpur, Malaysia. Open to network and security roles.
         </p>
     </section>
 
     </main>
 
     <footer>
-        <p>Built by hand. No template. Type: Instrument Serif and IBM Plex. 3D: three.js.</p>
+        <p>Hand-built, no template. Instrument Serif, IBM Plex, three.js.</p>
     </footer>
 
     <script>
