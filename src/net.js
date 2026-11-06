@@ -224,7 +224,7 @@ function label(name, text, accent, dy = -30, left = false, ox = 6) {
     labels.push({ name, el, dy, left, ox });
 }
 label("pve", "pve · OptiPlex 5090", true, -74, true, 60);
-label("pve2", "pve2 · laptop, 10Gb", true, 48, true, 64);
+label("pve2", "pve2 · laptop", true, 48, true, 64);
 label("docker", "VM 100 · Docker, 20 ctrs", false, -6, false, 112);
 label("nas", "VM 102 · NAS (OMV)", false, -38);
 label("agent", "LXC 104", false, 34, false, 22);

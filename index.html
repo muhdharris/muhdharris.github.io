@@ -164,7 +164,7 @@
                 <div class="diagram-scroll">
                     <a href="infra-topology.svg" aria-label="Open the homelab topology at full size">
                         <img src="infra-topology.svg" width="760" height="440"
-                             alt="Topology of the homelab: two Proxmox nodes on a flat /24 LAN. The first node, a Dell OptiPlex 5090, runs a Docker host VM with 20 containers and an OpenMediaVault NAS VM reached over NFS and SMB. The second node, a spare laptop with a 10 Gb NIC, runs a lightweight container for agent and automation. Remote access is through a Tailscale overlay, so no inbound ports are opened.">
+                             alt="Topology of the homelab: two Proxmox nodes on a flat /24 LAN. The first node, a Dell OptiPlex 5090, runs a Docker host VM with 20 containers and an OpenMediaVault NAS VM reached over NFS and SMB. The second node, a spare laptop, runs a lightweight container for agent and automation. Remote access is through a Tailscale overlay, so no inbound ports are opened.">
                     </a>
                 </div>
                 <figcaption>
@@ -181,7 +181,7 @@
                     <tr><th>Layer</th><th>What it is</th></tr>
                 </thead>
                 <tbody>
-                    <tr><td>Virtualisation</td><td>Proxmox VE on two nodes: a Dell OptiPlex 5090 (i5-11500, UHD 750) and a spare laptop with 10Gb networking. KVM VMs and LXCs.</td></tr>
+                    <tr><td>Virtualisation</td><td>Proxmox VE on two nodes: a Dell OptiPlex 5090 (i5-11500, UHD 750) and a spare laptop. KVM VMs and LXCs.</td></tr>
                     <tr><td>Storage</td><td>OpenMediaVault VM with disk passthrough, shared over NFS and SMB, hardlinked into the media pipeline.</td></tr>
                     <tr><td>Containers</td><td>Docker Compose on one VM: a media automation pipeline, Jellyfin, Immich, Pi-hole, CouchDB, Homepage, Uptime Kuma, Portainer.</td></tr>
                     <tr><td>Media</td><td>Download to library on its own, with VAAPI transcoding on the iGPU.</td></tr>
